@@ -1480,3 +1480,66 @@
 // var k = '20,60';
 
 // Chicken(k);
+
+// 选择排序
+// function Select_Sort(nums) {
+//     var N = nums.length;
+//     for (let i=0; i < N-1; i++) {
+//         var min = i;
+//         for (let j = i + 1; j < N; j++) {
+//             if (nums[j] < nums[min]) {
+//                 min = j;
+//             }
+//         }
+//         var t = nums[i];
+//         nums[i] = nums[min];
+//         nums[min] = t;
+//     }
+//     console.log(nums);
+// }
+// var k = [2,1,8,4,6,7,3];
+// Select_Sort(k);
+
+// 插入排序
+// function InsertSort(nums) {
+//     var N = nums.length;
+//     var temp;
+//     for (let i = 0; i < N; i++) {
+
+//         for (let j = i; j > 0 && nums[j] < nums[j - 1]; j--) {
+//             temp = nums[j-1];
+//             nums[j-1] = nums[j];
+//             nums[j] = temp;
+//         }
+//     }
+//     console.log(nums);
+// }
+// var k = [2,1,8,4,6,7,3];
+// InsertSort(k);
+
+// 相交单链表
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+// /**
+//  * @param {ListNode} headA
+//  * @param {ListNode} headB
+//  * @return {ListNode}
+//  */
+// var getIntersectionNode = function(headA, headB) {
+//     let  l2 = headB;
+//     let  l1 = headA;
+//     while(l1 !== l2) {
+//         l1 = l1 === null ? headB : l1.next;
+//         l2 = l2 === null ? headA : l2.next;
+//     }
+//     return l1;
+
+// }
+
