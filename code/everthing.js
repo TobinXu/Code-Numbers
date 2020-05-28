@@ -1543,3 +1543,259 @@
 
 // }
 
+// 反转链表 头插法
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+// /**
+//  * @param {ListNode} head
+//  * @return {ListNode}
+//  */
+// var reverseList = function(head) {
+//     let new_head = null;
+//     while(head !== null){
+//     let temp = head;   
+//     head = head.next;
+//     temp.next = new_head;
+//     new_head = temp;
+//     }
+//     return new_head;
+// };
+
+// function a(numberone) {
+//     var count = numberone;
+//     return function b(numberTwo) {
+//         if (numberTwo === undefined) {
+//             return count;
+//         } else {
+//             count += numberTwo;
+//             return b;
+//         }
+//     }(20);
+// }
+// console.log(a(10)());
+
+// function addcount() {
+//     let count =2;
+//     return function b(){
+//          count += 2;
+//          console.log(count);
+//         }
+// }
+
+// var add1 = addcount();
+// add1();
+// for (var i = 0; i < 5; i++) {
+//     setTimeout(function(){
+//         console.log(i)
+//     },200);
+// }
+
+// for (let i = 0; i < 5; i++) {
+//     setTimeout(function(){
+//         console.log(i)
+//     },200);
+// }
+
+// for (var i = 0; i < 5; i++) {
+//     setTimeout(function(){
+//         var temp = i;
+//         return function() {
+//             console.log(temp);
+//         };
+//     }(),200);
+// }
+
+// for (var i =0; i < 5; i++) {
+//     setTimeout(function() {
+//         var temp = i;
+//         return function() {
+//             console.log(temp);
+//         };
+//     }(),300)
+// }
+
+// var p1 = new Promise((resolve,reject) => {
+//      resolve("成功了");
+//     reject("卧槽失败了");
+// })
+
+// p1.then(data => {
+//     console.log(data)
+// },err => {
+//         console.log("失败了", data);
+//     }
+// ).catch(
+//     res => {
+//         console.log("抓好足了",res);
+//     }
+// )
+
+// function quickSort(s,l,r) {
+//     var i = l;
+//     var j = r;
+//     var key = s[i];
+//     if(l>r) {return };
+//     while(i < j) {
+//         while(i < j && s[j] >= key){
+//             j--;
+//         }
+//         if(i<j) {
+//             s[i] = s[j];
+//         }
+//          while(i<j && s[i] <= key) {
+//             i++;
+//         }
+//         if(i<j) {
+//             s[j] = s[i]
+//         }
+//     }
+//     s[i]=key;
+//     quickSort(arr,l,i-1);
+//     quickSort(arr,i+1,r);
+
+// }
+// var arr = [6,3,6,2,1,55,7,3,6,2,1];
+// quickSort(arr,0,arr.length-1);
+// console.log(arr);
+
+// function quickSort(s,l,r){
+//     var i = l;
+//     var j = r;
+//     key = s[i];
+//     if(l > r) {return};
+//     while(i<j) {
+//         while(i < j && s[j] >= key) {
+//             j--;
+//         }
+//         if(i<j) {
+//             s[i] = s[j];
+//         }
+//         while( i< j && s[i] <= key) {
+//             i++;
+//         }
+//         if(i < j) {
+//             s[j] = s[i];
+//         }
+//     }
+//     s[i] = key;
+//     quickSort(arr,l,i-1);
+//     quickSort(arr,i+1,r);
+// }
+
+// var arr = [8,6,5,3,1,5,22];
+// quickSort(arr,0,arr.length-1);
+// console.log(arr);
+
+// 相遇比较换值
+// function quicksort(s,l,r){
+//     var i = l;
+//     var j = r;
+//     var key = s[l];
+//     if (l >= r) {return};
+//     while (i<j) {
+//         while(i < j && s[j] > key) {
+//             j--;
+//         }
+//         while(i < j && s[i] <= key) {
+//             i++;
+//         }
+//         if(i < j) {
+//             var temp = s[j];
+//             s[j] = s[i];
+//             s[i] = temp;
+//         }
+//     }
+//     s[l] = s[i];
+//     s[i] = key;
+//     quicksort(arr,l,i-1);
+//     quicksort(arr,i+1,r);
+// }
+
+//  var arr = [8,6,5,3,1,5,22];
+//  quicksort(arr,0,arr.length-1);
+//  console.log(arr);
+
+
+// for (var i=0; i<5; i++) {
+//     setTimeout(function() {
+//         var temp = i;
+//         return function() {
+//             console.log(temp)
+//         };
+        
+//     }(),300);
+// }
+
+// 想准确地检测弹出窗口是否被屏蔽，必须检测返回值的同时，将对window.open()调用封装。在一个try-catch块中
+// var blocked = false;
+// try {
+//     var wroxWin = window.open("http://www.wrox.com","_blank");
+//     if (wroxWin == null) {
+//         blocked = true;
+//     }
+// } catch (ex) {
+//     blocked = true;
+// }
+
+// if (blocked) {
+//     alert("The opoup was blocked");
+// }
+
+// 防抖 在第一次出发事件时，不立刻执行，而是给出一个期限值，比如200ms
+// 然后：如果200ms内没有再次触发，不执行；再次触发，重新计时
+// 效果：如果短时间内大量触发，只执行一次
+// 实现：既然要有计时，肯定需要setTimeOut函数，还需要一个变量保存计时，考虑维护全局纯净，可以借助闭包实现
+
+// fn 需要防抖的函数 delay防抖时间期限值
+//  function debounce(fn, delay) {
+//      let timer = null; // 借助闭包
+//      return function() {
+//         if(timer) {
+//             clearTimeout(timer); // 进到这个分支，说明一个计时周期内，再次触发相同时间，所以清除当前计时器，重新计时
+//         } 
+//          timer = setTimeout(fn, delay) // 进入该分支说明当前没有计时，那就开始计时      
+//      }
+//  }
+
+//  // 输出滚动条的位置
+// function showTop() {
+//     var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+//     console.log('滚动条位置' + scrollTop);
+// }
+
+// window.onscroll = debounce(showTop,1000);
+
+
+// 节流 即使用户不断的拖动滚动条，也能在某个时间间隔给出反馈
+// 可以设置一个控制器，定期开放函数，也就是让函数在一次执行后，一个时间段内失效，过了这个时间段再激活
+// 效果 短时间内大量触发同一事件，在函数执行一次后，该函数在指定时间期限内不工作，过了这段时间在工作
+// 使用setTimeout 和 状态为valid（表示当前函数是否在工作状态）来实现
+
+// function throttle(fn, delay) {
+//     let valid = true;
+//     return function() {
+//         if(!valid) {
+//             //休息时间，暂不接客
+//             return false;
+//         }
+//         // 工作时间，执行函数并且在间隔期内把状态为设为无效
+//         valid = false;
+//         setTimeout(() => {
+//             fn();
+//             valid = true;
+//         }, delay)
+//     }
+// }
+
+// function showTop() { 
+//     var scrollTop = document.body.scrollTop || document.documentElement.scrollTop; // 滚动条与顶部的距离
+//     console.log('当前您在：',scrollTop);
+// }
+
+// window.onscroll = throttle(showTop, 1000);
+
