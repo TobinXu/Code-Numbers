@@ -1799,3 +1799,131 @@
 
 // window.onscroll = throttle(showTop, 1000);
 
+// 间歇调用
+// var num = 0;
+// var max = 10;
+// var setintervalId = null;
+// function num() {
+//     num++;
+//     if(num === max) {
+//         clearInterval(setintervalId);
+//         console.log("done!");
+//     }
+// }
+//  setintervalId = setInterval(num, 500);
+
+// 超时调用
+
+// var num = 0;
+// var max = 10;
+// function num() {
+//     num++;
+//     if (num < max) {
+//         setTimeout(num,500);
+//     } else {
+//         console.log("done");
+//     }
+// }
+
+// setTimeout(num, 500);
+
+// if (confirm("are you sure?")) {
+//     alert("I'm so gload your are sure!")
+// } else {
+//     alert("i am sorry to hear you are not sure!");
+// }
+
+// var result = prompt("What is your name?", "");
+// if(result !== null) {
+//     alert("Welcome, "+ result);
+// }
+// window.print();
+// window.find();
+
+// // 可以像下面这样创建一个函数，用以解析查询字符串，然后返
+// // 回包含所有参数的一个对象：
+// function getQueryStringArgs() {
+//     // 取得查询字符串并去掉开头的问号
+//     var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
+//     // 保存数据对象
+//     args = {},
+//     // 取得每一项
+//     items = qs.length ? qs.split("&") : [],
+//     item = null,   
+//     name = null,
+//     value = null,
+//     // 在for循环中使用
+//         i = 0,
+//         len = items.length;
+//         // 逐个将每一项添加到args对象中
+//     for (i = 0; i < len; i++) {
+//         item = items[i].split("=");
+//         name = decodeURIComponent(item[0]);
+//         value = decodeURIComponent(item[1]);
+//         if(name.length) {
+//             args[name] = value;
+//         }
+//     }
+//     return args;
+// }
+
+// // 实际使用一下上面的操作  假设查询字符串是?q=javascript&num=10
+// var args = getQueryStringArgs();
+// alert(args["q"]); // "javascript"
+// alert(args["num"]); // "10"
+
+//  无重复字符的最长子串
+//最初的想法 错误的
+// var lengthOfLongestSubstring = function(s) {
+//     var num = s.split("");
+//     var count = 0;
+//     for (let i = 0; i < num.length; i++) {
+//         if (num[i] !== num[i+1]) 
+//             count++;
+//     }
+//     console.log(count);
+
+// };
+
+
+//  无重复字符的最长子串
+// 思路：使用新数组arr然后每一轮循环都维护max。
+// 每一轮判断字符串的下一个元素是否存在于数组arr中，通过用indexOf方法（如果有返回下标，没有返回-1）
+// 如果数组arr中存在，那么删掉
+// var lengthOfLongestSubstring = function(s) {
+//     let arr = [];
+//     let max = 0;
+//     let index =0;
+//     for (let i =0; i< s.length;i++) {
+//         index = arr.indexOf(s[i]);
+//         if(index !== -1) {
+//             arr.splice(0, index+1);
+//         }
+//         arr.push(s[i]);
+//         max = Math.max(arr.length, max);
+//     }
+//     console.log(max);  
+// };
+// lengthOfLongestSubstring("pwwkew");
+
+
+
+// 求解字符串中不同元素的个数，思路 维护一个新数组，如果里面没有字符串元素，推入
+// 如果有结束本轮循环（continue），继续下轮循环判断
+// var lengthOfLongestSubstring = function(s) {
+//     let arr = [];
+//     let max = 0;
+//     let index =0;
+//     for (let i =0; i< s.length;i++) {
+//         index = arr.indexOf(s[i]);
+//         if(index !== -1) {
+//             continue;
+//             // arr.splice(0, index+1);
+//         }
+//         arr.push(s[i]);
+//         max = Math.max(arr.length, max);
+//         //max++;
+//     }
+//     console.log(max);  
+// };
+// lengthOfLongestSubstring("pwwkew");
