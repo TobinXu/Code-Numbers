@@ -1927,3 +1927,110 @@
 //     console.log(max);  
 // };
 // lengthOfLongestSubstring("pwwkew");
+
+// 判断两个字符串是否相等
+// var s = "flower";
+// var k = "flowkkk";
+// for(let i = 0;i < s.length; i++) {
+//     if (s.charAt(i) === k.charAt(i))
+//     console.log(s.charAt(i));
+// }
+
+// // 二维数组元素字符的读取
+// var strs = ["flower","flow","flight"];
+// console.log(strs[2]);
+// console.log(strs[2][2]);
+
+// 最长公共前缀
+// 如果输入字符串为空 返回空
+// 先取字符串数组中的第一个元素作为最长公共前缀，然后依次和后面的每一个字符串元素进行比较
+// 最后获得最大公共前缀
+// var longestCommonPrefix = function(strs) {
+//     if(strs.length === 0) 
+//         return "";
+//     let ans = strs[0];
+//     for(let i = 1; i < strs.length; i++) {
+//         let j = 0;
+//         for (;j < ans.length && j < strs[i].length; j++) {
+//             if(ans[j] !== strs[i][j])
+//             break;
+//         }
+//         ans = ans.substr(0, j);
+//         if (ans === "")
+//              return ans;
+//     }
+//     return ans;
+// };
+// var strs = [];
+// console.log(longestCommonPrefix(strs));
+
+// 字符串的排列
+// charCodeAt(index) index指大于零小于字符串长度的数值，该函数返回字符串中字母的Unicode码,a是97
+
+// var checkInclusion = function(s1, s2) {
+//       if(typeof s1 !== "string" || typeof s2 !== "string" || s1.length ===0 || s2.length ===0) {return false;} 
+//       let dictionary = new Array(26).fill(0);
+//       for (let i = 0; i < s1.length; i++) {
+//           let code = s1.charCodeAt(i) - 97;
+//           dictionary[code]++;
+//       }
+//       for (let left = 0,right = 0; right < s2.length; right++) {
+//         let code = s2.charCodeAt(right)-97;
+//         dictionary[code]--;
+//         while(dictionary[code] < 0) {
+//             dictionary[s2.charCodeAt(left)-97]++;
+//             left++;
+//         }
+//         if (right - left +1 === s1.length) 
+//             return true;
+        
+//       }
+//         return false;
+// }
+// console.log(checkInclusion("ab","abcv"));
+
+
+// 字符串相乘
+// map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一次提供的函数后的返回值。
+var multiply = function(num1, num2) {
+    if(typeof num1 !== "string" || typeof num2 !== "string" || num1.length ===0 || num2.length ===0) {return false;}
+    if(num1 === "0" || num2 === "0") return 0; 
+    const left = '0'.charCodeAt(0);
+// num1Arr 取较短的数字， num2Arr 取较长的数字，短数乘长数速度较快。
+    const num1Arr = (num1.length > num2.length ? num2 : num1).split('').map(item => item.charCodeAt(0) - left);
+    const num2Arr = (num1.length > num2.length ? num1 : num2).split('').map(item => item.charCodeAt(0) - left);
+    let m = num1Arr.length, n = num2Arr.length;
+    // 结果最多为m+n位数
+    let res = new Array(m+n).fill(0);
+    for (let i = m-1; i >= 0; i--)
+        for(let j = n-1; j >= 0; j--) {
+            let mul = num1Arr[i] * num2Arr[j];
+            // 乘积在res对应的索引位置
+            let p1 = i + j, p2 = i + j + 1;
+            // 叠加到res上
+            let sum = mul + res[p2];
+            res[p2] = sum % 10;
+            res[p1] += sum / 10;
+        }
+        // 结果前缀可能存在的0（未使用的位）
+        while (res.length > 1 && res[0] === 0) {
+            res.shift();
+        }
+        // 将计算结果转化为字符串
+        res = res.toString();
+        return res;
+   
+};
+num1 = "123";
+num2 = "456";
+console.log(multiply(num1, num2));
+
+// 字符串数值转化
+// console.log("9".charCodeAt(0)-"0".charCodeAt(0));
+// console.log([1,2,0].reverse());
+
+ 
+// 去除结果前的 0
+//   while (res.length > 1 && res[res.length - 1] === 0) {
+//     res.pop();
+// }
