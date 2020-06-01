@@ -1992,38 +1992,38 @@
 
 // 字符串相乘
 // map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一次提供的函数后的返回值。
-var multiply = function(num1, num2) {
-    if(typeof num1 !== "string" || typeof num2 !== "string" || num1.length ===0 || num2.length ===0) {return false;}
-    if(num1 === "0" || num2 === "0") return 0; 
-    const left = '0'.charCodeAt(0);
-// num1Arr 取较短的数字， num2Arr 取较长的数字，短数乘长数速度较快。
-    const num1Arr = (num1.length > num2.length ? num2 : num1).split('').map(item => item.charCodeAt(0) - left);
-    const num2Arr = (num1.length > num2.length ? num1 : num2).split('').map(item => item.charCodeAt(0) - left);
-    let m = num1Arr.length, n = num2Arr.length;
-    // 结果最多为m+n位数
-    let res = new Array(m+n).fill(0);
-    for (let i = m-1; i >= 0; i--)
-        for(let j = n-1; j >= 0; j--) {
-            let mul = num1Arr[i] * num2Arr[j];
-            // 乘积在res对应的索引位置
-            let p1 = i + j, p2 = i + j + 1;
-            // 叠加到res上
-            let sum = mul + res[p2];
-            res[p2] = sum % 10;
-            res[p1] += sum / 10;
-        }
-        // 结果前缀可能存在的0（未使用的位）
-        while (res.length > 1 && res[0] === 0) {
-            res.shift();
-        }
-        // 将计算结果转化为字符串
-        res = res.toString();
-        return res;
+// var multiply = function(num1, num2) {
+//     if(typeof num1 !== "string" || typeof num2 !== "string" || num1.length ===0 || num2.length ===0) {return false;}
+//     if(num1 === "0" || num2 === "0") return 0; 
+//     const left = '0'.charCodeAt(0);
+// // num1Arr 取较短的数字， num2Arr 取较长的数字，短数乘长数速度较快。
+//     const num1Arr = (num1.length > num2.length ? num2 : num1).split('').map(item => item.charCodeAt(0) - left);
+//     const num2Arr = (num1.length > num2.length ? num1 : num2).split('').map(item => item.charCodeAt(0) - left);
+//     let m = num1Arr.length, n = num2Arr.length;
+//     // 结果最多为m+n位数
+//     let res = new Array(m+n).fill(0);
+//     for (let i = m-1; i >= 0; i--)
+//         for(let j = n-1; j >= 0; j--) {
+//             let mul = num1Arr[i] * num2Arr[j];
+//             // 乘积在res对应的索引位置
+//             let p1 = i + j, p2 = i + j + 1;
+//             // 叠加到res上
+//             let sum = mul + res[p2];
+//             res[p2] = sum % 10;
+//             res[p1] += sum / 10;
+//         }
+//         // 结果前缀可能存在的0（未使用的位）
+//         while (res.length > 1 && res[0] === 0) {
+//             res.shift();
+//         }
+//         // 将计算结果转化为字符串
+//         res = res.toString();
+//         return res;
    
-};
-num1 = "123";
-num2 = "456";
-console.log(multiply(num1, num2));
+// };
+// num1 = "123";
+// num2 = "456";
+// console.log(multiply(num1, num2));
 
 // 字符串数值转化
 // console.log("9".charCodeAt(0)-"0".charCodeAt(0));
@@ -2034,3 +2034,98 @@ console.log(multiply(num1, num2));
 //   while (res.length > 1 && res[res.length - 1] === 0) {
 //     res.pop();
 // }
+
+// symbol 作为一个对象或一个Map的键值，他可以保证你的对象或Map键值不重复。
+// var privateKey = Symbol();
+// var obj = {
+//     [privateKey] : 'Hero'
+// }
+// // 访问时
+// console.log(obj[privateKey]); //Hero
+
+// // 数据结构Set，类似于数组，成员的值都是唯一的，没有重复值
+// const s = new Set();
+// [2,3,5,4,2,2].forEach(x => s.add(x));
+// for (let i of s) {
+//     console.log(i);
+// }
+// // 去除数组的重复成员
+// [...new Set(Array)]
+
+// const set = new Set([1,2,3,4,4]);
+// [...set]
+
+// JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构），但是传统上只能用字符串当作键。这给它的使用带来了很大的限制
+// Map 数据结构，各种类型的值（包括对象）都可以当键。
+// Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。
+// const m = new Map();
+// const o = {p: 'Hello World'};
+// m.set(o, 'content');
+// m.get(o); // 'content'
+// m.has(o) //true
+// m.delete(o)
+// m.has(o) // false
+
+// // 在实现一次
+// const map = new Map([
+//     ['name', '张三'],
+//     ['title', 'Author']
+// ]);
+// map.size // 2
+// map.has('name') //true
+// map.get('name') // 张三
+// map.has('title') //true
+// map.get('title') //Author
+
+// 居中
+// div使用绝对布局
+// 1.设置margin:AudioTrack;并设置top,left,right,bottom的值都相等。
+// 2.设置left和top都是50%，然后再用transform(-50%, -50%) 向左平移它的宽度的50%
+// // div使用flex布局
+// 设置justify-content:center; // 水平居中
+// align-items:center; //垂直居中
+
+// // 伪类和伪元素
+// 在css3中使用单冒号来表示伪类，用双冒号来表示伪元素。但是为了兼容已有的伪元素的写法，在一些浏览器中也可以使用单冒号
+// 来表示伪元素。
+
+// 伪类一般匹配的是元素的一些特殊状态，如hover、link等，而伪元素一般匹配的特殊的位置，比如after、before等
+
+// 选择器
+// （1）id选择器（#myid）
+// （2）类选择器（.myclassname）
+// （3）标签选择器（div,h1,p）
+// （4）后代选择器（h1p）
+// （5）相邻后代选择器（子）选择器（ul>li）
+// （6）兄弟选择器（li~a）
+// （7）相邻兄弟选择器（li+a）
+// （8）属性选择器（a[rel="external"]）
+// （9）伪类选择器（a:hover,li:nth-child）
+// （10）伪元素选择器（::before、::after）
+// （11）通配符选择器（*）
+
+// div嵌套div ，点击子级div不触发父级div点击事件
+// 解决方法： 在子级div上增加一个事件 onClick="event.cancelBubble = true"，这样就可以只触发自身的点击事件了
+
+// 在父div的position为abosulte或是relative的情况下，子级div的position为absolute.
+// 此时监听到了父div的缩放，并触发了事件。
+// 那么js如何做到去操作子级的left和top，及width和height，随着父div的缩放而自适应呢？
+// .a{
+//     width: 500px;
+//     height: 500px;
+//     position:relative;
+//     border: 1px solid red;
+//   }
+//   .b{
+//     width: 10%;
+//     height: 10%;
+//     position: absolute;
+//     left: 10%;
+//     top: 10%;
+//     border: 1px solid green;
+//   }
+
+// <div class="a">
+//   <div class="b"></div>
+// </div>
+
