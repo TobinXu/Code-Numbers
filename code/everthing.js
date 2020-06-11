@@ -2129,3 +2129,483 @@
 //   <div class="b"></div>
 // </div>
 
+// 冒泡学习
+/*{ <div id="outer">
+    <p id="inner">Click me!</p>
+</div>
+事件冒泡微软提出了名为事件冒泡(event bubbling)的事件流。事件冒泡可以形象地比喻为把一颗石头投入水中，
+泡泡会一直从水底冒出水面。也就是说，事件会从最内层的元素开始发生，一直向上传播，直到document对象。
+因此上面的例子在事件冒泡的概念下发生click事件的顺序应该是p -> div -> body -> html -> document
+
+// 事件捕获
+网景提出另一种事件流名为事件捕获(event capturing)。与事件冒泡相反，事件会从最外层开始发生，直到最具体的元素。
+
+addEventListener方法用来为一个特定的元素绑定一个事件处理函数，是JavaScript中的常用方法。addEventListener有三个参数：
+element.addEventListener(event, function, useCapture) // useCapture 设置为 true - 事件句柄在捕获阶段执行（即在事件捕获阶段调用处理函数）
+//                                                       false- false- 默认。事件句柄在冒泡阶段执行（即表示在事件冒泡的阶段调用事件处理函数）} */
+
+
+
+// cookie和session  cookie通过在客户端记录信息确定用户身份（不可跨域），session通过在服务端记录信息确定用户身份
+// http是一种无状态协议，一旦数据交换完毕，客户端和服务端就会断开连接，再次交互数据需要重新建立连接。
+// cookie可以解决上面问题，服务器如果徐涛记录该用户状态，就使用response向客户端办法一个cookie，
+// 当客户端会把cookie保存起来，需要请求时，将请求网址和cookie一同提交给服务器，服务器进行辨认。
+
+// session相当于在服务器上面建立一份客户档案，客户来访的时候只需要查询客户档案表即可。
+// session机制决定了客户只能获取到自己的session，彼此独立，互不可见。
+// 提高速度》内存里，客户第一次访问创建，生成后只要用户访问就更新维护。超过超时时间失效。
+// 生命周期：session浏览器启动关闭，session消失，而cookie预先设置生存周期，或永久保存到本地文件。
+
+// 箭头函数 将this指向当前环境
+// class Json {
+//     constructor() {
+//         console.log(this);
+//         this.a = 12;
+//         this.fun = () => {
+//             console.log(this);
+//         }
+//     }
+// }
+// let json = new Json();
+// // json.fun();
+// let eData = new Date();
+// eData.fun = json.fun;
+// eData.fun();
+
+// 作用域链 本质是一个指向变量对象的指针列表，它只引用但不实际包含变量对象。
+// 用途：保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端始终都是当前执行的代码所在的环境的变量对象。
+// 链的由来：如果这个环境是函数，则将其活动对象（activation object）作为变量对象。活动对象在最开始时只包含一个变量，
+// 即 arguments 对象（这个对象在全局环境中是不存在的）。作用域链中的下一个变量对象来自包含（外部）环境，而再下一个变量
+//对象则来自下一个包含环境。这样，一直延
+// 续到全局执行环境；全局执行环境的变量对象始终都是作用域链中的最后一个对象。
+// function compare(value1, value2) {
+//     if (value1 < value2) {
+//         return -1;
+//     } else if (value1 > value2) {
+//         return 1;
+//     } else {
+//         return 0;
+//     }
+// }
+// var result = compare(5 ,10);
+// 在创建compare()函数时，会创建一个预先包含全局变量对象的作用域链，这个作用域链被保存到内部的[[Scope]]属性中
+// 当调用compare()函数时，会为函数创建执行环境，然后通过赋值函数的[[Scope]]属性中的对象构建起执行环境的作用域链。
+// 此后又有活动对象(再次作为变量对象使用)被创建并被推入执行环境作用域链前端。对于compare函数执行环境而言
+// 其作用域链中包含两个变量对象：本地活动对象和全局对象
+
+// 总结一下: 当某个函数被调用时，会创建一个执行环境（execution context）及相应的作用域链。
+// 然后，使用 arguments 和其他命名参数的值来初始化函数的活动对象（activation object）。但在作用域
+// 链中，外部函数的活动对象始终处于第二位，外部函数的外部函数的活动对象处于第三位，
+
+// function Chicken(headAndFoot) {
+//     var str = headAndFoot.split(",");
+//     var head = parseInt(str[0]);
+//     var foot = parseInt(str[1]);
+//     if(head <= 1) console.log("NODATA");
+//     var too = 0;
+//     for (let j = 0; j < head; j++) {
+//         too = head - j;
+//         if(j * 2 + too * 4 === foot) {
+//             console.log(j + "," + too);
+//         }
+//     }
+// }
+// var k = '20,60';
+// Chicken(k);
+
+// function Select_Sort(nums) {
+//     var N = nums.length;
+//     for (let i = 0; i < N-1; i++) {
+//         var min = i;
+//         for (let j = i+1; j < N; j++) {
+//             if (nums[j] < nums[min]) {
+//                 min = j;
+//             }
+//         }
+//         var t = num[i];
+//         nums[i] = nums[min];
+//         nums[min] = t;
+//     }
+//     console.log(nums);
+// }
+// var k = [2,3,1,6,3,9,45,3];
+// Select_Sort(k);
+
+// function SingUp(arr) {
+//     var arr = ['(','{','[',']','}',')'];
+//     var tem = [];
+//     var flag = true;
+//     for (let i = 0; i < arr.length; i++) {
+//         var x =arr[i];
+//         switch(x) {
+//             case '(' :
+//             case '{' :
+//             case '[' :
+//                 tem.push(x);
+//                 break;
+//             case ')' :
+//             case '}' :
+//             case ']' :
+//                let topEle = tem.pop();
+//                if (topEle === '{' && x === '}' || topEle === '(' && x === ')' || topEle === '[' && x === ']') {
+//                    continue;
+//                } else {
+//                    flag = false;
+//                }
+//         }
+//     }
+//     if(flag) {
+//         console.log('括号匹配');
+//     } else {
+//         console.log('括号不匹配');
+//     }
+// }
+// SingUp();
+
+// function IsPrime(N) {
+//     var arr = [2,3];
+//     for (let i =0; i < N; i++) {
+//         var flag = true;
+//         for (let j =2; j <= i; j++) {
+//             if (i % j) {
+//                 flag = false;
+//                 break;
+//             }
+//         }
+//         if(flag) {
+//             arr.push(i);
+//         }
+//     }
+//     console.log(arr);
+// }
+
+// var lengthOfLongestSubstring = function(s) {
+//     let arr = [];
+//     let max = 0;
+//     let index = 0;
+//     for (let i = 0; i < s.length; i++) {
+//         index = arr.indexOf(s[i]);
+//         if( index !== -1) {
+//             continue;
+//         }
+//         arr.push[s[i]];
+//         max = Math.max(max, arr.length);
+//     }
+//     console.log(max);
+// }
+
+// function findSum(num, sum) {
+//     var right = 0;
+//     var left = 0;
+//     for (let i =0; i < num.length; i++) {
+//         right = i;
+//         left = i;
+//         var curSum = 0;
+//         while(curSum < sum) {
+//             curSum += num[right++];
+//         }
+//         if( curSum === sum) {
+//             for (let j = left; j < right; j++) {
+//                 console.log(num[j]);
+//             }
+//             console.log('\n');
+//         }
+//     }
+// }
+// var num = [1,222,442,2,4,2,4,2,4,53,3];
+// var sum = 7;
+// findSum(num,sum);
+
+// 使用hover当鼠标悬停到文字上时改变颜色
+// 这种一般是借助hover事件，就是说当鼠标放到文字上时会触发一个事件，此时可以修改文字的样式。
+// 另外一种简单的办法就是直接用css的hover属性设置样式。
+/////直接用css的hover属性设置样式。保存.css, 在html代码引用！
+// {< a href="" class="test">链接内容</a>
+// .test {
+//     color:#eeffee;
+// }
+// .test:hover {
+//     color:#ff0000;
+// } }
+
+// 事件委托
+// 事件委托本质上是利用了浏览器事件冒泡的机制。因为事件在冒泡过程中会上传到父节点，并且父节点可以通过事件对象获取到
+// 目标节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件，这种方式称为事件代理。
+
+// 使用事件代理我们可以不必要为每一个子元素都绑定一个监听事件，这样减少了内存上的消耗。并且使用事件代理我们还可以实现事件的动态绑定，
+// 比如说新增了一个子节点，我们并不需要单独地为它添加一个监听事件，它所发生的事件会交给父元素中的监听函数来处理。
+
+// var p1 = new Promise((resolve,reject) => {
+//     console.log('没有resolve');
+//     reject('失败了')
+// })
+// p1.then(data => {
+//     console.log('成功');
+// }, err => {
+//     console.log('失败');
+// }).catch(
+//     res => {
+//         console.log('没进入resolve和reject');
+//     }
+// )
+// .trangle {
+//     position: absolute;
+//     width: 0;
+//     height: 0;
+//     border-width: 0 10px 10px 10px;
+//     border-style: solid;
+//     border-color: transparent transparent white transparent;
+// }
+
+// const fn = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         let num = Math.ceil(Math.random() * 10);
+//         if( num > 5) {
+//             resolve(num);
+//         } else {
+//             resject(num);
+//         }
+//     }, 2000)
+// })
+
+// fn.then(res => {
+//     console.log(res)
+// }, err => {
+//     console.log(err)
+// })
+// fn.then(res => {
+//     console.log(res);
+//     return new Promise((resolve, reject) => {
+//         if (2 * res > 15) {
+//             resolve(2 * res)
+//         } else {
+//             reject( 2 * res)
+//         }
+//     })
+// }, err => {
+//     console.log('失败')
+// }).then(res => {
+//     console.log(res)
+// }, err => {
+//     console.log(err);
+// })
+
+// Promise.resolve('hello');
+// const promise =new Promise(resolve => {
+//     resolve('hello');
+// })
+
+// function a(numberone) {
+//     var count = numberone;
+//     return function(numbertwo) {
+//         if (numbertwo === undefined) {
+//             return count;
+//         } else {
+//             count += numbertwo;
+//             return b;
+//         }
+//     }
+// }
+// console.log(a(1)(2)());
+
+// for (var i = 0; i < 5; i++) {
+//     setTimeout(() => {
+//         console.log(i);
+//     },200)
+// }
+
+// for (var i = 0; i < 5; i++) {
+//     setTimeout(
+//             function a() {
+//             var temp = i;
+//             return function() {
+//                 console.log(temp);
+//             };
+//         }(),200)
+// }
+
+
+// for (var i =0; i < 5; i++) {
+//     (function(i) {
+//         setTimeout(function() {
+//             console.log(i);
+//         }, i*1000)
+//     })(i);
+// }
+
+// function debounce(fn, delay) {
+//     let timer = null; 
+//     return function() {
+//         if(timer) {
+//             clearTimeout(timer);
+//         }
+//         timer = setTimeout(fn, delay)
+//     }
+// }
+// function showTop() {
+//     var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+//     console.log('滚动条的位置'+scrollTop);
+// }
+// // window.onscroll = debounce(showTop, 1000);
+
+// function throttle(fn, delay) {
+//     let valid = true;
+//     return function() {
+//         if(!valid) {
+//             return false;
+//         }
+//         valid = false;
+//         setTimeout(() => {
+//             fn();
+//             valid =true;
+//         }, delay)
+//     }
+// }
+// quick_sort(arr,l,i-1);
+// quick_sort(arr,i+1,r);
+
+// class Json {
+//     constructor() {
+//         console.log(this);
+//         this.a = 12;
+//         this.fun() {
+//             console.log(this);
+//         }
+//     }
+
+//     height = 2;
+// }
+
+// let json = new Json();
+// let EData = new Data();
+// EData.fun = json.fun;
+// EData.fun();
+// a.charCodeAt(i) - 97
+
+// 斐波拉切数列求和
+// function Fib(n) {
+//     if(n<1) {return false;}
+//     if(n === 1 || n === 2) return 1;
+//     let arr = [1,1];
+//     for (let i = 2; i < n; i++) {
+//         arr[i] = arr[i-1] + arr[i-2];
+//     }
+//     var k = arr.pop()
+//     return k ;
+//  }
+
+// console.log(Fib(20));
+
+// 本题为考试多行输入输出规范示例，无需提交，不计分。
+// var n = parseInt(readline());
+// var ans = 0;
+// for(var i = 0;i < n; i++){
+//     lines = readline().split(" ")
+//     for(var j = 0;j < lines.length; j++){
+//         ans += parseInt(lines[j]);
+//     }
+// }
+// print(ans);
+
+// 3
+// 1 2 3
+// 2 1 3
+// 3 2 1
+// 这道题的思路可以建一个字典，包括a和A通过他们的ascll码编程数组中的0，其他符号一个道理
+// 然后判断数组中最大的值，可以是多个，进行输出
+// var checkInclusion = function(s1, s2) {
+//       if(typeof s1 !== "string" || typeof s2 !== "string" || s1.length ===0 || s2.length ===0) {return false;} 
+//       let dictionary = new Array(26).fill(0);
+//       for (let i = 0; i < s1.length; i++) {
+//           let code = s1.charCodeAt(i) - 97;
+//           dictionary[code]++;
+//       }
+//       for (let left = 0,right = 0; right < s2.length; right++) {
+//         let code = s2.charCodeAt(right)-97;
+//         dictionary[code]--;
+//         while(dictionary[code] < 0) {
+//             dictionary[s2.charCodeAt(left)-97]++;
+//             left++;
+//         }
+//         if (right - left +1 === s1.length) 
+//             return true;
+        
+//       }
+//         return false;
+// }
+// console.log(checkInclusion("ab","abcv"));
+
+// 将字符串翻转
+// 立刻想到的是将字符串切割成数组进行翻转然后在转变成字符串
+// function reverseString(str) {
+//     return str = str.split('').reverse().join('');
+// }
+
+// console.log(reverseString("hello"));
+
+// 使用for循环
+// function reverseString2(str) {
+//     var newStr = "";
+//     for (let i = str.length - 1; i >= 0; i--) {
+//         newStr += str[i];
+//     }
+//     return newStr;
+// }
+// console.log(reverseString2("hello"));
+
+// // 去重
+// var arr=[2,8,5,0,5,2,6,7,2];
+// function unique1(arr){
+//   var hash=[];
+//   for (var i = 0; i < arr.length; i++) {
+//      if(hash.indexOf(arr[i])==-1){
+//       hash.push(arr[i]);
+//      }
+//   }
+  
+//   return hash;
+// }
+// console.log(unique1(arr))
+// let [x, , y] = [1, 2, 3];
+// console.log(x,'+',y);
+
+// 解构赋值
+// 原来是
+// let a = 1;
+// let b = 2;
+// let c = 3;
+// 现在是
+// let [a, b, c] = [1, 2, 3];
+
+// const set = new Set([1,2,3,4,5,4]);
+// console.log([...set]);
+
+// function * helloWorldGenerator() {
+//     yield 'hello';
+//     yield 'world';
+//     return 'ending';
+// }
+
+// var hw = helloWorldGenerator();
+// console.log(hw.next());
+// console.log(hw.next());
+// console.log(hw.next());
+// console.log(hw.next());
+
+// 异或运算
+// console.log(1^1);
+
+function NumberFind(arr) {
+    var len = arr.length;
+    var res = -1;
+    if (len > 1) {
+        res = arr[0];
+        for (let i = 0; i < len; i++) {
+            res = res ^ arr[i];
+        }
+    }
+    return res;
+}
+
+arr = [1,1,2,3,2,3,4,4,6];
+console.log(NumberFind(arr));

@@ -1,1 +1,1 @@
-num1
+console.log(hw.next());
