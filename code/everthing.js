@@ -2610,3 +2610,110 @@ element.addEventListener(event, function, useCapture) // useCapture 设置为 tr
 // arr = [1,1,2,3,2,3,4,4,6,6,7];
 // console.log(NumberFind(arr));
 
+
+// var a = new Object();
+// a.value = 1;
+// b = a;
+// b.value = 2;
+
+// setTimeout(() => {
+//     console.log(2);
+//   });
+  
+// new Promise((resolve, reject) => {
+//     console.log(3)
+//     resolve(4)
+//   }).then((data) => {
+//     console.log(data);
+//   })
+  
+//   var name = 'xx';
+//   () => {
+//       console.log(this.name)
+//   }
+
+
+// function towNum(r,l) {
+//     var arr;
+//     for (let i =0; i < r.length; i++) {
+//         if(r.indexOf(l[i]) !== -1) {
+//            arr.push(l[i]); 
+//         }
+//     }
+//     console.log(arr);    
+// }
+
+// Math.max(arr1)-Math.min(arr2);
+// ...new Set([])
+
+// k.    k.apply([],arr);
+
+// Function.prototype.bind() {
+    
+
+//     return bind;
+// }
+// (\d{?={?:\d{3}+\.},","})
+
+
+// 描述上一行数组所含的数字
+// eg: 第四行 1 1 1 2 2 3
+// 输出 第五行 3 1 2 2 1 3 三个一 两个二 一个三
+
+// function descirbe(arr) {
+//     var count = 1;
+//     var res = new Array();
+//     for (let i = 0; i < arr.length; i++) {
+//         if(arr.length === 1) {console.log(1 + "arr[i]"); break;
+//         }
+//         if(arr[i] === arr[i+1]){
+//            count++;
+//           } else {
+//               res.push(count);
+//               res.push(arr[i]);
+//               count = 1;
+//           }
+         
+//     }
+//     console.log(res);
+    
+// }
+
+// arr = [1,2,1,1];
+// descirbe(arr);
+
+
+// function Chicken(headAndFoot) {
+//     var str = headAndFoot.split(",");
+//     var head = parseInt(str[0]);
+//     var foot = parseInt(str[1]);
+//     if(head <= 1) console.log("NODATA");
+//     var too = 0;
+//     for (let j = 0; j < head; j++) {
+//         too = head - j;
+//         if(j * 2 + too * 4 === foot) {
+//             console.log(j + "," + too);
+//         }
+//     }
+// }
+
+// function Select_Sort(nums) {
+//     var N = nums.length;
+//     for (let i = 0; i < N-1; i++) {
+//         var min = i;
+//         for (let j = i + 1; j < N; j++) {
+//             if (nums[j] < nums[min])
+//             min = j;
+//         }
+        
+//     var t = nums[i];
+//     nums[i] = nums[min];
+//     nums[min] = t;
+//     }
+//     console.log(nums);
+// }
+
+// function reverseString(str) {
+//     return str = str.split('').reverse().join('');
+// }
+
