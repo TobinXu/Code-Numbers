@@ -2717,3 +2717,107 @@ element.addEventListener(event, function, useCapture) // useCapture 设置为 tr
 //     return str = str.split('').reverse().join('');
 // }
 
+// 指定插入到第二个参数之前
+// 插入后成为最后一个子节点
+// returnedNode = someNode.insertBefore(newNode,null);
+// alert(newNode === someNode.lastChild); // true
+
+// 插入后成为第一个子节点
+// var returnedNode = someNode.insertBefore(newNode, someNode.firstChild);
+// alert(returnedNode === newNode); // true
+// alert(newNode === someNode.firstChild); //true
+
+// 插入到最后一个子节点前面
+// returnedNode = someNode.insertBefore(newNode, someNode.lastChild);
+// alert(newNode === someNode.child[someNode.childNodes.length-2]); //true
+
+// 替换第一个子节点
+// var returnedNode = someNode.replaceChild(newNode, someNode.firstChild);
+
+// 替换最后一个子节点
+// returnedNode = someNode.replaceChild(newNode, someNode.lastChild);
+
+// 移除第一个子节点
+// var formerFirstChild = someNode.removeChild(someNode.firstChild);
+
+// 移除最后一个子节点
+// var formerLastChild =someNode.removeChild(someNode.lastChild);
+
+// for (var i = 0; i < 5; i++) {
+//     (function(i) {
+//         setTimeout(function() {
+//             console.log(i);
+//         }, i * 1000)
+//     })(i);
+// }
+
+// const test = (name) => {
+//     console.log(name);
+// }
+// test('Jerry');
+
+// const obj = {
+//     a: () => {
+//         console.log(this)
+//     }
+// }
+// obj.a();
+
+// const obj = {
+//     a: function() {console.log(this)}
+// }
+// obj.a();
+
+// 求最小公倍数从迭代法求最大公约数开始
+// function gcd(a,b) {
+//     var temp;
+//     while(b != 0) {
+//         temp = a % b;
+//         a = b;
+//         b = temp;
+//     }
+//     return a;
+// }
+// function scm(a, b) {
+//     return (a * b) / gcd(a, b);
+// }
+
+// console.log(scm(5,15));
+
+// js实现括号匹配
+function SingUp(arr){
+    arr = arr.split('');
+    var temp =[];
+    var flag=true;
+    var count = 0;
+    for(let i=0;i<arr.length;i++){
+        var x=arr[i];
+        switch(x){
+            case '(' :
+            case '{' :
+            case '[' :
+            temp.push(x);
+            count++;
+            break;
+            case ')' :
+            case '}' :
+            case ']' :
+                topEle=temp.pop();
+                if(topEle=='{'&&x=='}'||topEle=='('&&x==')'||topEle=='['&&x==']'){
+                   continue;
+                }
+                else{
+                    // console.log('括号不匹配')将标志位置为false;
+                    flag=false;
+                }
+        }
+    }
+    if(flag){
+        console.log(count);
+    } else {
+        console.log(0);
+    }
+}
+  var arr='{([])}';
+
+SingUp(arr);
