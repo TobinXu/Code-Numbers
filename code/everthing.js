@@ -2785,39 +2785,70 @@ element.addEventListener(event, function, useCapture) // useCapture 设置为 tr
 // console.log(scm(5,15));
 
 // js实现括号匹配
-function SingUp(arr){
-    arr = arr.split('');
-    var temp =[];
-    var flag=true;
-    var count = 0;
-    for(let i=0;i<arr.length;i++){
-        var x=arr[i];
-        switch(x){
-            case '(' :
-            case '{' :
-            case '[' :
-            temp.push(x);
-            count++;
-            break;
-            case ')' :
-            case '}' :
-            case ']' :
-                topEle=temp.pop();
-                if(topEle=='{'&&x=='}'||topEle=='('&&x==')'||topEle=='['&&x==']'){
-                   continue;
-                }
-                else{
-                    // console.log('括号不匹配')将标志位置为false;
-                    flag=false;
-                }
-        }
-    }
-    if(flag){
-        console.log(count);
-    } else {
-        console.log(0);
-    }
-}
-  var arr='{([])}';
+// function SingUp(arr){
+//     arr = arr.split('');
+//     var temp =[];
+//     var flag=true;
+//     var count = 0;
+//     for(let i=0;i<arr.length;i++){
+//         var x=arr[i];
+//         switch(x){
+//             case '(' :
+//             case '{' :
+//             case '[' :
+//             temp.push(x);
+//             count++;
+//             break;
+//             case ')' :
+//             case '}' :
+//             case ']' :
+//                 topEle=temp.pop();
+//                 if(topEle=='{'&&x=='}'||topEle=='('&&x==')'||topEle=='['&&x==']'){
+//                    continue;
+//                 }
+//                 else{
+//                     // console.log('括号不匹配')将标志位置为false;
+//                     flag=false;
+//                 }
+//         }
+//     }
+//     if(flag){
+//         console.log(count);
+//     } else {
+//         console.log(0);
+//     }
+// }
+//   var arr='{([])}';
 
-SingUp(arr);
+// SingUp(arr);
+
+// class qiangGuo {
+//     constructor(height, weight) {
+//       this.height = '173cm';
+//       this.weight = '70kg';
+//     }
+  
+//     introduction() {
+//       return 'He' + 'is' +  this.x + ', ' + this.y + '!';
+//     }
+
+//     Sing() {
+//         return 'He can sing 阿司匹林 ！'
+//     }
+
+//     Swimming() {
+//         return 'He can swims 1000m once !'
+//     }
+
+//     Work() {
+//         return 'javascript + html + css + network'
+//     }
+
+//     Vedio() {
+//         return 'PR + 小丸工具箱 + LumaFusion'
+//     }
+
+//     Eat() {
+//         return 'Everthing !'
+//     }
+//   }
