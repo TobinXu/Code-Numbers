@@ -2852,3 +2852,12 @@ element.addEventListener(event, function, useCapture) // useCapture 设置为 tr
 //         return 'Everthing !'
 //     }
 //   }
+
+// 绝对定位做居中
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+margin: auto;
+background: orange;

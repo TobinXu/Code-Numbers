@@ -29,3 +29,11 @@
 // 2.附表格的高度自适应（底部固定
 // 3.父子组件之间的通信怎么实现
 
+//绝对定位做居中
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+margin: auto;
+background: orange;
