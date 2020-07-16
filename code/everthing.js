@@ -2854,10 +2854,106 @@ element.addEventListener(event, function, useCapture) // useCapture 设置为 tr
 //   }
 
 // 绝对定位做居中
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-margin: auto;
-background: orange;
+// position: absolute;
+// top: 0;
+// left: 0;
+// right: 0;
+// bottom: 0;
+// margin: auto;
+// background: orange;
+
+
+
+// 烟火动画
+// $color-green: rgb(59, 201, 22);
+// $color-pink: rgb(255, 102, 159);
+// $color-blue: rgb(74, 171, 255);
+// $color-yellow: rgb(255, 198, 102);
+// $color-green-transparent: rgba(59, 201, 22, .5);
+// $color-pink-transparent: rgba(255, 102, 159, .5);
+// $color-blue-transparent: rgba(74, 171, 255, .5);
+// $color-yellow-transparent: rgba(255, 198, 102, .5);
+// // css中数组使用括号括起来的，前两个是起始位置，第三四个是结束为止（前后一起表示运动轨迹）
+// // 烟火动画
+// $moves: (
+//         (startX: 0, startY: 0, endX: 0, endY: 55, width: 6, height: 6, background: $color-green),
+//         (startX: 0, startY: 0, endX: 15, endY: 60, width: 4, height: 4, background: $color-pink-transparent),
+//         (startX: 0, startY: 0, endX: 35, endY: 45, width: 4, height: 4, background: $color-blue-transparent),
+//         (startX: 0, startY: 0, endX: 50, endY: 25, width: 6, height: 6, background: $color-yellow),
+//         (startX: 0, startY: 0, endX: 60, endY: 0, width: 2, height: 2, background: $color-pink-transparent),
+//         (startX: 0, startY: 0, endX: 50, endY: -25, width: 6, height: 6, background: $color-blue),
+//         (startX: 0, startY: 0, endX: 40, endY: -30, width: 3, height: 3, background: $color-green-transparent),
+//         (startX: 0, startY: 0, endX: 20, endY: -55, width: 5, height: 5, background: $color-pink),
+//         (startX: 0, startY: 0, endX: 5, endY: -45, width: 4, height: 4, background: $color-green-transparent),
+//         (startX: 0, startY: 0, endX: -20, endY: -50, width: 2, height: 2, background: $color-pink-transparent),
+//         (startX: 0, startY: 0, endX: -40, endY: -50, width: 2, height: 2, background: $color-green-transparent),
+//         (startX: 0, startY: 0, endX: -55, endY: -30, width: 4, height: 4, background: $color-blue),
+//         (startX: 0, startY: 0, endX: -55, endY: -10, width: 3, height: 3, background: $color-yellow-transparent),
+//         (startX: 0, startY: 0, endX: -55, endY: -5, width: 3, height: 3, background: $color-green-transparent),
+//         (startX: 0, startY: 0, endX: -35, endY: -7, width: 2, height: 2, background: $color-pink-transparent),
+//         (startX: 0, startY: 0, endX: -45, endY: 10, width: 4, height: 4, background: $color-yellow-transparent),
+//         (startX: 0, startY: 0, endX: -50, endY: 25, width: 6, height: 6, background: $color-pink),
+//         (startX: 0, startY: 0, endX: -40, endY: 35, width: 4, height: 4, background: $color-green-transparent)
+// );
+
+// @mixin move($index) {
+//   $item: nth($moves, $index);
+//   $keyframesName: "move" + $index;
+//   $animationTime: .75s;
+//   $animationType: linear;
+//   $animationIterator: 1;
+//   $width: map-get($item, width);
+//   $height: map-get($item, height);
+//   $backgroud: map-get($item, background);
+//   $startX: map-get($item, startX);
+//   $startY: map-get($item, startY);
+//   $endX: map-get($item, endX);
+//   $endY: map-get($item, endY);
+
+//   width: px2rem($width);
+//   height: px2rem($height);
+//   background: $backgroud;
+//   animation: #{$keyframesName} $animationTime $animationType $animationIterator;
+//   @keyframes #{$keyframesName} {
+//     0% {
+//       transform: translate3d(px2rem($startX), px2rem($startY), 0) scale(0);
+//       opacity: 0;
+//     }
+//     50% {
+//       transform: translate3d(px2rem($endX * 0.5), px2rem($endY * 0.5), 0) scale(.5);
+//       opacity: 1;
+//     }
+//     90% {
+//       transform: translate3d(px2rem($endX), px2rem($endY), 0) scale(1);
+//       opacity: 1;
+//     }
+//     100% {
+//       transform: translate3d(px2rem($endX * 1.05), px2rem($endY * 1.05), 0) scale(1);
+//       opacity: 0;
+//     }
+//   }
+// }
+
+// 为了解决浮点数运算不准确的问题，在运算前我们把参加运算的数先升级(10的X的次方)
+// 到整数，等运算完后再降级(0.1的X的次方)。
+// 先将小数变为字符串再用split以点分割成一个数组，数组中包括两个元素一个是点
+// 前面的0，第二个是点后面的字符串一串数字，计算它的长度并把这个长度作为以
+// 10为基数，升级的次幂。Math.pow(10,x)。然后用小数乘一下。
+// 注意计算出来的指数，要根据两个相加的小数取里面小数点后面多的，也就是指数大的。
+// console.log(0.11111.toString().split(".")[1].length)
+// 加法为例子
+// Number.prototype.add = function(arg){   
+//     var r1,r2,m;   
+//     try{r1=this.toString().split(".")[1].length}catch(e){r1=0}   
+//     try{r2=arg.toString().split(".")[1].length}catch(e){r2=0}   
+//     m=Math.pow(10,Math.max(r1,r2))   
+//     return (this*m+arg*m)/m   
+// }
+Number.prototype.add = function(arg) {
+    var r1, r2, m;
+    try{r1 = this.toString().split(".")[1].length} catch(e) {r1 = 0}
+    try{r2 = arg.toString().split(".")[1].length} catch(e) {r2 = 0}
+    m = Math.pow(10, Math.max(r1, r2))
+    return (this * m + arg * m)
+}  
+
