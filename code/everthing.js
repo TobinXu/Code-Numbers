@@ -2949,11 +2949,32 @@ element.addEventListener(event, function, useCapture) // useCapture 设置为 tr
 //     m=Math.pow(10,Math.max(r1,r2))   
 //     return (this*m+arg*m)/m   
 // }
-Number.prototype.add = function(arg) {
-    var r1, r2, m;
-    try{r1 = this.toString().split(".")[1].length} catch(e) {r1 = 0}
-    try{r2 = arg.toString().split(".")[1].length} catch(e) {r2 = 0}
-    m = Math.pow(10, Math.max(r1, r2))
-    return (this * m + arg * m)
-}  
+// Number.prototype.add = function(arg) {
+//     var r1, r2, m;
+//     try{r1 = this.toString().split(".")[1].length} catch(e) {r1 = 0}
+//     try{r2 = arg.toString().split(".")[1].length} catch(e) {r2 = 0}
+//     m = Math.pow(10, Math.max(r1, r2))
+//     return (this * m + arg * m)
+// }  
 
+
+
+//  无重复字符的最长子串
+// 思路：使用新数组arr然后每一轮循环都维护max。
+// 每一轮判断字符串的下一个元素是否存在于数组arr中，通过用indexOf方法（如果有返回下标，没有返回-1）
+// 如果数组arr中存在，那么删掉
+var lengthOfLongestSubstring = function(s) {
+    let arr = [];
+    let max = 0;
+    let index =0;
+    for (let i =0; i< s.length;i++) {
+        index = arr.indexOf(s[i]);
+        if(index !== -1) {
+            arr.splice(0, index+1);
+        }
+        arr.push(s[i]);
+        max = Math.max(arr.length, max);
+    }
+    console.log(max);  
+};
+lengthOfLongestSubstring("pwwkew");
