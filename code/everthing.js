@@ -3402,7 +3402,7 @@ element.addEventListener(event, function, useCapture) // useCapture 设置为 tr
 //                                                       false- false- 默认。事件句柄在冒泡阶段执行（即表示在事件冒泡的阶段调用事件处理函数）} */
 // cookie和session  cookie通过在客户端记录信息确定用户身份（不可跨域），session通过在服务端记录信息确定用户身份
 // http是一种无状态协议，一旦数据交换完毕，客户端和服务端就会断开连接，再次交互数据需要重新建立连接。
-// cookie可以解决上面问题，服务器如果徐涛记录该用户状态，就使用response向客户端办法一个cookie，
+// cookie可以解决上面问题，服务器如果需要记录该用户状态，就使用response向客户端设置一个cookie，
 // 当客户端会把cookie保存起来，需要请求时，将请求网址和cookie一同提交给服务器，服务器进行辨认。
 // session相当于在服务器上面建立一份客户档案，客户来访的时候只需要查询客户档案表即可。
 // session机制决定了客户只能获取到自己的session，彼此独立，互不可见。
@@ -4293,3 +4293,57 @@ break;
 // console.log(person2.constructor === Person);
 // console.log(person2 instanceof Person);
 // console.log(person2 instanceof Object);
+
+/**
+ * 写一个XmlHttpRequest请求
+ */
+// const SERVER_URL = '/server';
+// let xhr = new XMLHttpRequest();
+
+// // 创建http请求
+// xhr.open('GET', SERVER_URL, true);
+
+// // 设置状态监听函数
+// xhr.onreadystatechange = function() {
+//     if (this.readyState !==4) return;
+
+//     //当请求成功时
+//     if (this.status === 200) {
+//         handle(this.response);
+//     } else {
+//         console.log(this.statusText);
+//     }
+// };
+
+// // 设置请求失败时的监听函数
+// xhr.onerror = function() {
+//     console.log(this.statusText);
+// };
+// // 设置请求头信息
+// xhr.responseType = "json";
+// xhr.setRequestHeader("Accept", "application/json");
+
+// // 发送http请求
+// xhr.send(null);
+
+// /**
+//  * 模块开发 commonjs\AMD\CMD\ES6的export和import
+//  */
+// // CMD 
+// define(funciton(require, exports, module) {
+//     var a = require("./a");
+//     a.doSomething();
+//     //此处省略100行
+//     var b = require("./b");
+//     b.doSomething();
+//     // ...
+// });
+// // AMD 默认推荐
+// define(["./a","./b"], function(a, b) {
+//     // 依赖必须一开始就写好
+//     a.doSomething();
+//     // 此处省略100行
+//     b.doSomething();
+//     // ...
+// });
+
