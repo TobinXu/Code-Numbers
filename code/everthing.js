@@ -3065,6 +3065,15 @@
 //          timer = setTimeout(fn, delay) // 进入该分支说明当前没有计时，那就开始计时      
 //      }
 //  }
+
+// funcution debounce(fn, delay) {
+//     let timer = null;
+//     if(timer) {
+//         clearTimeout(timer);
+//     }
+//     timer = setTimeout(fn, delay);
+// }
+
 //  // 输出滚动条的位置
 // function showTop() {
 //     var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
@@ -3090,6 +3099,21 @@
 //         }, delay)
 //     }
 // }
+
+// function throttle(fn ,delay) {
+//     let valid = true;
+//     return function() {
+//         if(!valid) {
+//             return false;
+//         }
+//         valid = false;
+//         setTimeout(() => {
+//             fn();
+//             valid = true;
+//         }, delay)
+//     }
+// }
+
 // function showTop() { 
 //     var scrollTop = document.body.scrollTop || document.documentElement.scrollTop; // 滚动条与顶部的距离
 //     console.log('当前您在：',scrollTop);
@@ -4346,4 +4370,131 @@ break;
 //     b.doSomething();
 //     // ...
 // });
+
+
+// 用函数来封装以特定的接口创建对象的细节
+// function createPerson(name, age ,job) {
+//     var o = new Object();
+//     o.name = name;
+//     o.age = age;
+//     o.job = job;
+//     o.sayaName = function() {
+//         alert(this.name);
+//     }
+//     return o;
+// }
+// var person1 = createPerson("Mike",20,"SoftWare Engineer");
+// var person2 = createPerson("nike",28,"doctor");
+
+//构造函数
+// function Person(name, age ,job) {
+//     this.name = name;
+//     this.age = age;
+//     this.job = job;
+//     this.sayName = function() {
+//         alert(this.name);
+//     };
+// }
+// var person1 = new Person("Mike", 20, "Engineer");
+// var person2 = new Person("Greg", 29, "Doctor");
+
+// 原型对象
+// function Person() {
+
+// }
+// Person.prototype.name = "Nicholas";
+// Person.prototype.age = 20;
+// Person.prototype.job = "Engineer";
+// Person.prototype.sayName = function() {
+//     console.log(this.name);
+// };
+// var person1 = new Person();
+// person1.sayName();
+// var person2 = new Person();
+// person2.sayName();
+
+// 组合使用构造函数来创建属性，让实例有自己的属性副本，原型模式俩创建共享的方法，共享西相同的方法引用
+// function Person(name, age ,job) {
+//     this.name = name;
+//     this.age = age;
+//     this.job = job;
+//     this.friends = ["Shelby", "Court"];
+// }
+// Person.prototype = {
+//     constructor : Person,
+//     sayName : function() {
+//         console.log(this.name);
+//     }
+// }
+// var person1 = new Person("Nicholas",20,"software Engineer");
+// var person2 = new Person("Greg", 20, "Doctor");
+// person1.friends.push("Van");
+// console.log(person1.friends);
+// console.log(person2.friends);
+// console.log(person1.friends === person2.friends);
+// console.log(person1.sayName === person2.sayName);
+// console.log(person1.sayName());
+
+// 原型链的继承
+// function SuperType() {
+//     this.property = true;
+// }
+// SuperType.prototype.getSuperValue = function() {
+//     return this.property;
+// };
+// function SubType() {
+//     this.subproperty = false;
+// }
+// // 继承了SuperType
+// SubType.prototype = new SuperType();
+// SubType.prototype.getSuperValue = function() {
+//     return this.subproperty;
+// }
+// var instance = new SubType();
+// console.log(instance.getSuperValue());
+
+// 借用构造函数继承
+// function SuperType() {
+//     this.colors = ["red", "blue", "green"];
+// }
+// function SubType() {
+//     // 继承了SuperType
+//     SuperType.call(this);
+// }
+// var instance1 = new SubType();
+// instance1.colors.push("black");
+// console.log(instance1.colors);
+// var instance2 = new SubType();
+// console.log(instance2.colors);
+
+// 组合继承
+// function SuperType(name) {
+//     this.name = name;
+//     this.colors = ["red", "blue", "green"];
+// }
+// SuperType.prototype.sayName = function() {
+//     console.log(this.name);
+// };
+// function SubType(name, age) {
+//     // 继承属性
+//     SuperType.call(this, name);
+//     this.age = age;
+// }
+// // 继承方法
+// SubType.prototype = new SuperType();
+// SubType.prototype.constructor = SubType;
+// SubType.prototype.sayAge = function() {
+//     console.log(this.age);
+// };
+
+// var instance1 = new SubType("Nicholas",20);
+// instance1.colors.push("black");
+// console.log(instance1.colors);
+// instance1.sayName();
+// instance1.sayAge();
+
+// var instance2 = new SubType("HerMan", 18);
+// console.log(instance2.colors);
+// instance2.sayName();
+// instance2.sayAge();
 
