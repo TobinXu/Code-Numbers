@@ -3054,7 +3054,8 @@
 // 防抖 在第一次出发事件时，不立刻执行，而是给出一个期限值，比如200ms
 // 然后：如果200ms内没有再次触发，不执行；再次触发，重新计时
 // 效果：如果短时间内大量触发，只执行一次
-// 实现：既然要有计时，肯定需要setTimeOut函数，还需要一个变量保存计时，考虑维护全局纯净，可以借助闭包实现
+// 实现：既然要有计时，肯定需要setTimeOut函数，还需要一个变量保存计时，
+// 考虑维护全局纯净，可以借助闭包实现
 // fn 需要防抖的函数 delay防抖时间期限值
 //  function debounce(fn, delay) {
 //      let timer = null; // 借助闭包
@@ -4498,3 +4499,184 @@ break;
 // instance2.sayName();
 // instance2.sayAge();
 
+// function debounce(fn, delay) {
+//     let timer = null;
+//     return function() {
+//         if (timer) {
+//             clearTimeout(timer);
+//         }
+//         timer = setTimeout(fn,delay)
+//     }
+     
+// }
+
+
+// function throttle(fn, delay) {
+//     let valid = true;
+//     return function() {
+//         if (!valid) {
+//             //状态位为false，表示休息时间
+//             return false;
+//         }
+//         valid = false;
+//         setTimeout(() => {
+//             fn();
+//             valid = true;
+//         },delay)
+//     }
+// }
+
+// 函数柯里化 curry
+// function curry(fn, ...args) {
+//     return fn.length <= args.length ? fn(...args) : curry.bind(null, fn, ...args);
+// } 
+
+// function curry(fn, ...args) {
+//     return fn.length <= args.length ? fn(...args) : curry.bind(null, fn, ...args);
+// }
+
+// 函数柯里化指一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术，也就是
+// 输入一个参数返回一个值
+// function curry(fn, args) {
+//     // 获取函数需要的参数长度
+//     let length = fn.length;
+//     args = args || [];
+//     return function() {
+//         let subArgs = args.slice(0);
+//         // 拼接得到现有的所有参数
+//         for (let i =0; i< arguments.length; i++) {
+//           subArgs.push(arguments[i]);
+//         }
+//         // 判断参数的长度是否已经满足函数所需要参数对的长度
+//         if (subArgs.length >= length) {
+//             // 如果满足 则执行
+//             return fn.apply(this, subArgs);
+//         } else {
+//             // 如果不满足，递归返回柯里化函数，等待参数的传入
+//             return curry.call(this, fn, subArgs);
+//         }
+//      };
+// }
+
+// function curry(fn, args) {
+//     let length = fn.length;
+//     args = args || [];
+   
+//     return function() {
+//         let subArgs = args.slice(0);
+//         for (let i = 0; i < arguments.length; i++) {
+//             subArgs.push(arguments[i]);
+//         }
+//         if(subArgs.length >= length) {
+//             fn.apply(this, subArgs);
+//         } else {
+//             curry.call(this, fn, subArgs);
+//         }
+//     }
+// }
+
+// function curry(fn, ...args) {
+//     return fn.length <= args.length ? fn(...args) : curry.bind(null, fn, ...args);
+// }
+
+// 浅拷贝
+// function shallowCopy(object) {
+//     // 只拷贝对象
+//     if (!object || typeof object !== "object") return;
+//     // 根据object的类型判断是新建对象还是数组
+//     let newObject = Array.isArray(object) ? [] : {};
+//     // 遍历object，并且判断是object的属性才拷贝
+//     for (let key in object) {
+//         if (object.hasOwnProperty(key)) {
+//             newObject[key] = object[key];
+//         }
+//     }
+//     return newObject;
+// }
+
+// 深拷贝
+// function deepCopy(object) {
+//     // 只拷贝对象
+//     if (!object || typeof object !== "object") return;
+//     // 根据object的类型判断是新建对象还是数组
+//     let newObject = Array.isArray(object) ? [] : {};
+//     // 遍历object，并且判断是object[key]是否是引用类型，是的话继续递归不是的话，直接将属性拷贝
+//     for (let key in object) {
+//         if (object.hasOwnProperty(key)) {
+//             newObject[key] = 
+//             typeof object[key] === "object" ? 
+//             deepCopy(object[key]) : object[key];
+//         }
+//     }
+//     return newObject;
+// }
+
+// function shallowCopy(object) {
+//     if (!object || typeof object !== "object") return;
+//     let newObj = Array.isArray(object) ? [] : {};
+//     for ( let key in object) {
+//         if (object.hasOwnproperty(key)) {
+//             newObj = object[key];
+//         }
+//     }
+//     return newObj;
+// }
+
+// function deepCopy(object) {
+//     if (!object || typeof object !== "object") return;
+//     let newObj = Array.isArray(object) ? [] : {};
+//     for ( let key in object) {
+//         if (object.hasOwnproperty(key)) {
+//             newObj = 
+//             typeof object[key] === "object" ?
+//             deepCopy(object[key]) : object[key];
+//         }
+//     }
+//     return newObj;
+// }
+
+
+// function shallowCopy(object) {
+//     if(!object || typeof object !== "object") return;
+//     let newObject = Array.isArray(object) ? [] : {};
+//     for (let key in object) {
+//         if (object.hasOwnProperty(key)) {
+//             newObject[key] = object[key];
+//         }
+//     }
+//     return newObject;
+// }
+
+
+// function deepCopy(object) {
+//     if(!object || typeof object !== "object") return;
+//     let newObject = Array.isArray(object) ? [] : {};
+//     for (let key in object) {
+//         if (object.hasOwnProperty(key)) {
+//             typeof newObject[key] === "object" ?
+//             deepCopy(object[key]) : object[key];
+//         }
+//     }
+//     return newObject;
+// }
+
+// function curry(fn, ...args) {
+//     return fn.length <= args.length ? fn(...args) : CountQueuingStrategy.bind(null, ...args);
+// }
+
+// function curry(fn, args) {
+//     let length = fn.length;
+//     args = args || [];
+//     return function() {
+//         let subArgs = args.slice(0);
+//         for (let i = 0; i < arguments.length; i++) {
+//             subArgs.push(arguments[i]);
+//         }
+//         if (subArgs.length >= length) {
+//             return fn.apply(this. subArgs);
+//         } else {
+//             return curry.call(this, fn , subArgs);
+//         }
+//     };
+// }
+// console.log((0.1+0.2-0.3 )< Number.EPSILON);
