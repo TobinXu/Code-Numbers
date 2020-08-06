@@ -4680,3 +4680,5 @@ break;
 //     };
 // }
 // console.log((0.1+0.2-0.3 )< Number.EPSILON);
+
+// 昨天两个数字相加减去右边的结果如果小于Number.EPSILON也可以判断两遍相等
