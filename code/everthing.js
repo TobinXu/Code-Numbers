@@ -927,6 +927,10 @@
 //     console.log(`err==>${err}`)
 // })
 
+// Promise 是一个构造函数，接收一个函数作为参数，返回一个 Promise 实例,这个函数里面接受两个参数
+// 分别是resolve函数和reject函数，状态的改变是通过 resolve() 和 reject() 函数来实现的，我们
+// 可以在异步操作结束后调用这两个函数改变 Promise 实例的状态，它的原型上定义了一个 then 方法，
+// 使用这个 then 方法可以为两个状态的改变注册回调函数。这个回调函数属于微任务，会在本轮事件循环的末尾执行。
 // 在Promise的内部，有一个状态管理器，有三种状态：pending，fulfilled，rejected。 
 // promise对象的初始状态为pending，
 // 当调用resolve（成功），会由pending=>fulfilled
@@ -972,7 +976,7 @@
 // });
 
 // promises all方法就是 作为几个参数的对象一旦有一个状态为rejected，则all的返回值就是rejected。
-// 当几个反坐参数的函数的返回状态都为fulfilled时，至于最后输出的时间就看谁跑的慢。
+// 当几个参数的函数的返回状态都为fulfilled时，至于最后输出的时间就看谁跑的慢。
 // let p1 = new Promise((resolve) => {
 //     setTimeout(() => {
 //         console.log('1s') //1秒后输出去
@@ -4682,3 +4686,211 @@ break;
 // console.log((0.1+0.2-0.3 )< Number.EPSILON);
 
 // 昨天两个数字相加减去右边的结果如果小于Number.EPSILON也可以判断两遍相等
+
+// let list = [1,2,3,4,5];
+// const incrementNumbers = (list) => list.map(number => number + 1);
+// console.log(incrementNumbers.length);
+
+// 为什么使用 setTimeout 实现 setInterval？怎么模拟？
+// 思路是使用递归函数，不断地去执行 setTimeout 从而达到 setInterval 的效果
+
+// function mySetInterval(fn, timeout) {
+//     // 控制器，控制定时器是否继续执行
+//     var timer = {
+//         flag: true
+//     };
+//     // 设置递归函数，模拟定时器执行
+//     function interval() {
+//         if (timer.flag) {
+//             fn();
+//             setTimeout(interval, timeout);
+//         }
+//     }
+//     // 启动定时器
+//     setTimeout(interval, timeout);
+//     // 返回控制器
+//     return timer;
+// }
+
+
+// 手写一个 Promise
+// const PENDING = "peding";
+// const RESOLVED = "resolved";
+// const REJECTED = "rejected";
+// function MyPromise(fn) {
+//     // 保存初始化状态
+//     var self = this;
+//     //初始化状态
+//     this.state = PENDING;
+//     // 用于保存resolved或者rejected传入的值
+//     this.value = null;
+//     // 用于保存resolve的回调函数
+//     this.resolvedCallbacks = [];
+//     //用于保存reject的回调函数
+//     this.rejectedCallbacks = [];
+//     // 状态转变为resolved方法
+//     function resolve(value) {
+//         // 判断传入元素是否为Promise值， 如果是，则状态改变必须等待前一个状态改变后在进行改变
+//         if (value instanceof MyPromise) {
+//             return value.then(resolve, reject);
+//         }
+//         // 保证代码的执行顺序为本轮事件循环的末尾
+//         setTimeout(() => {
+//             // 只有状态为pending时才能转变
+//             if (self.state === PENDING) {
+//                 // 修改状态
+//                 self.state = RESOLVED;
+//                 // 设置传入的值
+//                 self.value = value;
+//                 // 执行回调函数
+//                 self.resolvedCallbacks.forEach(callback => {
+//                     callback(value);
+//                 })
+//             }
+//         }, 0);
+//     }
+//     // 状态改变为rejected方法
+//     function reject(value) {
+//         // 保证代码执行顺序为本轮事件循环的末尾
+//         setTimeout(() => {
+//             // 只有状态为pending时才能转变
+//             if (self.state === PENDING) {
+//                 // 修改状态
+//                 self.state = REJECTED;
+//                 // 设置传入的值
+//                 self.value = value;
+//                 // 执行回调函数
+//                 self.rejectedCallbacks.forEach(callback => {
+//                     callback(value);
+//                 })
+//             }
+//         }, 0);
+//     }
+//     // 将两个方法传入函数执行
+//     try {
+//         fn(resolve, reject);
+//     } catch (e) {
+//         // 遇到错误时，捕获错误，执行reject函数
+//         reject(e);
+//     }
+// }
+
+// MyPromise.prototype.then = function(onResolved, onREjected) {
+//     // 首先判断两个参数是否为函数类型，因为这两个参数时可选参数
+//     onResolved =
+//     typeof onResolved === "function"
+//     ? onResolved
+//     : function(value) {
+//         return value;
+//     };
+//     onReject = 
+//     typeof Onreject === "function"
+//     ? onREjected
+//     : function(error) {
+//         return error;
+//     };
+//     // 如果是等待状态，则将函数加入对应列表中
+//     if (this.state === PENDING) {
+//         this.resolvedCallbacks.push(onResolved);
+//         this.rejectedCallbacks.push(onREjected);
+//     }
+//     // 如果状态已经凝固，则直接执行对应状态的函数
+//     if (this.state === RESOLVED) {
+//         onResolved(this.value);
+//     }
+//     if (this.state === REJECTED) {
+//         onREjected(this.value);
+//     }
+
+// };
+
+// 20200813手写promise
+// const PENDING = "pending";
+// const RESOLVED = "resolved";
+// const rejected = "REJECTED";
+// function MyPromise(fn) {
+//     // 保存初始状态
+//     var self = this;
+//     // 初始化状态
+//     this.state = PENDING;
+//     // 用于保存resolved或rejected传入的值
+//     this.value = null;
+//     // 用于保存resolve的回调函数
+//     this.resolvedCallbacks = [];
+//     // 用于保存reject的回调函数
+//     this.rejectedCallbacks = [];
+//     // 状态转变为resolved方法
+//     funciton resolve(value) {
+//         // 判断传入元素是否为Promise值，如果是，则状态改变必须等待前一个状态改变后在进行改变
+//         if (value instanceof MyPromise) {
+//             return value.then(resolve, reject);
+//         }
+//         // 保证代码的执行顺序为本轮事件循环的末尾
+//         setTimeout(() => {
+//             // 只有状态由pending时才能转变
+//             if (self.state === PENDING) {
+//                 // 修改状态
+//                 self.state = RESOLVED;
+//                 // 设置传入的值
+//                 self.value = value;
+//                 // 执行回调函数
+//                 self.resolvedCallbacks.forEach(callback => {
+//                     callback(value);
+//                 });
+//             }
+//         }, 0);
+//     }
+//     // 状态改变为rejected方法
+//     funciton reject(value) {
+//         // 保证代码的执行顺序为本轮事件循环的末尾
+//         setTimeout(() => {
+//             // 只有状态由pending时才能转变
+//             if (self.state === PENDING) {
+//                 // 修改状态
+//                 self.state = REJECTED;
+//                 // 设置传入的值
+//                 self.value = value;
+//                 // 执行回调函数
+//                 self.rejectedCallbacks.forEach(callback => {
+//                     callback(value);
+//                 });
+//             }
+//         }, 0);
+//     }
+//     // 将两个方法传入函数执行
+//     try {
+//         fn(resolve, reject);
+//     } catch (e) {
+//         // 遇到错误的话，捕获错误，执行reject函数
+//         reject(e);
+//     }
+
+// }
+
+// MyPromise.prototype.then(onResolved, onRejected) {
+//     // 首先判断两个参数是否为函数类型，因为这两个参数时可选参数
+//     onREsolved = 
+//     typeof onREsolved === "function"
+//     ? onREsolved 
+//     : function(value) {
+//         return value;
+//     };
+//     onRejected = 
+//     typeof onRejected === "funciton"
+//     ? onRejected
+//     : funciton(error) {
+//         return error;
+//     };
+//     // 如果是等待状态，则将函数加入对应列表中
+//     if (this.state === PENDING) {
+//         this.resolvedCallbacks.push(onResolved);
+//         this.rejectedCallbacks.push(onRejected);
+//     }
+//     // 如果状态已经凝固，则执行对应的状态函数
+//     if (this.state === RESOLVED) {
+//         onREsolved(this.value);
+//     }
+//     if (this.state === REJECTED) {
+//         onRejected(this.value);
+//     }
+// };
