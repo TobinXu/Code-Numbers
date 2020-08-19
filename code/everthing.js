@@ -4983,3 +4983,138 @@ break;
 //     }
 // };
 
+// 如何封装一个JavaScript的类型判断函数
+// function getType(value) {
+//     // 判断数据是null的情况
+//     if (value === null) {
+//         return value+ "";
+//     }
+//     // 判断数据是引用类型的情况
+//     if (typeof value === "object") {
+//         let valieClass = Object.prototype.toString.call(value),
+//         type = valueClass.split("")[1].split("");
+//         type.pop();
+//         return type.join("").toLowerCase();
+//     } else {
+//         // 判断数据是基本数据类型的情况和函数的情况
+//         return typeof value;
+//     }
+// }
+
+//如何判断一个对象是否为空对象？
+
+// Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组
+// function checkNullObj(obj) {
+//     return Object.keys(obj).length === 0;
+// }
+
+// 使用闭包实现每隔一秒打印1234
+// for (var i =0; i < 5; i++) {
+//     (function(i){
+//         setTimeout(function() {
+//             console.log(i);
+//         }, i * 1000)
+//     })(i)
+// }
+
+// for (let i =0 ;i < 5; i++) {
+//    setTimeout(() => {
+//     console.log(i);
+//    }, i * 1000)
+// }
+
+// 一道常被人轻视的前端 JS 面试题,
+// 包含了变量定义提升、this指针指向、
+// 运算符优先级、原型、继承、全局变量污染、对象属性及原型属性优先级等知识，
+// function Foo() {
+//     getName = function() {
+//       alert(1);
+//     };
+//     return this;
+//   }
+//   Foo.getName = function() {
+//     alert(2);
+//   };
+//   Foo.prototype.getName = function() {
+//     alert(3);
+//   };
+//   var getName = function() {
+//     alert(4);
+//   };
+//   function getName() {
+//     alert(5);
+//   }
+  
+//   //请写出以下输出结果：
+//   Foo.getName(); // 2
+//   getName(); // 4
+//   Foo().getName(); // 1
+//   getName(); // 1
+//   new Foo.getName(); // 2
+//   new Foo().getName(); // 
+//   new new Foo().getName(); // 
+
+
+// vm.$set的原理
+// 由于 JavaScript 的限制，Vue 不能检测数组和对象的变化
+// Vue.set(object, propertyName, value) 方法向嵌套对象添加响应式 property。
+// vm.$set 实例方法是全局 Vue.set 方法的别名
+/*
+data里的响应式数据都有_ob_的标签
+第一步：target类型判断，基本数据类型不行，数组和对象可以
+第二步：对于数组的处理其实就是调用了splice方法，之家添加或替换
+第三步：对于对象，key存在，直接替换，key不存在对象中
+target如果为非响应式对象，直接给target的key赋值，如果是响应式对象，进行依赖收集
+*/
+/*
+function set(target: Array<any> | Object, key: any, val: any): any {
+    // isUndef 是判断 target 是不是等于 undefined 或者 null 。
+    //isPrimitive 是判断 target 的数据类型是不是 string、number、symbol、boolean 中的一种
+    if (process.env.NODE_ENV !== 'production' &&
+      (isUndef(target) || isPrimitive(target))
+    ) {
+      warn(`Cannot set reactive property on undefined, null, or primitive value: ${(target: any)}`)
+    }
+  
+    // 数组的处理
+    if (Array.isArray(target) && isValidArrayIndex(key)) {
+      target.length = Math.max(target.length, key)
+      target.splice(key, 1, val)
+      return val
+    }
+  
+    // 对象，并且该属性原来已存在于对象中，则直接更新
+    if (key in target && !(key in Object.prototype)) {
+      target[key] = val
+      return val
+    }
+  
+    // vue给响应式对象(比如 data 里定义的对象)都加了一个 __ob__ 属性，
+    // 如果一个对象有这个 __ob__ 属性，那么就说明这个对象是响应式对象，我们修改对象已有属性的时候就会触发页面渲染。
+    // 非 data 里定义的就不是响应式对象。
+    const ob = (target: any).__ob__
+  
+    if (target._isVue || (ob && ob.vmCount)) {
+      process.env.NODE_ENV !== 'production' && warn(
+        'Avoid adding reactive properties to a Vue instance or its root $data ' +
+        'at runtime - declare it upfront in the data option.'
+      )
+      return val
+    }
+  
+    // 不是响应式对象
+    if (!ob) {
+      target[key] = val
+      return val
+    }
+  
+    // 是响应式对象，进行依赖收集
+    defineReactive(ob.value, key, val)
+  
+    // 触发更新视图
+    ob.dep.notify()
+    return val
+  }
+  */
+
+  
