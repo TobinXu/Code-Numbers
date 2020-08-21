@@ -5168,5 +5168,78 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 7、作用域——局部修改样式；
 8、JavaScript 赋值—— 在CSS中使用JavaScript表达式赋值。 */
 
+
 // 关于正常流的理解（下面这篇文章讲解的特别清晰）
 // 链接：https://juejin.im/post/6844903875552477191
+
+// Number.EPSILON
+// 浮点数的存储
+// JavaScript 如何存储小数。和其它语言如 Java 和 Python 不同，JavaScript 中所有数字包括整数和小数都只有一种类型 — Number。
+// 相同点在于他们的实现遵循 IEEE 754 标准，使用 64 位固定长度来表示，也就是标准的 double 双精度浮点数来表示。
+
+// 解决：
+// 1.升阶
+// 2.左边两数计算与右边结果相减如果小于es6的Number.EPSILON的话，认定两遍相等。
+
+// 大数危机：
+// 要想解决大数的问题你可以引用第三方库 bignumber.js，原理是把所有数字当作字符串，重新实现了计算逻辑，缺点是性能比原生的差很多。
+// 现在 TC39 已经有一个 Stage 3 的提案 proposal bigint，大数问题有望彻底解决。
+
+
+// 封装一个AJAX
+// 超级简易版本
+// funciton ajax(path, method, data, success, fail) {
+//   let request = new XMLHttpRequest();
+//   request.open(method, path);
+//   request.send(data);
+//   request.onreadystatechange = () => {
+//     if (request.status >= 200 && request.status < 300) {
+//       success.call(undefined, request.responseText)
+//     } else if (request >= 400) {
+//       fial.call(undefined, request);
+//     }
+//   }
+// }
+
+// promise版本
+// function ajax(options) {
+//   let {path, method, data} = options;
+//   return new Promise(funciton(resolve, reject) {
+//     let request = new XMLHttpRequest();
+//     request.open(method, path);
+//     requestAnimationFrame.send(data);
+//     request.onreadystatechange = () => {
+//       if (request.readystate === 4) {
+//         if (request.status >= 200 && request.status < 300) {
+//           resolce.call(undefined, request.responseText);
+//         } else if (request.status >= 400) {
+//           reject.call(undefined, request);
+//         }
+//       }
+//     }
+//   })
+// }
+
+cosnt SERVER_URL = "/server";
+let xhr = new XMLHttpRequest();
+// 创建Http请求
+xhr.open("GET", SERVER_URL, true);
+// 设置状态监听函数
+XMLHttpRequest.onreadystatechange = function() {
+  if (this.readyState !== 4) return;
+  // 当请求成功时
+  if (this.state === 200) {
+    handle(this.response);
+  } else {
+    console.error(this.statusText);
+  }
+};
+// 设置请求失败时的监听函数
+xhr.onerror = function() {
+  console.error(this.statusText);
+};
+// 设置请求头信息
+xhr.responseType = "json";
+xhr.setRequestHeader("Accept", "application/json");
+// 发送http请求
+xhr.send(null);
