@@ -5199,7 +5199,7 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 //   request.open(method, path);
 //   request.send(data);
 //   request.onreadystatechange = () => {
-//     if (request.status >= 200 && request.status < 300) {
+//     if (request.status >= 200 && request.status < 300 || request.status === 304) {
 //       success.call(undefined, request.responseText)
 //     } else if (request >= 400) {
 //       fial.call(undefined, request);
@@ -5327,5 +5327,132 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // 就是浏览器并发连接数的问题。浏览器对每个域名的并发链接是有限制的，
 // 一般现代浏览器都是6个，使用多个独立域名，可以大大拓展这个并发连接数，
 // 也就是令浏览器并行下载更多资源，提高站点性能。
+
+
+// const SERVER_URL = "/server";
+// // 创建对象
+// let xhr = new XMLHttpRequest();
+// // 使用open方法创建Http请求
+// xhr.open("GET",SERVER_URL,true);
+// // 设置状态监听函数
+// xhr.onreadystatechange = function() {
+//   if (this.readyState !== 4) return;
+//   // 当请求成功判断请求状态
+//   if (this.status >= 200 && this.status < 300 || this.status === 304) {
+//     handle(this.response);
+//   } else {
+//     console.error(this.statusText);
+//   }
+// }
+// // 失败函数
+// xhr.onerror = function() {
+//   console.error(this.statusText);
+// }
+// // 请求头添加信息
+// xhr.responseType = "json";
+// xhr.setRequestHeader("Accept", "application/json");
+
+// // 发送
+// xhr.send(null);
+
+// const SERVER_URL= "/server";
+// let xhr = new XMLHttpRequest();
+// xhr.open("GET", "SERVER_URL", true);
+// xhr.onreadystatechange = function() {
+//   if (this.readyState !== 4) return;
+//   if (this.status >=200 && this.status <300 || this.status === 304) {
+//     handle(this.response);
+//   } else {
+//     console.error(this.statusText);
+//   }
+// }
+// xhr.onerror = function() {
+//   console.error(this.statusText);
+// }
+// xhr.responseText("json");
+// xhr.setRequestHeader("Accept", "application/json");
+// xhr.send(null);
+
+// function getJSON(url) {
+//   // 创建一个promise对象
+//   let promise = new Promise(funciton(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     // 新建一个http请求
+//     xhr.open("GET", url, true);
+//     // 设置状态监听函数
+//     xhr.onreadystatechange = function() {
+//       if (this.readyStae !== 4) return;
+//       if (this.status === 200) {
+//         resolve(this,response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     };
+//     // 设置错误监听函数
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     }
+//     // 设置响应数据类型
+//     xhr.responseType = "json";
+//     // 设置请求头信息
+//     xhr.setRequestType("Accept", "application/json");
+//     // 发送http请求
+//     xhr.send(null);
+//   });
+//   return promise;
+// }
+
+// function getJSON(url) {
+//   // 创建一个promise对象
+//   let promise = new Promise(function(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     // 新建一个http请求
+//     xhr.open("GET", url, true);
+//     // 设置状态监听函数
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !== 4) return;
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     };
+//     // 设置错误监听函数
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     };
+//     // 设置响应的数据类型
+//     xhr.responseType = "json";
+//     // 设置请求头信息
+//     xhr.setRequestHeader("Accept", "application/json");
+//     // 发送http请求
+//     xhr.send(null);
+//   })
+//   return promise;
+// }
+
+// function getJSON(url) {
+//   let promise = new Promise(function(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET", url, true);
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !== 4) return;
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } esle {
+//         reject(new Error(this.statusText));
+//       };
+//     }
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     }
+
+//     xhr.responseType = "json";
+//     xhr.setRequestHeader("Accept", "application/json");
+//     xhr.send(null);
+//   })
+//   return promise;
+// }
+
 
 
