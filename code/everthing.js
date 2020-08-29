@@ -3056,7 +3056,7 @@
 //     alert("The opoup was blocked");
 // }
 // 防抖 在第一次出发事件时，不立刻执行，而是给出一个期限值，比如200ms
-// 然后：如果200ms内没有再次触发，不执行；再次触发，重新计时
+// 然后：如果200ms内没有再次触发，执行；再次触发，重新计时
 // 效果：如果短时间内大量触发，只执行一次
 // 实现：既然要有计时，肯定需要setTimeOut函数，还需要一个变量保存计时，
 // 考虑维护全局纯净，可以借助闭包实现
@@ -5455,6 +5455,236 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // }
 
 
-hhhhhhhhhhhhhhh
-sssssssssssssssssssssssssssssssssssssssss
-ssssss ssss 
+// 封装ajax 使用Promise
+// funciton getJSON(url) {
+//   let promise = new Promise(function(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET", url, true);
+//     xhr.onreadystatechange = funciton() {
+//       if (this.readyState !== 4) return;
+//       if (this.status >= 200 %% this.status < 300 || this.status === 304) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     };
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText))
+//     };
+//     xhr.responseType = "json";
+//     xhr.setRequestHeader("Accept", "application/json");
+//   })
+//   return promise;
+// }
+
+// function debounce(fn, delay) {
+//   let timer = null;
+//   return function() {
+//     if (timer) {
+//       clearTimeout(timer);
+//     }
+//     timer = setTimeout(fn, delay);
+//     return timer;
+//   }
+  
+// }
+
+// function throttle(fn, delay) {
+//   let valid = true;
+//   return function() {
+//     if(!valid) {
+//       return false;
+//     }
+//     valid = false;
+//     setTimeout(() => {
+//       fn();
+//       valid = true;
+//     }, delay);
+//   }
+// }
+
+// function shallowCopy(object) {
+//   if (!object || typeof object !== "object") return;
+//   let newObj = Array.isArray(object) ? [] : {};
+//   for (let key in object) {
+//     if (object.hasOwnProperty(key)) {
+//       newObj = object[key];
+//     }
+//   }
+//   return newObj;
+// }
+
+// function deepCopy(object) {
+//   if (!objcet || typeof object !== "objcet") return;
+//   let newObj = Array.isArray(object) ? [] : {};
+//   for (let key in object) {
+//     if (object.hasOwnProperty(key)) {
+//       newObj = 
+//       typeof objcet[key] === "objcet"
+//       ? deepCopy(object[key])
+//       : objcet[key];
+//     }
+//   }
+//   return newObj;
+// }
+
+// call函数实现
+// Function.prototype.myCall = function(context) {
+//   // 判断调用对象
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   // 获取参数
+//   let args = [...arguments].slice(1),
+//   result = null;
+//   // 判断context是否传入，如果未传入则设置为window
+//   context = context || window;
+//   // 将调用函数设为对象的方法
+//   context.fn = this;
+//   // 调用函数
+//   result = context.fn(...args);
+//   // 降属性删除
+//   delete context.fn;
+//   return result;
+// };
+
+// let args = [1,1,2,3,1,6,5,4,2,[9,8]].slice(1);
+// console.log(...args);console.log(args);
+
+// Function.prototype.myCall = function(context) {
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   let args = [...arguments].slice(1),
+//   result = null;
+//   // 判断context是否传入，没有的话设为window
+//   context = context || window;
+//   // 将调用函数设为对象的方法
+//   context.fn = this;
+//   // 执行该方法
+//   result = context.fn(...args);
+//   // 删除这个执行过的方法
+//   delete context.fn;
+//   // 返回结果
+//   return result;
+// }
+
+// Function.prototype.myCall = function(context) {
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   let args = [...arguments].slice(1),
+//   result = null;
+//   // 判断是否传入，没有的话指向window
+//   context = context || window;
+//   // 将调用函数设为对象方法
+//   context.fn = this;
+//   // 执行这个方法
+//   result = context.fn(...args);
+//   // 删除这个方法
+//   delete context.fn;
+//   // 返回结果
+//   return result;
+// }
+
+// apply函数的实现
+// Function.prototype.myApply = function(context) {
+//   // 类型判断
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   // 初始化结果
+//   let result = null;
+//   // 判断context是否存在，不存在指向window
+//   context = context || window;
+//   // 将函数设为对象的方法
+//   context.fn = this;
+//   // 执行方法
+//   if(arugments[1]){
+//     result = context.fn(...arguments[1]);
+//   } else {
+//     result = context.fn();
+//   }
+//   // 将属性删除
+//   delete context.fn;
+//   // 返回结果
+//   return result;
+// }
+
+// bind函数的实现
+// Function.prototype.myBind = function(context) {
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   let args = [...arguments].slice(1),
+//   fn = this;
+//   return function Fn() {
+//     // 根据调用方式，传入不同绑定值
+//     return fn.apply(
+//       this instanceof Fn ? this : context,
+//       args.concat(...arguments)
+//     );
+//   };
+// };
+
+// Function.prototype.myBind = function(context) {
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   let args = [...arguments].slice(1),
+//   fn = this;
+//   return function Fn() {
+//     // 根据调用方式，传入不同绑定值
+//     return fn.apply(
+//       this instanceof Fn ? this : context,
+//       args.concat(...arguments)
+//     );
+//   };
+// };
+
+// Function.prototype.myBind = function(context) {
+//   if (typeof this !== 'function') {
+//     console.error("type error");
+//   }
+//   let args = [...arguments].slice(1),
+//   fn = this;
+//   return function Fn() {
+//     // 根据调用方式，传如不同的绑定值
+//     return fn.apply(
+//       this instanceof Fn ? this : context,
+//       args.concat(...arguments)
+//     ) 
+//   }
+// }
+
+// Function.prototype.myBind = function(context) {
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   let args = [...arguments].slice(1),
+//   fn = this;
+//   return function Fn() {
+//     return fn.apply(
+//       this instanceof Fn ? this : context,
+//       args.concat(...arguments)
+//     )
+//   }
+// }
+
+
+// Function.prototype.myBind = function(context) {
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   let args = [...arguments].slice(1),
+//   fn = this;
+//   return function Fn() {
+//     return fn.apply(
+//       this instanceof Fn ? this : context,
+//       args.concat(...arguments)
+//     );
+//   };
+// };
+
+
+
