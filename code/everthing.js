@@ -6271,3 +6271,16 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 //   }
 // }
 
+class MyCalss {
+  constructor() {}
+  get prop() {
+    return 'getter';
+  }
+  set pro(value) {
+    console.log('setter:'+"value");
+  }
+}
+
+let inst = new MyCalss();
+console.log(inst.prop = 123);
+console.log(inst.prop);
