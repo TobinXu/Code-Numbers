@@ -6561,45 +6561,76 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // }
 
 // [445] Add Two Numbers II
-function addTwoNumbers(l1 ,l2) {
-  const stack1 = [];
-  const stack2 = [];
-  const stack = [];
+// function addTwoNumbers(l1 ,l2) {
+//   const stack1 = [];
+//   const stack2 = [];
+//   const stack = [];
   
-  let [cur1, cur2, carry] = [l1, l2, 0];
+//   let [cur1, cur2, carry] = [l1, l2, 0];
   
-  while(cur1) {
-    stack1.push(cur1.val);
-    cur1 = cur1.next;
-  }
-  while(cur2) {
-    stack2.push(cur2.val);
-    cur2 = cur2.next;
-  }
+//   while(cur1) {
+//     stack1.push(cur1.val);
+//     cur1 = cur1.next;
+//   }
+//   while(cur2) {
+//     stack2.push(cur2.val);
+//     cur2 = cur2.next;
+//   }
 
-  let [a,  b] = [null, null];
+//   let [a,  b] = [null, null];
   
-  while(stack1.length > 0 || stack2.length > 0) {
-    a = Number(stack1.pop()) || 0;
-    b = Number(stack2.pop()) || 0;
-    stack.push((a + b + carry) % 10); // 入栈（从最底下往上，位数升高，这个操作时取个位）
-    if (a + b + carry >= 10) {
-      carry = 1;
-    } else {
-      carry = 0;
+//   while(stack1.length > 0 || stack2.length > 0) {
+//     a = Number(stack1.pop()) || 0;
+//     b = Number(stack2.pop()) || 0;
+//     stack.push((a + b + carry) % 10); // 入栈（从最底下往上，位数升高，这个操作时取个位）
+//     if (a + b + carry >= 10) {
+//       carry = 1;
+//     } else {
+//       carry = 0;
+//     }
+//   }
+//   if (carry === 1) {
+//     stack.push(1);
+//   }
+//   const dummy = {};
+//   let current = dummy;
+//   while (stack.length > 0) {
+//     current.next = {
+//       val : stack.pop(),
+//       next : null
+//     };
+//    current = current.next;
+//   }
+//   return dummy.next;
+// };
+
+// leetcode 回文
+function isPalindrome(head) {
+  let low = head;
+  let fast = head;
+  if (!head || !head.next) return true;
+  const values = [];
+  // 通过快慢指针找到链表中点
+  while (fast && fast.next) {
+    values.push(low.val);
+    fast = fast.next.next;
+    low = low.next;
+  }
+  // 处理链表长度只有1的情况
+  if (!values.length) {
+    return true;
+  }
+  // 处理奇偶链表的差异
+  if (fast) {
+    low = low.next;
+  }
+  // 通过比较后半段链表的值和前半段链表的值是否相等从而判断是否为回文链表
+  while(low) {
+    let curVal = values.pop();
+    if (curVal !== low.val) {
+      return false;
     }
+    low = low.next;
   }
-  if (carry === 1) {
-    stack.push(1);
-  }
-  const dummy = {};
-  let current = dummy;
-  while (stack.length > 0) {
-    current.next = {
-      val : stack.pop(),
-      next : null
-    };
-   current = current.next;
-  }
-  return dummy.next;
-};
+  return true;
+}
