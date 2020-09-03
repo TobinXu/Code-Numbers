@@ -6271,16 +6271,126 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 //   }
 // }
 
-class MyCalss {
-  constructor() {}
-  get prop() {
-    return 'getter';
-  }
-  set pro(value) {
-    console.log('setter:'+"value");
-  }
-}
+// class MyCalss {
+//   constructor() {}
+//   get prop() {
+//     return 'getter';
+//   }
+//   set pro(value) {
+//     console.log('setter:'+"value");
+//   }
+// }
 
-let inst = new MyCalss();
-console.log(inst.prop = 123);
-console.log(inst.prop);
+// let inst = new MyCalss();
+// console.log(inst.prop = 123);
+// console.log(inst.prop);
+
+// leetcode 001 两数之和
+// function twoSum(nums, target) {
+//   // 构造哈希表
+//   const map = new Map(); // 存储方式为{值，下标}即{value, index}
+//   // 遍历数组
+//   for (let i = 0; i < nums.length; i++) {
+//       let temp = target - nums[i];   
+//       if (map.has(temp)) {
+//          return [map.get(temp), i]; 
+//       } else {
+//         map.set(nums[i], i );
+//       }
+//   }
+//   console.error("no two sum solution");
+// };
+
+// console.log(twoSum([2, 7, 11, 15], 9));
+
+// leetcode 002 两数之和
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+// /**
+//  * @param {ListNode} l1
+//  * @param {ListNode} l2
+//  * @return {ListNode}
+//  */
+// function addTwoNumbers(l1, l2) {
+//   let node = new ListNode('head');
+//   let temp = node; // 临时结点
+//   let carry = 0; // 进位
+//   let sum = 0; // 新链表当前未取余的值=链表1的值+链表2的值+carry
+//   // 遍历，直到最长的链表为空
+//   while (l1 || l2) {
+//     sum = (l1? l1.val : 0) + (l2? l2.val : 0) + carry;
+//     temp.next = new ListNode(sum % 10); // 取余后为新链表的值
+//     temp = temp.next;
+//     carry = sum >=10 ? 1 : 0;
+//     l1 && (l1 = l1.next); // l1下一个结点不为空的话继续往下走
+//     l2 && (l2 = l2.next);
+//   } 
+//   carry && (temp.next = new ListNode(carry));
+//   return node.next;
+// }
+
+// leetcode53 最大子序列和（连续子数组
+// function maxSubArray(nums) {
+//   let res = nums[0];
+//   let sum = 0;
+//   for (let num in nums) {
+//     if (sum > 0) {
+//       sum += nums[num];
+//     } else {
+//       sum = nums[num];
+//     }
+//     res = Math.max(res, sum);
+//   }
+//   return res;
+// }
+// let nums = [-2,1,-3,4,-1,2,1,-5,-4];
+// console.log(maxSubArray(nums));
+
+
+// leetcode 136 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+// 异或运算来解决
+// function NumberFind(arr) {
+//   let res = arr[0];
+//   for (let i = 1; i < arr.length; i++) {
+//     res = res ^ arr[i];
+//   }
+//   console.log(res);
+// }
+
+// arr = [1,1,2,3,2,3,4,4,6,6,7];
+// NumberFind(arr);
+
+// 斐波那契数列（递归解法）
+// function fib(N) {
+//   if (N ===0 || N === 1) return N;
+//   return fib(N-1) + fib(N-2);
+// }
+// console.log(fib(10)); // 55
+
+// function Fib(n) {
+//   if(n<1) {return false;}
+//   if(n === 1 || n === 2) return n;
+//   // 建立数组
+//   let arr = [1,1];
+//   for (let i = 2; i <= n; i++) {
+//       arr[i] = arr[i-1] + arr[i-2];
+//   }
+//   // var k = arr.pop()
+//   return arr[n-1]; // 数组的最后一项即为值
+// }
+
+// console.log(Fib(11)); // 89
+
+
+// function fib(N) {
+//   if (N ===1 || N ===0) return N;
+//   return fib(N-1)+fib(N-2);
+// }
+
+// console.log(fib(10));
+
