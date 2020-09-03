@@ -6394,3 +6394,58 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 
 // console.log(fib(10));
 
+// 找出数组中最大的元素
+// var list = [1,2,3,4,5,6,15];
+// console.log(Math.max.apply(null,list));
+
+// function _addTwoNumbers(l1, l2) {
+//   if (l1 === null) return l2;
+//   if (l2 === null) return l1;
+//   let stack1 = [];
+//   let stack2 = [];
+//   while(l1 !== null) {
+//     stack1.push(l1.val);
+//     l1 = l1.next;
+//   }
+//   while(l2 !== null) {
+//     stack2.push(l2.val);
+//     l2 = l2.next;
+//   }
+//   let carry = 0;
+//   let head = new ListNode();
+//   while(stack1.length > 0 || stack2.length > 0 || caryy > 0) {
+//     let sum = carry;
+//     sum += stack1.length > 0 ? stack1.pop() : 0;
+//     sum += stack2.length > 0 ? stack2.pop() : 0;
+//     let node = new ListNode(sum % 10);
+//     node.next = head; // 头插法
+//     head = node;
+//     carry = sum / 10;
+//     return head;
+//   }
+// }
+
+
+// 相交链表
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ **/
+function getIntersectionNode(headA, headB) {
+  let l1 = headA;
+  let l2 = headB;
+  while(l1 !== l2) {
+    l1 = l1 === null ? headB : l1.next;
+    l2 = l2 === null ? headA : l2.next;
+  }
+  return l1;
+}
