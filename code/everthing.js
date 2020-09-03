@@ -6435,17 +6435,171 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
  * }
  */
 
+// /**
+//  * @param {ListNode} headA
+//  * @param {ListNode} headB
+//  * @return {ListNode}
+//  **/
+// function getIntersectionNode(headA, headB) {
+//   let l1 = headA;
+//   let l2 = headB;
+//   while(l1 !== l2) {
+//     l1 = l1 === null ? headB : l1.next;
+//     l2 = l2 === null ? headA : l2.next;
+//   }
+//   return l1;
+// }
+
+
+// 反转链表
 /**
- * @param {ListNode} headA
- * @param {ListNode} headB
- * @return {ListNode}
- **/
-function getIntersectionNode(headA, headB) {
-  let l1 = headA;
-  let l2 = headB;
-  while(l1 !== l2) {
-    l1 = l1 === null ? headB : l1.next;
-    l2 = l2 === null ? headA : l2.next;
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+ 
+// /**
+//  * @param {ListNode} head
+//  * @return {ListNode}
+//  */
+// 迭代法
+// var reverseList = function(head) {
+//   let new_head = null;
+//   while(head !== null){
+//   let temp = head;   
+//   head = head.next;
+//   temp.next = new_head;
+//   new_head = temp;
+//   }
+//   return new_head;
+// };
+
+// 归并两个有序链表
+
+// 递归解法
+// function mergeTwoLists(l1 ,l2) {
+//   if (l1 === null) return l2;
+//   if (l2 === null) return l1;
+//   if (l1.val < l2.val) {
+//     l1.next = mergeTwoLists(l1.next, l2);
+//     return l1;
+//   } else {
+//     l2.next = mergeTwoLists(l2.next, l1);
+//     return l2;
+//   }
+// }
+
+// 迭代解法(用到一个新链表)
+// function mergeTwoLists(l1, l2) {
+//   const prehead = new ListNode(-1);
+//   let prev = prehead;
+//   while(l1 !== null && l2 !==null) {
+//     if (l1.val <= l2.val) {
+//       prev.next = l1;
+//       l1 = l1.next;
+//     } else {
+//       prev.next = l2;
+//       l2 = l2.next;
+//     }
+//     prev = prev.next;
+//   }
+//   // 合并后l1和l2最多只有一个还未被合并完，我们直接将链表尾部指向未合并完的链表即可
+//   prev.next = l1 === null ? l2 : l1;
+//   return prehead.next;
+// }
+
+// 删除排序链表中的重复元素
+// 迭代，跟后面的结点进行比较，相同的话，丢弃并跳过后面的结点
+// function deleteDuplicates(head) {
+//   let cur = head;
+//   while(cur && cur.next) {
+//     if (cur.val === cur.next.val) {
+//       cur.next = cur.next.next;
+//     } else {
+      
+//       cur = cur.next;
+//     }
+//   }
+//   return head;
+// }
+
+// 递归
+// function deleteDuplicates(head) {
+//   if (head == null || head.next == null) return head;
+//   head.next = deleteDuplicates(head.next);
+//   return head.val == head.next.val ? head.next : head;
+// }
+
+// 删除链表的倒数第N个节点
+// function removeNthFromEnd(head, n) {
+//   let [fast, slow] = [head, head];
+//   // fast先走n步
+//   while(--n) {
+//     fast = fast.next;
+//   }
+//   if (!fast.next) return head.next; // 如果fast此时是尾结点即fast.next ===null, 则删除头结点
+//   fast = fast.next; // fast再向前走一步
+//   // 接下来fast\slow一起前进
+//   while(fast && fast.next) {
+//     fast = fast.next;
+//     slow = slow.next;
+//   }
+//   slow.next = slow.next.next;
+//   return head;
+// }
+
+// 6. 交换链表中的相邻结点
+
+// function swapPairs(head) {
+//     if (head === null || head.next === null) return head;
+//     let next = head.next;
+//     head.next = swapPairs(next.next);
+//     next.next = head;
+//     return next;
+// }
+
+// [445] Add Two Numbers II
+function addTwoNumbers(l1 ,l2) {
+  const stack1 = [];
+  const stack2 = [];
+  const stack = [];
+  
+  let [cur1, cur2, carry] = [l1, l2, 0];
+  
+  while(cur1) {
+    stack1.push(cur1.val);
+    cur1 = cur1.next;
   }
-  return l1;
-}
+  while(cur2) {
+    stack2.push(cur2.val);
+    cur2 = cur2.next;
+  }
+
+  let [a,  b] = [null, null];
+  
+  while(stack1.length > 0 || stack2.length > 0) {
+    a = Number(stack1.pop()) || 0;
+    b = Number(stack2.pop()) || 0;
+    stack.push((a + b + carry) % 10); // 入栈（从最底下往上，位数升高，这个操作时取个位）
+    if (a + b + carry >= 10) {
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+  }
+  if (carry === 1) {
+    stack.push(1);
+  }
+  const dummy = {};
+  let current = dummy;
+  while (stack.length > 0) {
+    current.next = {
+      val : stack.pop(),
+      next : null
+    };
+   current = current.next;
+  }
+  return dummy.next;
+};
