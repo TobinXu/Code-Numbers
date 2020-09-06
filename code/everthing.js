@@ -6813,3 +6813,30 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 //   return true;
 // }
 
+// var str = "abc";
+// console.log(str.indexOf("a"));
+
+// var str ="Visit Microsoft!";
+// console.log(str.replace(/Microsoft/,"W3School"));
+
+// function moveZeros(nums) {
+//   let index = 0;
+//   for (let num in nums) {
+//     if (num !=0) {
+//       nums[index++] = num;
+//     }
+//   }
+//   while (index < nums.length) {
+//     nums[index++] = 0;
+//   }
+// }
+
+// var nums = [0,1,0,3,12];
+// console.log(moveZeros(nums));
+
+
+// flat()数组降维
+// nums = [[1,2,[8,9]],[11,22],[3,4]];
+//   console.log(nums.flat(1));
+
+

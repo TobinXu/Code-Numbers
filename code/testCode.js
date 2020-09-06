@@ -71,16 +71,58 @@
 //   }
 // }
 
-function Fib(n) {
-  if(n<1) {return false;}
-  if(n === 1 || n === 2) return n;
-  // 建立数组
-  let arr = [1,1];
-  for (let i = 2; i < n; i++) {
-      arr[i] = arr[i-1] + arr[i-2];
-  }
-  var k = arr.pop()
-  return k ;
-}
+// function Fib(n) {
+//   if(n<1) {return false;}
+//   if(n === 1 || n === 2) return n;
+//   // 建立数组
+//   let arr = [1,1];
+//   for (let i = 2; i < n; i++) {
+//       arr[i] = arr[i-1] + arr[i-2];
+//   }
+//   var k = arr.pop()
+//   return k ;
+// }
 
-console.log(Fib(20));
+// console.log(Fib(20));
+
+
+
+// var moveZeros = function(nums) {
+//   let index = 0;
+//   for (let num in nums) {
+//     if (nums[num] !=0) {
+//       nums[index++] = nums[num];
+//     }
+//   }
+//   while (index < nums.length) {
+//     nums[index++] = 0;
+//   }
+//   return nums;
+// }
+
+// var nums = [0,1,0,3,12];
+// console.log(moveZeros(nums));
+
+// function matrixReshape(nums,r,c) {
+//   let m = nums.length, n = nums[0].length;// m行 n列
+//   // 判断能否转换
+//   if (m * n != r * c) {
+//     return nums;
+//   }
+//   let res = [];
+//   let arr = []; 
+//   // 先对二维数组降维处理
+//   for (let num of nums) {
+//     arr.push(...num);
+//   }
+//   for (let i = 0; i <r; i++) { // r行
+//     res.push(arr.splice(0, c)); // 对于处理后的数组arr进行切割，每一项(即每一行)从头切割c列
+//   }
+//   return res;
+// }
+// let nums =
+// [[1,2],
+//  [3,4]],
+// r = 1, c = 4;
+// console.log(
+//   matrixReshape(nums,r,c)); //[ [ 1, 2, 3, 4 ] ]
