@@ -126,3 +126,18 @@
 // r = 1, c = 4;
 // console.log(
 //   matrixReshape(nums,r,c)); //[ [ 1, 2, 3, 4 ] ]
+// function dailyTemperatures(T) {
+//     let stack = [];
+//     let res = new Array(T.length).fill(0);
+//     for (let i = 0; i < T.length; i++) {
+//       while(stack.length && T[i] > T[stack[stack.length - 1]]) {
+//         let topIdx = stack.pop(); //数组即将要入栈的元素大于栈顶元素，则栈顶弹出
+//         res[topIdx] = i - topIdx;
+//       }
+//       stack.push(i);
+//     }
+//     return res;
+//   }
+//   let T =  [73, 74, 75, 71, 69, 72, 76, 73];
+//   console.log(dailyTemperatures(T));
+

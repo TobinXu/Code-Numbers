@@ -7058,3 +7058,123 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 //   return res;
 // }
 
+// 用两个栈实现队列（后进先出实现先进先出）
+// class MyQueue {
+//   constructor() {
+//     this.pushArr = [];
+//     this.popArr = [];
+//   }
+//   // 讲一个元素放入队列尾部
+//   push(value) {
+//     this.pushArr.push(value);
+//   }
+//   // 从队列首部移出元素
+//   pop() {
+//     if (!this.popArr.length) {
+//       while(this.pushArr.length) {
+//         this.popArr.push(this.pushArr.pop());
+//       }
+//     }
+//     return this.popArr.pop();
+//   }
+//   // 返回队列首部元素
+//   peek() {
+//     if (!this.popArr.length) {
+//       while(this.pushArr.length) {
+//         this.popArr.push(this.pushArr.pop());
+//       }
+//     }
+//     return this.popArr[this.popArr.length - 1];
+//   }
+//   // 返回队列是否为空
+//   empty() {
+//     return !this.pushArr.length && !this.popArr.length;
+//   }
+// }
+
+// // 用队列实现栈
+// function MyStack() {
+//   this.queue = [];
+// }
+// MyStack.prototype.push = function(x) {
+//   this.queue.push(x);
+// }
+// MyStack.prototype.pop = function() {
+//   let res = [];
+//   for (let i = 0; i < this.queue.length - 1; i++) {
+//     res.push(this.queue[i]);
+//   }
+//   let r = this.queue[this.queue.length - 1];
+//   this.queue = res;
+//   return r;
+// }
+// MyStack.prototype.top = function() {
+//   if (this.queue.length === 0) {
+//     return null;
+//   }
+//   return this.queue[this.queue.length - 1];
+// }
+// MyStack.prototype.empty = function() {
+//   return this.queue.length === 0;
+// }
+
+// 借用一个迷你辅助栈原理，跟正常栈一一对应，每次弹出的时候也降辅助栈中元素弹出，这样保证最小值保存在迷你栈中
+// var MinStack = function() {
+//  this.stack = [];
+//  this.min_stack = [Infinity];   
+// }
+// MinStack.prototype.push = function(x) {
+//   this.stack.push(x);
+//   this.min_stack.push(Math.min(this.min_stack[this.min_stack.length - 1], x));
+// }
+// MinStack.prototype.pop = function() {
+//   this.stack.pop();
+//   this.min_stack.pop();
+// }
+// MinStack.prototype.top = function() {
+//   return this.stack[this.stack.length - 1];
+// }
+// MinStack.prototype.getMin = function() {
+//   return this.min_stack[this.min_stack.length - 1];
+// }
+
+// 有点错误 改进中 20200907
+// function isValid(arr) {
+//   let temp = [];
+//   let num = 0;
+  
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] == '(' || arr[i] == '[' || arr[i] == '{') 
+//       num++;
+//     if (arr[i] == ')' || arr[i] == ']' || arr[i] == '}'){
+//       if (num == 0) {
+//         return false;
+//       } else if(arr[i] == ')'&& arr[i-1] == '(' || arr[i] == ']' && arr[i-1] == '[' 
+//       || arr[i] == '}'&& arr[i-1] == '{') {
+//         num--;
+//       }
+//     }
+//   }
+//   if (num == 0)
+//   return true;
+//   else 
+//   return false;
+ 
+// }
+// console.log(isValid('{[]}'));
+
+
+function dailyTemperatures(T) {
+  let stack = [];
+  let res = new Array(T.length).fill(0);
+  for (let i = 0; i < T.length; i++) {
+    while(stack.length && T[i] > T[stack[stack.length - 1]]) {
+      let topIdx = stack.pop(); //数组即将要入栈的元素大于栈顶元素，则栈顶弹出
+      res[topIdx] = i - topIdx;
+    }
+    stack.push(i);
+  }
+  return res;
+}
+let T =  [73, 74, 75, 71, 69, 72, 76, 73];
+console.log(dailyTemperatures(T));
