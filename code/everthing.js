@@ -6913,3 +6913,148 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // k = 8;
 // console.log(kthSmallest(matrix, k)); // 13
 
+// // 错误的集合
+// function findErrorNums(nums) {
+//   for (let i = 0; i < nums.length; i++) {
+//     while (nums[i] != i + 1 && nums[nums[i] - 1] != nums[i]) {
+//       swap(nums, i, nums[i] - 1);
+//     }
+//   }
+//   // 遍历数组找出重复数，不符合条件即重复
+//   for (let i = 0; i < nums.length; i++) {
+//     if (nums[i] != i + 1) {
+//       return [nums[i], i + 1];
+//     }
+//   }
+//   return null;
+// }
+// function swap(nums, i, j) {
+//   let tmp = nums[i];
+//   nums[i] = nums[j];
+//   nums[j] = tmp;
+// }
+
+// console.log(findErrorNums([1,2,2,4]))
+
+// // 寻找重复数
+// function findDuplicate(nums) {
+//   let low = 1, high = nums.length - 1; // 数组想的范围1到n
+//   while (low < high) { // 在循环中缩小区间，区间闭合循环结束
+//     let mid = (low + high) >> 1 // 求中间值
+//     let count = 0;
+//     for (let i =0; i < nums.length; i++) {
+//       if (nums[i] <= mid) count++; // 统计小于等于mid的数
+//     }
+//     // 重复数落在[1, mid]
+//     if (count > mid) {
+//       high = mid; // 区间收缩
+//     } else {
+//       low = mid + 1;
+//     }
+//   } 
+//   return low;
+// }
+
+// function findDuplicate(nums) {
+//   let slow = 0, fast = 0; // slow跳一步，fast跳两步
+//   while (true) {
+//     slow = nums[slow]; // 以新项作为索引
+//     fast = nums[nums[fast]] // 以新项作为索引而得到的新新项作为索引
+//     if (slow === fast) {// 指针首次相遇
+//       fast = 0; 让快指针回到起点
+//       while (true) { // 开启新循环
+//         if (slow === fast) { // 如果再次相遇，就肯定是入口处
+//           return slow; // 返回入口，即重复的数
+//         }
+//         slow = nums[slow]; // 两个指针每次都进一步
+//         fast = nums[fast];
+//       }
+//     } 
+//   }
+// }
+
+// function constructor(n, k) {
+//   let i = k;
+//   let result = [1];
+//   let num = 1;
+//   let flag = true; // true为正，false为负
+//   while(result.length <= k) {
+//     if (flag) {
+//       num = num + i;
+//     } else {
+//       num = num - i;
+//     }
+//     result.push(num);
+//     i--;
+//     flag = !flag;
+//   }
+//   // 基数已经准备好，进行剩余部分填充
+//   num = result.length + 1;
+//   while(num <= n) {
+//     result.push(num++);
+//   }
+//   return result;
+
+// }
+
+// function findShortestSubArray(nums) {
+//   // 先找到出现次数最多的元素的总次数
+//   let map = new Map(),size = 1, distacne = nums.length;
+//   for (let n of nums) {
+//     map.set(n, map.has(n) ? map.get(n) + 1 : 1);
+//     size = Math.max(size, map.get(n));
+//   }
+//   let h = new Map();
+//   for (let i = 0; i < nums.length; i++) {
+//     let cur = nums[i];
+//     h.set(cur, h.has(cur) ? h.get(cur) + 1 : 1);
+//     if (h.get(cur) === size) {
+//       let start = nums.indexOf(cur);
+//       distacne = Math.min(distance, i - start + 1);
+//     }
+//   }
+//   return distance;
+// }
+
+// function isToeplitzMatrix(nums) {
+//   let groups = new Map();
+//   for (let r = 0; r < nums.length; r++) {
+//     for (let c =0; c < nums[0].length; c++) {
+//       if (!groups.has(r-c))
+//         groups.set(r-c, nums[r][c]);
+//         else if (groups.get(r-c) !== nums[r][c])
+//         return false;
+//     }
+//   }
+//   return true;
+// }
+
+// function arrayNesting(nums) {
+//   let ans = 0;
+//   for (let i = 0; i < nums.length; i++) {
+//     let start = i;
+//     let count = 0;
+//     while(nums[start] !== -1) {
+//       count++;
+//       let tmp = start;
+//       start = nums[start];
+//       nums[tmp] = -1;
+//     }
+//     ans = Math.max(ans, count);
+//   }
+//   return ans;
+// }
+
+
+// function maxChunksToSorted(nums) {
+//   // 当遍历到第i个位置时，如果可以切分为块，那前i个位置的最大值一定等于i
+//   // 否则，一定有比i小的数划分到后面的块，那块排序后，一定不满足升序。
+// //  前N个数字最大的肯定是N，那么当遍历到i位置时： i==前N个最大的数字，即为一个集合。
+//   let res = 0, max = 0;
+//   for (let i = 0; i < nums.length; i++) {
+//     max = Math.max(max, nums[i]); // 统计前i个位置的最大元素
+//     if (max === i) res++;
+//   }
+//   return res;
+// }
+
