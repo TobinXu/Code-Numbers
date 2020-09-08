@@ -7164,17 +7164,54 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // console.log(isValid('{[]}'));
 
 
-function dailyTemperatures(T) {
-  let stack = [];
-  let res = new Array(T.length).fill(0);
-  for (let i = 0; i < T.length; i++) {
-    while(stack.length && T[i] > T[stack[stack.length - 1]]) {
-      let topIdx = stack.pop(); //数组即将要入栈的元素大于栈顶元素，则栈顶弹出
-      res[topIdx] = i - topIdx;
-    }
-    stack.push(i);
-  }
-  return res;
-}
-let T =  [73, 74, 75, 71, 69, 72, 76, 73];
-console.log(dailyTemperatures(T));
+// function dailyTemperatures(T) {
+//   let stack = [];
+//   let res = new Array(T.length).fill(0);
+//   for (let i = 0; i < T.length; i++) {
+//     while(stack.length && T[i] > T[stack[stack.length - 1]]) {
+//       let topIdx = stack.pop(); //数组即将要入栈的元素大于栈顶元素，则栈顶弹出
+//       res[topIdx] = i - topIdx;
+//     }
+//     stack.push(i);
+//   }
+//   return res;
+// }
+// let T =  [73, 74, 75, 71, 69, 72, 76, 73];
+// console.log(dailyTemperatures(T));
+
+// 获取长度技巧
+// let nums = [1,2,3];
+// const doubleNums = [...nums, ...nums];
+// const {length} = doubleNums;
+// console.log(doubleNums);
+// console.log(length);
+
+// function nextGreaterElements(nums) {
+//   const doubleNums = [...nums, ...nums];
+//   const {length} = doubleNums;
+//   if (length === 0 ) return doubleNums;
+//   let stack = [];
+//   let res = new Array(length).fill(-1);
+//   for (let i = 0; i < length; i++) {
+//     //如果要压入栈的元素大于栈顶元素 
+//     while(stack.length && doubleNums[i] > doubleNums[stack[stack.length - 1]]) {
+//       let index = stack.pop();
+//       res[index] = doubleNums[i]; // 这个index上对应的第一个比他大的数就是doubleNums[i]
+//     }
+//     stack.push(i);
+//   }
+//   return res.slice(0,(res.length / 2));
+// }
+// console.log(nextGreaterElements([1,2,1]));
+
+// function isIn(s1, s2) {
+//   let tmp = s1+s1;
+//   if (tmp.indexOf(s2) !== -1) {
+//     return true;
+//   }
+//   else
+//    return false;
+// }
+// console.log(isIn('AABCD','CDAA'))
+
+
