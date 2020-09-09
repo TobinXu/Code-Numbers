@@ -7214,4 +7214,294 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // }
 // console.log(isIn('AABCD','CDAA'))
 
+// 封装ajax
+// const SERVER_URL = '/server';
+// let xhr = new XMLHttpRequest();
+// // 创建http请求
+// xhr.open('GET', SERVER_URL, true);
+// // 设置状态监听函数
+// xhr.onreadystatechange = function() {
+//   if (this.state !== 4) return;
+//   // 当请求成功时
+//   if (this.state === 200) {
+//     handle(this.response);
+//   } else {
+//     console.error(this.stateText);
+//   }
+// };
+// // 设置请求失败监听函数
+// xhr.onerror = function() {
+//   console.error(this.stateText);
+// };
 
+// // 设置请求头信息
+// xhr.responseType = "json";
+// xhr.setRequestHeader("Accept", "application/json");
+// // 发送http请求
+// xhr.send(null);
+
+// promsie封装ajax请求
+// function getJSON(url) {
+//   // 创建一个promise 对象
+//   let promise = new Promise(function(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     // 新建一个http请求
+//     xhr.open("GET", url, true);
+//     // 设置状态监听函数
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !==4) return;
+//       // 当请求成功时，查看请求状态
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     };
+//     // 设置错误监听函数
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     };
+//     // 设置相应的数据类型
+//     xhr.responseType = "Json";
+//     // 设置请求头信息
+//     xhr.setRequestHeader("Accept", "application/json");
+//     // 发送http请求
+//     xhr.send(null);
+//   });
+//   return promise;
+// }
+
+
+// function shallowCopy(object) {
+//   // 只拷贝对象
+//   if (!object || typeof object !== "objcet") return;
+//   // 根据object类型判断新建数组还是对象
+//   let newObj = Array.isArray(object) ? [] : {};
+//   // 遍历object，并且判断是object的属性才拷贝
+//   for (let key in object) {
+//     if (object.hasOwnProperty(key)) {
+//       newObj[key] = object[key];
+//     }
+//   }
+//   return newObj;
+// }
+
+// function deepCopy(object) {
+//   // 只拷贝对象
+//   if (!object || typeof object !== "object") return;
+//   let newObj = Array.isArray(object) ? [] : {};
+//   for (let key in object) {
+//     if (object.hasOwnProperty(key)) {
+//       newObj[key] = 
+//       typeof object[key] === 'object' 
+//       ? deepCopy(object[key])
+//       : object[key];
+//     }
+//   }
+//   return newObj;
+// }
+
+// function debounce(fn, delay) {
+//   let timer = null;
+//   return function() {
+//     if (timer) {
+//       clearTimeout(timer);
+//     }
+//     timer = setTimeout(fn,delay);
+//   }
+// }
+
+// function throttle(fn, delay) {
+//   let valid = true;
+//   return function() {
+//     if (!valid) {
+//       return false;
+//     }
+//     valid = false;
+//     setTimeout(() => {
+//       fn();
+//       valid =true;
+//     }, delay)
+//   }
+// }
+
+// Function.prototype.myCall = function(context) {
+//   // 判断调用对象
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   // 获取参数
+//   let args = [...arguments].slice(1);
+//   result = null;
+//   context = context || window;
+//   context.fn = this;
+//   result = context.fn(...args);
+//   delete context.fn;
+//   return result;
+// }
+
+// Function.prototype.myApply = function(context) {
+//   if (typeof this !== "function") {
+//     throw new TypeError("Error");
+//   }
+//   let result = null;
+//   context = context || window;
+//   context.fn = this;
+//   if (arguments[1]) {
+//     result = context.fn(...arguments[1])
+//   } else {
+//     result = context.fn();
+//   }
+//   delete context.fn;
+//   return result;
+// }
+
+// Function.prototype.myBind = function() {
+//   if (typeof this !== "function") {
+//     throw new TypeError("error");
+//   }
+//   var args = [...arguments].slice(1);
+//   fn = this;
+//   return function Fn() {
+//     return fn.apply(
+//       this instanceof Fn ? this : AudioContext,
+//       args.concat(...arguments)
+//     );
+//   };
+// };
+
+// 手写promise
+// const PENDING = "pending";
+// const RESOLVED = "resolved";
+// const REJECTED = "rejected";
+// function MyPromsie(fn) {
+//   // 保存初始化状态
+//   var self = this;
+//   // 初始化状态
+//   this.state = PENDING;
+//   // 用于保存resolved或rejected传入的值
+//   this.value = null;
+//   // 用于保存resolved的回调函数
+//   this.resolvedCallbacks = [];
+//   // 用于保存rejectd的回调函数
+//   this.rejectedCallbacks = [];
+//   // 状态变为resolved方法
+//   function resolve(value) {
+//     // 判断传入元素是否为promise值，如果是，则状态改变必须等待前一个状态改变后再进行
+//     if (value instanceof MyPromsie) {
+//       return value.then(resolve, reject);
+//     }
+//     // 保证代码的执行顺序为本轮事件循环末尾
+//     setTimeout(() => {
+//       // 只有状态为pending时才能转变
+//       if (self.state === PENDING) {
+//         // 修改状态
+//         self.state = RESOLVED;
+//         // 设置传入的值
+//         self.value = value;
+//         // 执行回调函数
+//         self.resolvedCallbacks.forEach(callback => {
+//           callback(value);
+//         });
+//       }
+//     }, 0);
+//   }
+//   // 状态变为rejected的方法
+//   function reject(value) {
+//     // 保证代码执行顺序为本轮事件循环末尾
+//     setTimeout(() => {
+//       if (self.state === PENDING) {
+//         self.state = REJECTED;
+//         self.value = value;
+//         self.rejectedCallbacks.forEach(callback => {
+//           callback(value);
+//         })
+//       }
+//     }, 0);
+//   }
+//   try {
+//     fn(resolve, reject)
+//   } catch(e) {
+//     reject(e);
+//   }
+// }
+// MyPromsie.prototype.then = function(onResolved, onRejected) {
+//   // 首先判断两个参数是否为函数，因为这两个参数是可选参数
+//   onResolved = 
+//   typeof onResolved === "function"
+//   ? onResolved
+//   : function(value) {
+//     return value;
+//   };
+//   onRejected = 
+//   typeof onRejected === "function"
+//   ? onRejected
+//   :function(error) {
+//     throw error;
+//   };
+//   // 如果是等待状态，则将函数加入对应列表中
+//   if (this.state === PENDING) {
+//     this.resolvedCallbacks.push(onResolved);
+//     this.rejectedCallbacks.push(onRejected);
+//   }
+//   if (this.state = RESOLVED) {
+//     onResolved(this.value);
+//   }
+//   if (this.state = REJECTED) {
+//     onRejected(this.value);
+//   }
+// }
+// clip : rect(0 100px 100px 0);
+
+// function containDuplicate(nums) {
+//   let set = new Set();
+//   for (let num of nums) {
+//     set.add(num);
+//   }
+//   return set.size < nums.length;
+// }
+// console.log(containDuplicate([1,2,3]))
+
+// function LHS(nums) {
+//   let sum = 0;
+//   let map = new Map();
+//   for (let i in nums) {
+//     if (map.has(nums[i])) {
+//       map.set(nums[i], map.get(nums[i]) + 1);
+//     } else {
+//       map.set(nums[i], 1);
+//     }
+//   }
+//   for (let key of map.keys()) {
+//     if (map.has(key+1)) {
+//       let t = map.get(key) + map.get(key+1);
+//       sum = Math.max(sum, t);
+//     }
+//   }
+//   return sum;
+// }
+
+// 最长连续子序列
+function longestConsecutive(nums) {
+  let set = new Set();
+  for (let num of nums) {
+    set.add(num);
+  }
+  let longest = 0;
+  for (let num of nums) {
+    if (set.delete(num)) {
+      // 向当前元素的左边搜索，eg：当前元素为100，则向左搜索：99,98,97，...
+      let currentLongest = 1;
+      let current = num;
+      while(set.delete(current - 1)) current--;
+      currentLongest += num - current;
+      // 向当前元素的右边搜索，eg: 当前为100，则向右搜索：101,102,103，...
+      current = num;
+      while(set.delete(current + 1)) current++;
+      currentLongest += current - num;
+      // 搜索完后更新longest
+      longest = Math.max(longest, currentLongest);
+    }
+  }
+  return longest;
+}
