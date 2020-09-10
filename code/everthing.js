@@ -7482,26 +7482,115 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // }
 
 // 最长连续子序列
-function longestConsecutive(nums) {
-  let set = new Set();
-  for (let num of nums) {
-    set.add(num);
-  }
-  let longest = 0;
-  for (let num of nums) {
-    if (set.delete(num)) {
-      // 向当前元素的左边搜索，eg：当前元素为100，则向左搜索：99,98,97，...
-      let currentLongest = 1;
-      let current = num;
-      while(set.delete(current - 1)) current--;
-      currentLongest += num - current;
-      // 向当前元素的右边搜索，eg: 当前为100，则向右搜索：101,102,103，...
-      current = num;
-      while(set.delete(current + 1)) current++;
-      currentLongest += current - num;
-      // 搜索完后更新longest
-      longest = Math.max(longest, currentLongest);
-    }
-  }
-  return longest;
-}
+// function longestConsecutive(nums) {
+//   let set = new Set();
+//   for (let num of nums) {
+//     set.add(num);
+//   }
+//   let longest = 0;
+//   for (let num of nums) {
+//     if (set.delete(num)) {
+//       // 向当前元素的左边搜索，eg：当前元素为100，则向左搜索：99,98,97，...
+//       let currentLongest = 1;
+//       let current = num;
+//       while(set.delete(current - 1)) current--;
+//       currentLongest += num - current;
+//       // 向当前元素的右边搜索，eg: 当前为100，则向右搜索：101,102,103，...
+//       current = num;
+//       while(set.delete(current + 1)) current++;
+//       currentLongest += current - num;
+//       // 搜索完后更新longest
+//       longest = Math.max(longest, currentLongest);
+//     }
+//   }
+//   return longest;
+// }
+
+
+// function isBipartite(graph) {
+//   // bfs+染色法
+//   const len = grap.length;
+//   const colors = new Array(len).fill(0); //用于存储染色信息的数组，0表示未染色，1表示染成红色，2表示绿色
+//   for (let i = 0; i < len; i++) {
+//     if (!colors[i]) { //判断是否染色，如已染色说明此处已被遍历过了，跳过（为什么不判断是否雨需要染得颜色相同，不同的话直接false）
+//       let que = [i]; // 用队列存储需要被染色的节点下表
+//       colors[i] = 1;// 初始化第一个的颜色为红色
+//       while(que.length) { //通过队列的长度来判断是否结束循环
+//         const key = que.shift();
+//         const color = colors[key] === 1 ? 2 : 1; // 记录下该节点的下个节点应该为什么颜色
+//         for (const item of graph[key]) { // 遍历该节点所有与之相连的结点
+//           if (colors[item]) { // 如果该节点已经被染色，则判断该颜色是否与记录下的颜色一样，不一样则返回false
+//             if (colors[item] !== color) return false;
+//           } else { // 如果未被染色，则将其染色，并将其添加进队列中
+//               colors[item] = color;
+//               que.push(item);
+//           }
+
+//         }
+//       }
+//     }
+//   }
+//   return true;
+// }
+
+// /**
+//  * @param {number[][]} graph
+//  * @return {boolean}
+//  */
+// var isBipartite = function (graph) {
+//   /* dfs + 染色法 */
+//   const colors = new Array(graph.length).fill(0); // 用于存储染色信息的数组，0 表示未染色，1 表示染成红色，2 表示染成绿色
+//   return colors.every((value, index) => value === 0 ? dfs(index, graph, colors, 1) : true); // 如果已经被染色就不必在递归了
+// };
+
+// const dfs = (i, graph, colors, color) => {
+//   if (colors[i]) { // 递归出口，如果已被染色，则判断是否与要被染色的颜色一致
+//     if (colors[i] !== color) return false; // 不一致 return false
+//     return true; // 一致 return true
+//   }
+//   colors[i] = color; // 未被染色，则将其染色
+//   return graph[i].every(value => dfs(value, graph, colors, color === 1 ? 2 : 1));
+// };
+
+
+
+// const SERVER_URL = '/server';
+// let xhr = new XMLHttpRequest();
+// xhr.open("GET", SERVER_URL, true);
+// xhr.onreadystatechange = function() {
+//   if (this.readyState !== 4) return;
+//   if (this.status === 200) {
+//     handle(this.response);
+//   } else {
+//     console.error(this.statusText);
+//   }
+// };
+// xhr.onerror = function() {
+//   console.error(this.statusText);
+// };
+// xhr.responseType = "json";
+// xhr.setRequestHeader("Accept", "application/json");
+// xhr.send(null);
+
+// function getJSON(url) {
+//   let promise = new Promise(function(resolve,reject) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET", url, true);
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !== 4) return;
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     };
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     };
+//     xhr.responseType = "json";
+//     xhr.setRequestHeader("Accept", "applicaiton/json");
+//     xhr.send(null);
+//   });
+//   return promise;
+// }
+
