@@ -7603,3 +7603,151 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 
 // [] == ![] => [] == false => [] == toNumber(false) => [] == 0 => toPrimitive([]) == 0 => '' == 0 => toNumber('') == 0 => true;
 
+// 原型链继承
+// function SuperType() {
+//   this.property = true;
+// }
+// SuperType.prototype.getSuperValue = function() {
+//   return this.prototype;
+// }
+// function SubType() {
+//   this.subproperty = false;
+// }
+// // 继承了SuperType
+// SubType.prototype = new SuperType();
+// SubType.prototype.getSubValue = function() {
+//   return this.subproperty;
+// }
+// var instance = new SubType();
+// console.log(instance.getSuperValue());
+
+// 构造函数继承
+// function SuperType() {
+//   this.colors = ["red", "blue", "green"];
+// }
+// function SubType() {
+//   SuperType.call(this);
+// }
+// var instance1 = new SubType();
+// instance1.colors.push("black");
+// console.log(instance1.colors);
+// var instance2 = new SubType();
+// console.log(instance2.colors);
+// function SuperType(name) {
+//   this.name = name;
+// }
+// function SubType() {
+//   SuperType.call(this, "Nicholas");
+//   this.age = 29;
+// }
+// var instance = new SubType();
+// console.log(instance.age);
+// console.log(instance.name);
+
+// 组合继承
+// function SuperType(name) {
+//   this.name = name;
+//   this.colors = ["red", "blue", "green"];
+// }
+// SuperType.prototype.sayName = function() {
+//   console.log(this.name);
+// }
+// function SubType(name, age) {
+//   SuperType.call(this,name);
+//   this.age = age;
+// }
+// SubType.prototype = new SuperType();
+// SubType.prototype.constructor = SubType;
+// SubType.prototype.sayAge = function() {
+//   console.log(this.age);
+// }
+// var instance1 = new SubType("Nike", 29);
+// instance1.colors.push("black");
+// console.log(instance1.colors);
+// instance1.sayAge();
+// instance1.sayName();
+// var instance2 = new SubType("Greg", 18);
+// console.log(instance2.colors);
+// instance2.sayName();
+// instance1.sayAge();
+
+// 原型式继承（浅复制）
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+// var person = {
+//   nname: "nike",
+//   friends: ["S","co", "van"]
+// };
+// var anotherPerson = object(person);
+// anotherPerson.name = "Greg";
+// anotherPerson.friends.push("rio");
+// var yetAntherPerson = object(person);
+// yetAntherPerson.name = "Linda";
+// yetAntherPerson.friends.push("Bar");
+// console.log(person.friends);
+
+// es6的原型式继承  不需要自己定义object了，直接使用Object.create(第一个参数，第二个参数) 第一个参数是要当做原型的对象，第二个是自定义的新属性
+// var person = {
+//   name: "Nicholas",
+//   friends: ["She","Cout","Van"]
+// };
+// var anotherPerson = Object.create(person, {
+//   name: {
+//     value: "Greg"
+//   }
+// });
+// console.log(anotherPerson.name);
+
+// 寄生式继承，和原型式继承差不多，多了一个函数，封装了一下继承过程
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+// 封装
+// function createAnother(original) {
+//   var clone = object(original);
+// 对象增强
+//   clone.sayHi = function() {
+//     console.log("hi");
+//   };
+//   return clone;
+// }
+// var person = {
+//   name:'nike',
+//   friends:  ["s","b","s"]
+// };
+// var anotherPerson = createAnother(person);
+// anotherPerson.sayHi();
+
+
+// 寄生组合式继承 用到了构造函数继承和寄生式继承
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+// function inheritPrototype(subType, superType) {
+//   var prototype = object(superType.prototype); // 创建对象
+//   prototype.constructor = subType;
+//   subType.prototype = prototype;
+// }
+// function SuperType(name) {
+//   this.name = name;
+//   this.colors = ["red", "blue", "green"];
+// }
+// SuperType.prototype.sayName = function() {
+//   console.log(this.name);
+// };
+// function SubType(name, age) {
+//   SuperType.call(this, name);
+//   this.age = age;
+// }
+// inheritPrototype(SubType, SuperType);
+// SubType.prototype.sayAge = function() {
+//   console.log(this.age);
+// }
+
