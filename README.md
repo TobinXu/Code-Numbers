@@ -1,4 +1,4 @@
-# ---everthing-
+# -everthing-
 编程训练，代码量需要大大的提升
 2020年05月27日 徐强国你听着奥。以后git要是报错说 refusing to merge unrelated histories
 那绝对是你在github上面建立了一个库，并且还自动初始化了它的readme，但是你本地并没有进行这个操作
