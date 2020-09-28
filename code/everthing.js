@@ -7751,20 +7751,55 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 //   console.log(this.age);
 // }
 
-// AMD
-define(['./a', './b'], function(a, b) {
-  // 依赖必须一开始就写好
-  a.doSomething();
-  // 此处省略100行
-  b.doSomething();
-  // ...
-})
+// // AMD
+// define(['./a', './b'], function(a, b) {
+//   // 依赖必须一开始就写好
+//   a.doSomething();
+//   // 此处省略100行
+//   b.doSomething();
+//   // ...
+// })
 
-// CMD
-define(function(require, exports, module) {
-  var a = require('./a');
-  a.doSomething();
-  // 省略n行
-  var b = require('./b');
-  b.doSomething();
-})
+// // CMD
+// define(function(require, exports, module) {
+//   var a = require('./a');
+//   a.doSomething();
+//   // 省略n行
+//   var b = require('./b');
+//   b.doSomething();
+// })
+
+// define(function(require, exports, module) {
+//   // 就近依赖
+//   var a = require('./a');
+//   a.doSomething();
+//   var b = require('./b');
+//   b.doSomething();
+// })
+// define(['./a', './b'], function(a, b) {
+//   // 依赖前置
+//   a.doSomething();
+//   b.doSomething();
+// })
+
+//（1+2）*3-4
+// var result = subtract(multiply(add(1,2),3),4);
+// // 等价于
+// add(1,2).multiply(3).subtract(4);
+
+// var p1 = new Promise((resolve,reject) => {
+//   console.log('没有resolve')
+//   // throw new Error('手动返回错误')
+//   reject('失败了')
+// })
+// p1.then(data => {
+//   console.log('data=',data);
+// },err => {
+//   console.log('err=',err)
+// }).catch(
+//   res => {
+//       console.log('catch data=',data)
+//   }
+// )
+
+
