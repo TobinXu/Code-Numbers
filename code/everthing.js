@@ -7803,3 +7803,95 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // )
 
 
+// function sky() {
+//   what is the tommor is a good day  i  thik
+// }
+
+// function MyInstanceof(left, right) {
+//   // 获取对象的原型和获取构造函数的原型
+//   let proto = Object.getPrototypeOf(left);
+//   let prototype = right.prototype;
+//   // 判断构造函数的prototype对象是否出现在了对象的原型链上
+//   while(true) {
+//     if (!proto) return false;
+//     if (proto === prototype) return true;
+//     proto = Object.getPrototypeOf(proto);
+//   } 
+// }
+
+// function objectFactory() {
+//   let newObject = null,
+//   constructor = Array.prototype.call(arguments),
+//   result = null;
+//   // 参数判断
+//   if (typeof constructor !== 'function') {
+//     console.log("type error");
+//     return;
+//   }
+//   // 新建空对象，并且把空对象的原型设置为构造函数的prototype对象
+//   newObject = Object.create(constructor.prototype);
+//   // 将this指向新对象，并且执行函数
+//   result = constructor.apply(newObject, arguments);
+//   // 判断新建对象类型并返回
+//   let flag =
+//   result && (typeof result === 'object' || typeof result === 'function');
+//   // 判断返回结果(如果是值类型，返回创建的对象；如果是引用类型，就返回这个引用类型的对象)
+//   return flag ? result : newObject;
+// }
+// 使用方法
+// objectFactory(构造函数， 初始化参数)
+
+
+// const SEVER_URL = "/sever";
+// let xhr = new XMLHttpRequest();
+// // 创建http请求
+// xhr.open("GET", SEVER_URL, true);
+// // 设置状态监听函数
+// xhr.onreadystatechange = function() {
+//   if (this.readyState !== 4) return;
+//   // 当请求成功时
+//   if (this.status === 200) {
+//     hanle(this.response);
+//   } else {
+//     console.error(this.statusTExt);
+//   }
+// };
+// // 设置请求失败监听函数
+// xhr.onerror = function() {
+//   console.error(this.statusText);
+// }
+// // 设置请求头信息
+// xhr.responseType = "json";
+// xhr.setRequestHeader("Accept", "application/json");
+// // 发送http请求
+// xhr.send(null);
+
+// function getJson(url) {
+//   // 创建一个promise对象
+//   let promise = new Promise(function(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     // 新建一个http请求
+//     xhr.open("GET", url, true);
+//     // 设置状态的监听函数
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !== 4) return;
+//       // 当请求成功或失败时，改变promise的状态
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     }
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     }
+//     // 设置响应的数据类型
+//     xhr.responseType = "json";
+//     // 设置请求头信息
+//     xhr.setRequestHeader("Accept", "application/json");
+//     // 发送http请求
+//     xhr.send(null);
+//   });
+//   return promise;
+// }
+
