@@ -269,3 +269,27 @@ function isPalindrome (x) {
 //     }
 //     return ans;
 // }
+
+class Modal {
+    constructor(name) {
+      this.name = name;
+      this.getName();
+    }
+    getName() {
+      return this.name;
+    }
+  }
+  Modal.create = (function() {
+    let instance = null;
+    return function(name) {
+      if (!instance) {
+        instance = new Modal(name);
+      }
+      return instance;
+    }
+  })()
+  let a = Modal.create('aaa');
+  let b = Modal.create('bbb');
+  // 因为是单利，所以两个实例是相等的
+  console.log(a, b);
+  console.log(a === b);

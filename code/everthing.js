@@ -7895,3 +7895,293 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 //   return promise;
 // }
 
+// class Modal {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Modal.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Modal(name);
+//     }
+//     return instance;
+//   }
+// })()
+// let a = Modal.create('aaa');
+// let b = Modal.create('bbb');
+// // 因为是单利，所以两个实例是相等的
+// console.log(a, b);
+// console.log(a === b);
+
+// 第一遍
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//  let instance = null;
+//  return function(name) {
+//    if (!instance) {
+//     instance = new Model(name);
+//    }
+//    return instance;
+//  }
+// })();
+// let a = Model.create('aaa');
+// console.log(a);
+
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create("aaaa");
+
+// 第二遍
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create("aaa");
+// let b = Model.create("bbb");
+
+// 第三遍
+// 一个类只有一个实例对象并且提供了访问该实例的全局访问点
+// class Model {
+//   constrcutor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create("aaa");
+
+// 第四遍
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       insntance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create("aaa");
+
+// 第五遍
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create('aaa');
+
+// 第六遍
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = Model.create(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create("aaaa");
+
+// 第七遍
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create("aaa");
+
+// 第八遍
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function(){
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create("aaa");
+
+// 第九遍
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create("aaa");
+
+// 第十遍
+
+// class Model {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Model.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Model(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Model.create('aaa');
+// let b = Model.create('bbb');
+// console.log(a === b);
+// console.log(a.getName());
+
+// const list = {
+//   'A' : 100,
+//   'B' : 70,
+//   'C' : 50
+// }
+// const obj = new Proxy(list, {
+//   get(target, key) {
+//     if (target[key] > 60) {
+//       console.log('考试及格');
+//       console.log(target[key]);
+//     } else {
+//       console.log('不及格成绩无法公示');
+//     }
+//   },
+//   set(target, key, newVal) {
+//     if (newVal - target[key] > 10) {
+//       target[key] = newVal;
+//       console.log('修改成绩成功');
+//       console.log(target[key]);
+
+//     } else {
+//       console.log('修改成绩失败');
+//     }
+//   }
+// })
+// obj.A;
+// obj.C;
+// obj.C = 111;
+
