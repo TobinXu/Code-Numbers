@@ -8185,3 +8185,268 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // obj.C;
 // obj.C = 111;
 
+// const list = { 
+//   'A' : 100,
+//   'B' : 80,
+//   'C' : 50
+// }
+// const obj = new Proxy(list, {
+//   get(target, key) {
+//     if (target[key] > 60) {
+//       console.log('成绩及格');
+//       console.log(target[key]);
+//     } else {
+//       console.log('成绩不及格，不予公示');
+//     }
+//   },
+//   set(target,key, newVal) {
+//     if (newVal - target[key] > 10) {
+//       target[key] = newVal;
+//       console.log('修改成功');
+//       console.log(target[key]);
+//     } else {
+//       console.log("修改失败");
+//     }
+//   }
+// })
+// obj.A;
+// obj.C;
+// obj.C = 110;
+
+// const list = {
+//   'A' : 100,
+//   'B' : 80,
+//   'C' : 50
+// }
+// const obj = new Proxy(list, {
+//   get(target, key) {
+//     if (target[key] > 60) {
+//       console.log("查询成功");
+//       console.log(target[key]);
+//     } else {
+//       console.log("成绩不合格，不予公示");
+//     }
+//   },
+//   set(target, key, newVal) {
+//     if (newVal - target[key] > 10) {
+//       target[key] = newVal;
+//       console.log("修改成功,修改后成绩为:",target[key]);
+//     } else {
+//       console.log("修改失败");
+//     }
+//   }
+// })
+// obj.A;
+// obj.C;
+// obj.C = 110;
+
+// const createImage = (function() {
+//   const img = document.createElement('img');
+//   document.body.appendChild(img);
+//   return function(src) {
+//     img.src = src;
+//   }
+// })();
+// const proxyImage = function(fn) {
+//   const image = new Image();
+//   const defaultImg = 'https://rs.vip.miui.com/vip-resource/prod/mio/v136/static/media/lazyLoad.a10ffbd7.png';
+//   return function(src) {
+//     fn(defaultImg);
+//     // 加一个延迟，可以看到图片替换的过程
+//     setTimeout(function() {
+//       image.src = src;
+//       image.onload = function() {
+//         fn(src);
+//       };
+//     }, 2000);
+//   }
+// }
+// const proxy = proxyImage(createImage);
+// proxy('https://pic1.zhimg.com/80/v2-ec33fcec249a9cabab61b14436432bf0_r.jpg');
+
+// const createImage = (function() {
+//   const img = document.createElement('img');
+//   document.body.appendChild(img);
+//   return function(src) {
+//     img.src = src;
+//   }
+// })
+// const proxyImage = function(fn) {
+//   const image = new Image();
+//   const defaultImage = "url1";
+//   return function(src) {
+//     fn(defaultImage);
+//     // 加一个延迟，展示懒加载的过程
+//     setTimeout(function() {
+//       image.src = src;
+//       image.onload = function() {
+//         fn(src);
+//       }
+//     }, 2000);
+//   }
+// }
+// const proxy = proxyImage(createImage);
+// proxy('url2');
+
+// 先建立立即执行函数添加新img节点
+// 再建立proxyImage对象实现懒加载
+// const createImage = (function() {
+//   const img = document.createElement('img');
+//   document.body.appendChild(img);
+//   return function(src) {
+//     img.src = src;
+//   }
+// })();
+// const proxyImage = function(fn) {
+//   const image = new Image();
+//   const defaultImage = 'https://rs.vip.miui.com/vip-resource/prod/mio/v136/static/media/lazyLoad.a10ffbd7.png';
+//   return function(src) {
+//     fn(defaultImage);
+//     // 延迟，懒加载效果
+//     setTimeout(function() {
+//       image.src = src;
+//       image.onload = function() {
+//         fn(src);
+//       }
+//     }, 2000)
+//   }
+// }
+// const proxy = proxyImage(createImage);
+// proxy("https://pic1.zhimg.com/80/v2-ec33fcec249a9cabab61b14436432bf0_r.jpg");
+
+// 先创建一个立即执行函数来新建img节点并添加图片路径
+// 懒加载过程，立即执行函数作为参数传入
+// const createImage = (function() {
+//   const img = document.createElement('img');
+//   document.body.appendChild(img);
+//   return function(src) {
+//     img.src = src;
+//   }
+// })(); 
+// const proxyImage = function(fn) {
+//   const image = new Image();
+//   const defaultImage = 'url1';
+//   return function(src) {
+//     fn(defaultImage);
+
+//   // 懒加载效果
+//     setTimeout(function() {
+//       image.src = src;
+//       image.onload = function() {
+//         fn(src);
+//       }
+//     }, 2000);
+//   }
+// }
+// const proxy = new proxyImage();
+// proxy('url2');
+
+// 创建一个主题，保存状态，状态变化之后触发所有观察者对象：添加订阅对象、获取信息、设置信息、发布通知
+// 观察者：自动更新
+// class Subject {
+//   constructor() {
+//     this.message = '暂无通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update());
+//   }
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+// }
+
+// class Observer {
+//   constructor(name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.message.attach(this);
+//   }
+//   update() {
+//     console.log(`${this.name}收到通知：${this.message.getMessage()}`);
+//   }
+// }
+// let message = new Subject();
+// let a = new Observer('张三', message);
+// let b = new Observer("李四", message);
+// let c = new Observer('王五', message);
+
+// message.setMessage("明天开家长会");
+// message.setMessage("在家也要好好学习");
+// message.setMessage('明天开运动会');
+
+
+// class Subject {
+//   constructor() {
+//     this.message = '暂无通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update())
+//   }
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+// }
+// class Observer {
+//   constructor(name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.message.attach(this);
+//   }
+//   update() {
+//     console.log(`${this.name}收到通知:${this.message.getMessage()}`)
+//   }
+// }
+// let message = new Subject();
+// let a = new Observer('张三', message);
+// let b = new Observer('王五', message);
+// message.setMessage("明天不上学");
+// message.setMessage('在家好好学习');
+
+class Subject {
+  constructor() {
+    this.message = '暂无通知';
+    this.observers = [];
+  }
+  getMessage() {
+    return this.message;
+  }
+  setMessage(message) {
+    this.message = message;
+    this.notifyAllObservers();
+  }
+  notifyAllObservers() {
+    this.observers.forEach(observer => observer.update())
+  }
+  attach(observer) {
+    this.observers.push(observer);
+  }
+}
+class Observer {
+  constructor(name, message) {
+    this.name = name;
+    this.message = message;
+    this.message.attach(this);
+  }
+  update() {
+    console.log(`${this.name}收到通知:${this.message.getMessage()}`);
+  }
+}
+let message = new Subject();
+let a = new Observer('张三', message);
+message.setMessage('干你丫的')
