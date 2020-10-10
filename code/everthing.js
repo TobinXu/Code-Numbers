@@ -8418,35 +8418,157 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // message.setMessage("明天不上学");
 // message.setMessage('在家好好学习');
 
-class Subject {
-  constructor() {
-    this.message = '暂无通知';
-    this.observers = [];
-  }
-  getMessage() {
-    return this.message;
-  }
-  setMessage(message) {
-    this.message = message;
-    this.notifyAllObservers();
-  }
-  notifyAllObservers() {
-    this.observers.forEach(observer => observer.update())
-  }
-  attach(observer) {
-    this.observers.push(observer);
-  }
-}
-class Observer {
-  constructor(name, message) {
-    this.name = name;
-    this.message = message;
-    this.message.attach(this);
-  }
-  update() {
-    console.log(`${this.name}收到通知:${this.message.getMessage()}`);
-  }
-}
-let message = new Subject();
-let a = new Observer('张三', message);
-message.setMessage('干你丫的')
+// class Subject {
+//   constructor() {
+//     this.message = '暂无通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update())
+//   }
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+// }
+// class Observer {
+//   constructor(name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.message.attach(this);
+//   }
+//   update() {
+//     console.log(`${this.name}收到通知:${this.message.getMessage()}`);
+//   }
+// }
+// let message = new Subject();
+// let a = new Observer('张三', message);
+// message.setMessage('干你丫的')
+
+// class Modal {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Modal.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Modal(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Modal.create('aaa');
+// let b = Modal.create('bbb');
+
+// 构造函数里面要初始化信息和缓存订阅者、获取信息、设置信息、发布通知、添加订阅者
+// class Subject {
+//   constructor() {
+//     this.message = '暂无通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update());
+//   }
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+// }
+
+// 绑定
+// 更新
+// class Observer {
+//   constructor(name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.message.attach(this);
+//   }
+//   update() {
+//     console.log(`${this.name}收到通知：${this.message.getMessage()}`);
+//   }
+// }
+
+// let message = new Subject();
+// let a = new Observer('张三', message);
+// let b = new Observer('李四', message);
+// let c = new Observer('王五', message);
+
+// message.setMessage("明天开学");
+// message.setMessage("今天提前放假");
+// message.setMessage("在家记得踢足球");
+
+// 立即执行函数迎来添加img结点并显示src路径的图片
+// 代理图片函数用来执行立即执行函数并添加定时器来定时替换原路径照片达到懒加载的效果
+// const createImage = (function() {
+//   const img = document.createElement('img');
+//   document.body.appendChild(img);
+//   return function(src) {
+//     img.src = src;
+//   }
+// })();
+
+// const proxyImage = function(fn) {
+//   const image = new Image();
+//   const defaultImage = 'url';
+//   return function(src) {
+//     fn(defaultImage);
+//     setTimeout(function() {
+//       image.src= src;
+//       image.onload = function() {
+//         fn(src);
+//       }
+//     }, 2000);
+//   }
+// }
+// const proxy = proxyImage(createImage);
+// proxy("url");
+
+// const list = {
+//   'A' :100,
+//   'B' : 80,
+//   'C' : 40
+// }
+// const obj = new Proxy(list, {
+//   get(target, key) {
+//     if (target[key] > 60) {
+//       console.log('考试及格');
+//       return target[key];
+//     } else {
+//       console.log('不及格，成绩不予公示');
+//     }
+//   },
+//   set(target, key, newVal) {
+//     if (newVal - target[key] > 10) {
+//       target[key] = newVal;
+//       console.log('修改后成绩为：', target[key]);
+//     } else {
+//       console.log('修改成绩失败');
+//     }
+//   }
+// })
+
+// obj.A;
+// obj.B;
+// obj.C;
+// obj.A = 111;
+// obj.C = 45;
+
+

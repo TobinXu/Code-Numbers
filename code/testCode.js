@@ -270,26 +270,69 @@ function isPalindrome (x) {
 //     return ans;
 // }
 
-class Modal {
-    constructor(name) {
-      this.name = name;
-      this.getName();
-    }
-    getName() {
-      return this.name;
-    }
-  }
-  Modal.create = (function() {
-    let instance = null;
-    return function(name) {
-      if (!instance) {
-        instance = new Modal(name);
-      }
-      return instance;
-    }
-  })()
-  let a = Modal.create('aaa');
-  let b = Modal.create('bbb');
-  // 因为是单利，所以两个实例是相等的
-  console.log(a, b);
-  console.log(a === b);
+// class Modal {
+//     constructor(name) {
+//       this.name = name;
+//       this.getName();
+//     }
+//     getName() {
+//       return this.name;
+//     }
+//   }
+//   Modal.create = (function() {
+//     let instance = null;
+//     return function(name) {
+//       if (!instance) {
+//         instance = new Modal(name);
+//       }
+//       return instance;
+//     }
+//   })()
+//   let a = Modal.create('aaa');
+//   let b = Modal.create('bbb');
+//   // 因为是单例，所以两个实例是相等的
+//   console.log(a, b);
+//   console.log(a === b);
+
+// function maxDepth(root) {
+//   if (!root) {
+//     return 0;
+//   } else {
+//    const left = maxDepth(root.left);
+//    const right = maxDepth(root.right);
+//     return Math.max(left, right) + 1;
+//   }
+// }
+// let tree = [3,9,20,null,null,15,7];
+// console.log(maxDepth(tree));
+
+// 层序遍历的话
+// 知道当前层的节点数
+// 逐个让当前层的结点出列
+// 让左右子节点入列
+// 当前层所有结点已经出列，如果有下一层的话，则队列不为空，则深度++
+// function maxDepth(root) {
+//   if (!root) return 0;
+//   let queue = [root];
+//   let depth = 1;
+//   while(queue.length) {
+//     const levelSize = queue.length;
+//     for (let i = 0; i < levelSize; i++) {
+//       let node = queue.shift();
+//       if (node.left) queue.push(node.left);
+//       if (node.right) queue.push(node.right);
+//     }
+//     if (queue.length) depth++;
+//   }
+//   return depth;
+// }
+
+// 层序遍历输出所有结点
+// 使用数组模拟队列，将根节点放入
+// 利用一个临时数组存储每层的所有结点，一个结果数组用于存储节点集合
+// 每层结点依次出队并存入当前层的节点集合
+
+// 层序遍历输出所有结点
+// 使用数组模拟队列，将根节点放入
+// 利用一个临时数组存储每层的所有结点，一个结果数组用于存储节点集合
+// 每层结点依次出队并存入当前层的节点集合
