@@ -8572,3 +8572,90 @@ LESS 并没有裁剪 CSS 原有的特性，而是在现有 CSS 语法的基础�
 // obj.C = 45;
 
 
+// 二叉树的层次遍历 II
+
+// function levelOrderBottom(root) {
+//   if (!root) return [];
+//   let queue = [root];
+//   let res = [];
+//   while(queue.length) {
+//     let temp = [];
+//     const levelSize = queue.length;
+//     for (let i = 0; i < levelSize; i++) {
+//       let node = queue.shift();
+//       temp.push(node.val);
+//       if (node.left) queue.push(node.left);
+//       if (node.right) queue.push(node.right);
+//     }
+//     res.push(temp);
+//   }
+//   return res.reverse();
+// }
+
+
+// 二叉树的右视图
+// 判断是否遍历到每一层的最后的元素，如果是则直接放入result数组，最后返回result即可
+
+// function rightSideView(root) {
+//   if (!root) return [];
+//   let queue = [root];
+//   let res = [];
+//   while(queue.length) {
+//     const levelSize = queue.length;
+//     for (let i = 0; i < levelSize; i++) {
+//       let node = queue.shift();
+//       if (i === levelSize - 1) res.push(node.val);
+//       if (node.left) queue.push(node.left);
+//       if (node.right) queue.push(node.right);
+//     }
+//   }
+//   return res;
+// }
+
+// 二叉树的层平均值
+// 将每层结点相加并除每层的节点数，然后推入数组并返回
+// function averageOfLevels(root) {
+//   let queue = [root];
+//   let res = [];
+//   while(queue.length) {
+//     let levelSum = 0;
+//     const levelSize = queue.length;
+//     for (let i = 0; i < levelSize; i++) {
+//       let node = queue.shift();
+//       levelSum += node.val;
+//       if (node.left) queue.push(node.left);
+//       if (node.right) queue.push(node.right);
+//     }
+//     res.push(levelSum / levelSize);
+//   }
+//   return res;
+// }
+
+// 429. N叉树的层序遍历
+// 遍历每层结点时，针对每个结点判断是否含有子节点，有的话将其加入队列
+// function levelOrder (root) {
+//   if (!root) return [];
+//   let queue = [root];
+//   let res = [];
+//   while(queue.length) {
+//     let temp = [];
+//     const levelSize = queue.length;
+//     for (let i = 0; i < levelSize; i++) {
+//       let node = queue.shift();
+//       temp.push(node.val);
+//       for (let j = 0; j < node.children.length; j++) {
+//         if (node.children[j]) queue.push(node.children[j]);
+//       }
+//     }
+//     res.push(temp);
+//   }
+//   return res;
+// }
+
+/*
+function test() {
+  return 1
+  +3 // 在这里自动添加分号因为不符合规则1并且符合规则3，即return 1后面的+3符合语法，所以分号插入到+3后面，代码块结束处
+}
+console.log(test()); // 4
+*/

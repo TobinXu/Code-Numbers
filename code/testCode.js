@@ -332,7 +332,20 @@ function isPalindrome (x) {
 // 利用一个临时数组存储每层的所有结点，一个结果数组用于存储节点集合
 // 每层结点依次出队并存入当前层的节点集合
 
-// 层序遍历输出所有结点
-// 使用数组模拟队列，将根节点放入
-// 利用一个临时数组存储每层的所有结点，一个结果数组用于存储节点集合
-// 每层结点依次出队并存入当前层的节点集合
+// function levelOrder(root) {
+//   if (!root) return [];
+//   let queue = [root];
+//   let res = [];
+//   while(queue.length) {
+//     let temp = [];
+//     const levelSize = queue.length;
+//     for (let i = 0; i < levelSize; i++) {
+//       let node = queue.shift();
+//       temp.push(node.val);
+//       if (node.left) queue.push(node.left);
+//       if (node.right) queue.push(node.right);
+//     }
+//     res.push(temp);
+//   }
+//   return res;
+// }
