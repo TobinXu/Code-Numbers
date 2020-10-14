@@ -8659,3 +8659,157 @@ function test() {
 }
 console.log(test()); // 4
 */
+
+// var mySymbol = Symbol('my symboy');
+// function sleep(duration) {
+//    return new Promise(function(resolve) {
+//      setTimeout(resolve, duration);
+//    })
+// }
+// async function changeColor(duration, color) {
+//   document.getElementById("traffic-light").style.background = color;
+//   await sleep(duration);
+// }
+// async function main() {
+//   while(true) {
+//     await changeColor(3000, 'green');
+//     await changeColor(1000, 'yellow');
+//     await changeColor(2000, 'red');
+//   }
+// }
+// main();
+
+// 工厂模式
+// function createPerson(name, age, job) {
+//   var o = new Object();
+//   o.name = name;
+//   o.age = age;
+//   o.job = job;
+//   o.sayName = function() {
+//     console.log(this.name);
+//   };
+//   return o;
+// }
+// var person1 = createPerson('Nicholas', 29, 'softwate Engineer');
+// var person2 = createPerson('Greg', 18, 'doctor');
+
+
+// 构造函数模式
+// function Person(name, age, job) {
+//   this.name = name;
+//   this.age = age;
+//   this.job = job;
+//   this.sayName = function() {
+//     console.log(this.name);
+//   };
+// }
+// var person1 = new Person('Nicholas', 29, 'software Engineer');
+// var person2 = new Person('Greg', 20, 'doctor');
+
+/*
+new 操作符实际上经历了四个步骤：
+1.创建一个新对象
+2.将构造函数的作用域赋给新对象（因此this就指向了这个新对象
+3.执行构造函数中的代码（为这个新对象添加属性
+4.返回新对象
+*/
+
+// 原型模式
+// function Person() {}
+// Person.prototype.name = 'Nicholas';
+// Person.prototype.age = 20;
+// Person.prototype.job = 'doctor';
+// Person.prototype.sayName = function() {
+//   console.log(this.name);
+// };
+// var person1 = new Person();
+// person1.sayName();
+// var person2 = new Person();
+// person2.sayName();
+
+// 1.自顶向下比较左右子树最大深度差，如果每个结点的左右子树最大深度差小于等于一，即所有子树都是平衡的，那么整个子树都是平衡的
+// function isBalanced(root) {
+//   if (!root) return true;
+//   return Math.abs(depth(root.left)-depth(root.right)) <= 1 
+//   && isBalanced(root.left) 
+//   && isBalanced(root.right);
+// }
+// function depth(node) {
+//   if (!node) return -1;
+//   return Math.max(depth(node.left), depth(node.right)) + 1;
+// }
+
+// 自底向上，判定每个子树是否为平衡树，如果平衡则是用他们的高度判断父节点是否平衡，并计算父节点高度，如果不平衡返回-1
+// 遍历比较二叉树每个结点的左右子树深度：
+// 1.比较左右子树深度，若差值大于1则返回标记-1，表示当前子树不平衡
+// 2.左右子树有一个不平衡，或左右子树差值大一1，则二叉树不平衡
+// 3.若左右子树平衡，返回当前树的深度（左右子树深度最大值+1
+// function isBalanced(root) {
+//   return balanced(root) !== -1;
+// }
+// function balanced(node) {
+//   if (!node) return 0;
+//   const left = balanced(node.left);
+//   const right = balanced(node.right);
+//   if (left === -1 || right === -1 || Math.abs(left - right) > 1) {
+//     return -1;
+//   }
+//   return Math.max(left, right) +1;
+// }
+
+
+// function diameterOfBinaryTree(root) {
+//   let ans = 1; //默认为1是因为默认了根节点自身的路径长度
+//   depth(root);
+//   function depth(node) {
+//     if (!node) return 0;
+//     let left = depth(node.left);
+//     let right = depth(node.right);
+//     ans = Math.max(ans, left+right+1); // 每到一个节点更新一次最大值
+//     return Math.max(left, right) + 1; // 返回该节点为根的子树的深度(每一个结点都有左右两颗子树，返回最深的，肯定要+1即算上该节点本身)
+//   }
+//   return ans-1;
+// }
+
+// // 后序遍历：将「对节点的处理操作」放到了「递归右子树」之后。
+// function invertTree(root) {
+//   if (!root) return root;
+//   // 递归压栈压到底
+//   invertTree(root.left);
+//   invertTree(root.right);
+//   // 执行交换
+//   const temp = root.left;
+//   root.left = root.right;
+//   root.right = temp;
+//   return root;
+// }
+
+// // 前序遍历：将「对节点的处理操作」放到了「递归左子树」之前。
+// function invertTree(root) {
+//   if (!root) return root;
+//   // 交换
+//   const temp = root.left;
+//   root.left = root.right;
+//   root.right = temp;
+//   // 内部的翻转交给递归去做
+//   invertTree(root.left);
+//   invertTree(root.right);
+//   return root;
+// }
+
+// 层序遍历，BFS
+// function invertTree(root) {
+//   if (!root) return root;
+//   let queue = [root];
+//   while(queue.length) {
+//     let node = queue.shift(); // 出列的结点
+//     const temp = node.left; // 交换出列结点的左右子树
+//     node.left = node.right;
+//     node.right = temp;
+//     // 入列考察，因为要继续翻转他们
+//     if (node.left) queue.push(node.left);
+//     if (node.right) queue.push(node.right);
+//   }
+//   return root;
+// }
+
