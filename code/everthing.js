@@ -8832,19 +8832,223 @@ new 操作符实际上经历了四个步骤：
 // }
 
 
-function longestUnivaluePath(root) {
-  let max = 0;
-  if (!root) return 0;
-  depth(root);
-  function depth(node) {
-    if (!node) return 0;
-    const left = depth(node.left);
-    const right = depth(node.right);
-    let leftSize = 0, rightSize = 0;
-    if (node.left && node.left.val === node.val) leftSize = left + 1;
-    if (node.right && node.right.val === node.val) rightSize = right + 1;
-    max = Math.max(max, leftSize+rightSize); // 每到一个节点更新一次最大值
-    return Math.max(leftSize, rightSize); 
-  }
-  return max;
-}
+// function longestUnivaluePath(root) {
+//   let max = 0;
+//   if (!root) return 0;
+//   depth(root);
+//   function depth(node) {
+//     if (!node) return 0;
+//     const left = depth(node.left);
+//     const right = depth(node.right);
+//     let leftSize = 0, rightSize = 0;
+//     if (node.left && node.left.val === node.val) leftSize = left + 1;
+//     if (node.right && node.right.val === node.val) rightSize = right + 1;
+//     max = Math.max(max, leftSize+rightSize); // 每到一个节点更新一次最大值
+//     return Math.max(leftSize, rightSize); 
+//   }
+//   return max;
+// }
+
+// function mergeTrees(r1, r2) {
+//   if (r1 === null || r2 === null) {
+//     return r1 === null ? r2 : r1;
+//   }
+//   return dfs(r1, r2);
+//   function dfs(t1, t2) {
+//     // 如果 t1和t2中，只要有一个是null，函数就直接返回
+//     if (t1 === null || t2 === null) {
+//       return t1 === null ? t2 : t1;
+//     }
+//     // 让t1的值 等于t1和t2的值累加，再递归计算两棵树的左节点、右节点
+//     t1.val += t2.val;
+//     t1.left = dfs(t1.left, t2.left);
+//     t1.right = dfs(t1.right, t2.right);
+//     return t1;
+//   }
+// }
+
+// 广度优先搜索即层序遍历解法
+/*
+只要两颗树的左节点都不为 null，就把将他们放入队列中；同理只要两棵树的右节点都不为 null 了，也将他们放入队列中。
+然后我们不断的从队列中取出节点，把他们相加。
+如果出现 树 1 的 left 节点为 null，树 2 的 left 不为 null，直接将树 2 的 left 赋给树 1 就可以了；同理如果树 1 的 right 节点为 null，树 2 的不为 null，将树 2 的 right 节点赋给树 1。
+*/
+// function mergeTrees(r1, r2) {
+//   // 如果两个结点有一个是null直接返回另一个即可
+//   if (r1 === null || r2 === null) {
+//     return r1 === null ? r2 : r1;
+//   }
+//   let queue = [];
+//   queue.push(r1);
+//   queue.push(r2);
+//   while(queue.length) {
+//     let t1 = queue.shift();
+//     let t2 = queue.shift();
+//     t1.val += t2.val;
+//     // 如果t1和t2左子树都不为空就放到队列中
+//     // 如果t1左子树为空，就把t2的左子树挂到t1的左子树上
+//     if (t1.left !== null && t2.left !== null) {
+//       queue.push(t1.left);
+//       queue.push(t2.left);
+//     } else if (t1.left === null) {
+//       t1.left = t2.left;
+//     }
+//     // 对于右子树也是一样的
+//     if (t1.right !== null && t2.right !== null) {
+//       queue.push(t1.right);
+//       queue.push(t2.right);
+//     } else if (t1.right === null) {
+//       t1.right = t2.right;
+//     }
+     
+//   }
+//   return r1;
+// }
+
+
+/* 
+sum —— 从根节点到叶子节点的路径上的节点值相加的目标和
+递归。转为判断：左、右子树中能否找出和为 sum - root.val 的路径
+每遍历一个节点，sum 就减去当前节点值，当遍历到叶子节点时，已经没有子节点了，如果 sum - 当前叶子节点值 == 0 ，就是找到了从根节点到叶子节点的和为 sum 的路径
+时间复杂度：O(n)，每个节点被遍历一次
+*/
+
+// function hasPathSum(root, sum) {
+//   if (root === null) return false;
+//   // 遍历到叶子节点如果满足sum - root.val === 0则为true
+//   if (root.left === null && root.right === null) {
+//     return sum-root.val === 0;
+//   }
+//   return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val); // 大问题转为两个子树的问题
+// }
+
+
+// 利用两个递归，咋一看很复杂，其实两个递归是各司其职，界限分明。
+
+//一个递归求从任意一个节点开始有多少条满足条件的路径。
+//一个递归是遍历整棵树，求各个节点开始各有多少满足条件的路径数，各路径数相加即可得出符合条件的总路径数
+
+// function pathSum(root, sum) {
+//   if (!root) return 0;
+//   let page = findDown(root, sum); //从根节点开始有多少满足条件的路径数，findDown函数是求从单个节点开始满足条件的路径数
+//   let sum1 = pathSum(root.left, sum);//遍历左子树求符合条件的路径数，
+//   let sum2 = pathSum(root.right, sum);//遍历右子树求符合条件的路径数
+//   return page + sum1 + sum2;//得出总路径数
+// }
+// // 求从单个节点开始满足条件的路径数，tNode为当前节点，sum为规定的路径权值和
+// //若节点为空，返回0
+//  // 当前节点权值刚好等于sum则算为1，否则为0
+//  //剩下的权值要子树来凑，先看左子树能不能凑出来
+//   //再看右子树是否能凑出来
+//   // 返回符合条件的路径数
+// function findDown(node, sum) {
+//   if (!node) return 0;
+//   let ret = node.val === sum ? 1 : 0;
+//   let leftSum = pathSumStartWithRoot(node.left, sum - node.val);
+//   let rightSum = pathSumStartWithRoot(node.right, sum - node.val);
+  
+//   return ret + leftSum + rightSum;
+// }
+
+// 是不是子树
+// 两个树同为null相同，一个为null一个不是的话不同，都不为null判断左右子树是否相同
+// 1.两个树相同
+// 2.和另一个树的左子树相同
+// 3.和另一个树的右子树相同
+
+// function isSubtree(s, t) {
+//   if (s === null) return false;
+//   if (isSameTree(s, t)) return true;
+//   return isSubtree(s.left, t) || isSubtree(s.right, t);
+// }
+// function isSameTree(s, t) {
+//   if (s === null && t === null) return true;
+//   if (s === null || t === null) return false;
+//   return s.val === t.val && isSameTree(s.left, t.left) && isSameTree(s.right, t.right);
+// }
+
+// function isSymmetric(root) {
+//   if (root === null) return true;
+//   return isSymmetric(root.left, root.right);
+// }
+// function isSymmetric(t1, t2) {
+//   if (t1 === null && t2 === null) return true;
+//   if (t1 === null || t2 === null) return false;
+//   if (t1.val !== t2.val) return false;
+//   return isSymmetric(t1.left, t2.right) && isSymmetric(t1.right, t2.left);
+// }
+
+
+// // 如果根节点的左或右子树为空的话是构不成子树的。而最小深度是要求从根节点到子树的。当左或右子树为空时，不符合要求。
+// function minDepth(root) {
+//   if (!root) return 0;
+//   // null结点不参与比较
+//   if (root.left === null && root.right !== null) {
+//     return 1+ minDepth(root.right);
+//   }
+//   if (root.left !== null && root.right === null) {
+//     return 1 + minDepth(root.left);
+//   }
+//   return 1 + Math.min(minDepth(root.left), minDepth(root.right));
+// }
+
+// function sumOfLeftLeaves (root) {
+//   // 设置结果
+//   let sum = 0;
+//   function dfs(root) {
+//     // 终止条件
+//     if (!root) return;
+//     // 如果有左子树，才进行添加
+//     if (root.left && !root.left.left && !root.left.right) {
+//       sum += root.left.val;
+//     }
+//     // 依序遍历左子树和右子树之道没有为止
+//     dfs(root.left);
+//     dfs(root.right);
+//   }
+//   dfs(root);
+//   return sum;
+  
+// }
+
+// function sumOfLeftLeaves(root) {
+//   if (!root) return 0;
+//   let res = 0;
+//   let nowRoot = [root];
+//   while(nowRoot.length) {
+//     let nextRoot = [];
+//     for (let i = 0; i < nowRoot.length; i++) {
+//       //  如果满足条件，那么添加左子树
+//       if (nowRoot[i].left && !nowRoot[i].left.left && !nowRoot[i].left.right) {
+//         res += nowRoot[i].left.val;
+//       }
+//       if (nowRoot[i].left) {
+//         nextRoot.push(nowRoot[i].left);
+//       }
+//       if (nowRoot[i].right) {
+//         nextRoot.push(nowRoot[i].right);
+//       }
+//     }
+//     nowRoot = nextRoot;
+//   }
+//   return res;
+// }
+
+// 从根节点开始偷或者从子节点开始偷两种情况比较最大数
+// 首先来定义这个问题的状态
+// 爷爷节点获取到最大的偷取的钱数呢
+
+// 首先要明确相邻的节点不能偷，也就是爷爷选择偷，儿子就不能偷了，但是孙子可以偷
+// 二叉树只有左右两个孩子，一个爷爷最多 2 个儿子，4 个孙子
+// 根据以上条件，我们可以得出单个节点的钱该怎么算
+// 4 个孙子偷的钱 + 爷爷的钱 VS 两个儿子偷的钱 哪个组合钱多，就当做当前节点能偷的最大钱数。这就是动态规划里面的最优子结构
+
+// function rob(root) {
+//   if (!root) return 0;
+//   let val1 = root.val;
+//   if (root.left) val1 += rob(root.left.left) + rob(root.left.right);
+//   if (root.right) val1 += rob(root.right.left) + rob(root.right.right);
+//   let val2 = rob(root.left) + rob(root.right);
+//   return Math.max(val1, val2);
+// }
+
