@@ -8813,3 +8813,38 @@ new 操作符实际上经历了四个步骤：
 //   return root;
 // }
 
+    /**
+        对于任意一个节点, 如果最大和路径包含该节点, 那么只可能是两种情况:
+        1. 其左右子树中所构成的和路径值较大的那个加上该节点的值后向父节点回溯构成最大路径
+        2. 左右子树都在最大路径中, 加上该节点的值构成了最终的最大路径
+        **/
+// function maxPathSum(root) {
+//   let max = Number.MIN_SAFE_INTEGER; 
+//   depth(root);
+//   function depth(node) {
+//     if (!node) return 0;
+//     let leftSum = Math.max(0, depth(node.left)); // 如果子树路径和为负则应当置0表示最大路径不包含子树
+//     let rightSum = Math.max(0, depth(node.right));
+//     max = Math.max(max, leftSum+rightSum+node.val); // 每到一个节点更新一次最大值(判断在该节点包含左右子树的路径和是否大于当前最大路径和)
+//     return Math.max(leftSum, rightSum) + node.val; // 返回该节点为中心的最大路径和(每一个结点都有左右两颗子树，返回左右中最长的路径+root.val根节点的值)
+//   }
+//   return max;
+// }
+
+
+function longestUnivaluePath(root) {
+  let max = 0;
+  if (!root) return 0;
+  depth(root);
+  function depth(node) {
+    if (!node) return 0;
+    const left = depth(node.left);
+    const right = depth(node.right);
+    let leftSize = 0, rightSize = 0;
+    if (node.left && node.left.val === node.val) leftSize = left + 1;
+    if (node.right && node.right.val === node.val) rightSize = right + 1;
+    max = Math.max(max, leftSize+rightSize); // 每到一个节点更新一次最大值
+    return Math.max(leftSize, rightSize); 
+  }
+  return max;
+}
