@@ -9125,3 +9125,47 @@ sum —— 从根节点到叶子节点的路径上的节点值相加的目标和
 //   return res;
 // }
 
+// function trimBST(root, l , r) {
+//   if (!root) return null;
+//   //下面两个if相当于删除不满足要求的节点
+//   if (root.val > r) return trimBST(root.left, l, r);//返回修剪过的右子树。抱有一丝丝期望，希望右子树能够满足要求，因为右子树的值大于当前根节点的值
+//   if (root.val < l) return trimBST(root.right, l , r);//返回修剪过的左子树，抱有一丝丝期望，希望左子树能够满足要求，因为左子树的值小于当前根节点的值
+//   //处理正常的节点
+//   root.left = trimBST(root.left, l, r);
+//   root.right = trimBST(root.right, l, r);
+//   return root;
+// }
+
+// 思路：看到二叉搜索树，应该会立刻想到它的一个性质，它的中序遍历输出的是一个升序数组。
+// 知道了这个，这道题就很简单了，只需要把中序遍历的第 k 个元素返回即可。
+// function kthSmallest(root, k) {
+//   let [num, res] = [0, 0];
+//   function inorderTraversal(node, k) {
+//     if (!node) return;
+//     inorderTraversal(node.left, k);
+//     num++; // 每遍历一次num++
+//     if (num === k) return res = node.val;
+//     inorderTraversal(node.right, k);
+//   }
+//   inorderTraversal(root, k);
+//   return res;
+// }
+
+// 迭代
+function kthSmallest(root, k) {
+  let stack = [];
+  let node = root;
+  while(node || stack.length) {
+    // 遍历左子树
+    while(node) {
+      stack.push(node);
+      node = node.left;
+    }
+    node = stack.pop();
+    if (--k === 0) {
+      return node.val;
+    }
+    node = node.right;
+  }
+  return null;
+}
