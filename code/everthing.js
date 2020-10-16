@@ -9052,3 +9052,76 @@ sum —— 从根节点到叶子节点的路径上的节点值相加的目标和
 //   return Math.max(val1, val2);
 // }
 
+// 先将根节点放入栈中，只要栈不空，就弹出元素并判断是否有值，有的话推入结果集
+// 继续将结点的左右孩子压入栈中，因为是先序遍历所以先压入右孩子
+// function preorderTraversal(root) {
+//   let res = [];
+//   let stack = [root];
+//   while(stack.length) {
+//     let node = stack.pop();
+//     if (node === null) continue;
+//     res.push(node.val);
+//     stack.push(node.right);
+//     stack.push(node.left);
+//   }
+//   return res;
+// }
+
+// function preorderTraversal(root) {
+//   let res = [];
+//   function preOrderTraversal(node) {
+//     if (node) {
+//       res.push(node.val);
+//       preOrderTraversal(node.left);
+//       preOrderTraversal(node.right);
+//     }
+//   }
+//   preOrderTraversal(root);
+//   return res;
+// }
+
+//前序遍历为 root -> left -> right，后序遍历为 left -> right -> root。
+// 可以修改前序遍历成为 root -> right -> left，那么这个顺序就和后序遍历正好相反。
+
+// function postorderTraversal(root) {
+//   let res = [];
+//   let stack = [root];
+//   while(stack.length) {
+//     let node = stack.pop();
+//     if (node === null) continue;
+//     res.push(node.val);
+//     stack.push(node.left);
+//     stack.push(node.right);
+//   }
+//   return res.reverse();
+// }
+
+// function postorderTraversal(root) {
+//   let res = [];
+//   function postOrderTraversal(node) {
+//     if (node) {
+//       postOrderTraversal(node.left);
+//       postOrderTraversal(node.right);
+//       res.push(node.val);
+//     }
+//   }
+//   postOrderTraversal(root);
+//   return res;
+// }
+
+// 现将根节点和左右左孩子压入栈中在逐一弹出，将值压入结果集，然后在右子树进行同样的操作
+// function inorderTraversal (root) {
+//   let res = [];
+//   let stack = [];
+//   while(root || stack.length) {
+//     while(root) {
+//       stack.push(root);
+//       root = root.left;
+//     }
+//     root = stack.pop();
+//     res.push(root.val);
+//     root = root.right;
+//   }
+//   return res;
+// }
+
