@@ -9327,21 +9327,82 @@ function lowestCommonAncestor(root, p, q) {
 
 // 将二叉查找树转换成数组然后左右指针在数组中查找
 
-function findTarget(root, k) {
-  let nums = [];
-  function inOrder(root, nums) {
-    if (root == null) return;
-    inOrder(root.left, nums);
-    nums.push(root.val);
-    inOrder(root.right, nums);
+// function findTarget(root, k) {
+//   let nums = [];
+//   function inOrder(root, nums) {
+//     if (root == null) return;
+//     inOrder(root.left, nums);
+//     nums.push(root.val);
+//     inOrder(root.right, nums);
+//   }
+//   inOrder(root, nums);
+//   let i =0, j = nums.length - 1;
+//   while (i < j) {
+//     let sum = nums[i] + nums[j];
+//     if (sum == k) return true;
+//     if (sum < k) i++;
+//     else j--;
+//   }
+//   return false;
+// }
+
+// 利用中序遍历有序的特点，求相邻两个数的差值，找出最小的
+
+// const getMinimumDifference = (root) => {
+//   let diff = Number.MAX_SAFE_INTEGER;
+//   let preVal;
+
+//   const inOrder = (root) => {
+//     if (root == null) {
+//       return;
+//     }
+//     inOrder(root.left);
+//     if (preVal !== undefined && root.val - preVal < diff) {
+//       diff = root.val - preVal;
+//     }
+//     preVal = root.val;
+//     inOrder(root.right);
+//   };
+
+//   inOrder(root);
+//   return diff;
+// };
+
+/*
+我们可以顺序扫描中序遍历序列，用 \rm basebase 记录当前的数字，用 \rm countcount 记录当前数字重复的次数，用 \rm maxCountmaxCount 来维护已经扫描过的数当中出现最多的那个数字的出现次数，用 \rm answeranswer 数组记录出现的众数。每次扫描到一个新的元素：
+
+首先更新 \rm basebase 和 \rm countcount:
+如果该元素和 \rm basebase 相等，那么 \rm countcount 自增 11
+否则将 \rm basebase 更新为当前数字，\rm countcount 复位为 11
+然后更新 \rm maxCountmaxCount：
+如果 \rm count = maxCountcount=maxCount，那么说明当前的这个数字（\rm basebase）出现的次数等于当前众数出现的次数，将 \rm basebase 加入 \rm answeranswer 数组
+如果 \rm count > maxCountcount>maxCount，那么说明当前的这个数字（\rm basebase）出现的次数大于当前众数出现的次数，因此，我们需要将 \rm maxCountmaxCount 更新为 \rm countcount，清空 \rm answeranswer 数组后将 \rm basebase 加入 \rm answeranswer 数组
+*/
+
+function findMode(root) {
+  let base = 0, count = 0, maxCount = 0;
+  let ans = [];
+  function update(x) {
+    if (x === base) {
+      count++;
+    } else {
+      count = 1;
+      base = x;
+    }
+    if (count === maxCount) {
+      ans.push(base);
+    }
+    if (count > maxCount) {
+      maxCount = count;
+      ans = [base];
+    }
   }
-  inOrder(root, nums);
-  let i =0, j = nums.length - 1;
-  while (i < j) {
-    let sum = nums[i] + nums[j];
-    if (sum == k) return true;
-    if (sum < k) i++;
-    else j--;
+  function inOrder(root) {
+    if (root === null) return;
+    inOrder(root.left);
+    update(root.val);
+    inOrder(root.right);
   }
-  return false;
+  inOrder(root);
+  return ans;
 }
