@@ -9176,40 +9176,172 @@ sum —— 从根节点到叶子节点的路径上的节点值相加的目标和
   // 遍历右子树,结点值累加给sum并把累加的结果赋给root.val
   // 遍历顶点
   // 遍历左子树
-function convertBST(root) {
-  let sum = 0;
-  function inOrder(node) {
-    if (node == null) {  // 遍历到null节点，开始返回
-      return;
+// function convertBST(root) {
+//   let sum = 0;
+//   function inOrder(node) {
+//     if (node == null) {  // 遍历到null节点，开始返回
+//       return;
+//     }
+//     inOrder(node.right);
+//     sum += node.val;
+//     node.val = sum;
+//     inOrder(node.left);
+//   }
+//   inOrder(root);
+//   return root;
+// }
+
+// function convertBST(root) {
+//   let sum = 0;
+//   let stack = [];
+//   let cur = root;
+//   // 右子节点，不断压入
+//    while (cur) {
+//      stack.push(cur);
+//      cur = cur.right;
+//    }
+//   // 清空栈，位于栈顶的结点出栈并累加，找左子节点，存在的话压入栈
+//   while(stack.length) {
+//     cur = stack.pop();
+//    sum += cur.val;
+//    cur.val = sum;
+//    cur = cur.left;
+//    while (cur) {
+//      stack.push(cur);
+//      cur = cur.right;
+//    }
+//  }
+//  return root; 
+// }
+/*
+只要不是 p 和 q 的值都大于（小于）root.val，即，不同处在 root 的一个子树中，就只有这三种情况：
+
+p 和 q 分居 root 的左右子树。
+root 就是 p，q 在 p 的子树中。
+root 就是 q，p 在 q 的子树中
+这三种情况，p 和 q 的公共祖先都是 root。
+*/
+// function lowestCommonAncestor(root, p, q) {
+//   if (root.val < p.val && root.val < q.val) {
+//     return lowestCommonAncestor(root.right, p, q);
+//   }
+//   if (root.val > p.val && root.val < q.val) {
+//     return lowestCommonAncestor(root.left, p, q);
+//   }
+//   return root;
+// }
+
+// 迭代
+// 只要不符合都大于或者都小于即当前root就是满足条件的root
+function lowestCommonAncestor(root, p, q) {
+  while(root) {
+    if (root.val < p.val && root.val < q.val) {
+      root = root.right;
+    } else if (root.val > p.val && root.val >q.val) {
+      root = root.left;
+    } else {
+      break;
     }
-    inOrder(node.right);
-    sum += node.val;
-    node.val = sum;
-    inOrder(node.left);
   }
-  inOrder(root);
   return root;
 }
 
-function convertBST(root) {
-  let sum = 0;
-  let stack = [];
-  let cur = root;
-  // 右子节点，不断压入
-   while (cur) {
-     stack.push(cur);
-     cur = cur.right;
-   }
-  // 清空栈，位于栈顶的结点出栈并累加，找左子节点，存在的话压入栈
-  while(stack.length) {
-    cur = stack.pop();
-   sum += cur.val;
-   cur.val = sum;
-   cur = cur.left;
-   while (cur) {
-     stack.push(cur);
-     cur = cur.right;
-   }
- }
- return root; 
+
+/*
+成为最近公共祖先有以下几种情况
+1.p和q在root的子树中，且分列两侧
+2.p===root，且q在root的子树中
+3.q===root，且p在root的子树中
+思路：
+如果当前遍历的节点 root，不是 p 或 q 或 null，则我们要递归搜寻左右子树：
+如果左右子树递归调用，都有结果，说明 p 和 q 分居 root 的左右子树，返回 root。
+如果只是其中一个子树递归调用有结果，说明 p 和 q 都在这个子树，则返回该子树递归调用的结果。
+如果两个子树递归调用的结果都为 null，说明 p 和 q 都不在这俩子树中，返回 null。
+*/
+// function lowestCommonAncestor(root, p, q) {
+//   if (root === null) return null;
+//   if (root === q || root === p) return root;
+//   const left = lowestCommonAncestor(root.left, p, q);
+//   const right = lowestCommonAncestor(root.right, p, q);
+//   if (left && right) return root;
+//   if (left === null) return right;
+//   return left; 
+// }
+
+
+// 实现二叉树的平衡，其实很简单，就每次把一组数最中间的位置，作为树的头拎起来，剩下部分平均分两份就行，
+// 要是出多来一个数就分配给左脚or右脚
+// 选择指针：l,r，分别代表参与构建BST的数组的开头索引和结尾索引
+// function sortedArrayToBST(nums) {
+//   if (nums.length === 0) return null;
+//   function buildTree(l, r) {
+//     if (l > r) return null;
+//     let mid = Math.floor((l+r)/2);
+//     let root = new TreeNode(nums[mid]);
+//     root.left = buildTree(l, mid-1);
+//     root.right = buildTree(mid+1, r);
+//     return root;
+//   }
+//   return buildTree(0, nums.length - 1);
+// }
+
+// function sortedListToBST(head) {
+//   let nums = [];
+//   while(head) {
+//     nums.push(head.val);
+//     head = head.next;
+//   }
+//   if (nums.length === 0) return null;
+//   function buildTree(l, r) {
+//     if (l > r) return null;
+//     let mid = Math.floor((l+r)/2);
+//     let root = new TreeNode(nums[mid]);
+//     root.left = buildTree(l, mid-1);
+//     root.right = buildTree(mid+1, r);
+//     return root;
+//   }
+//   return buildTree(0, nums.length - 1);
+// }
+
+// 寻找链表的中间点，有个小技巧：
+// 快、慢指针指向头结点，快指针一次走两步，慢指针一次走一步，当快指针走到尾节点时，慢指针正好走到链表的中间。然后断成两个链表，分而治之。
+// 为了断开，我们需要一个变量，保存慢指针的前一个节点，因为单向链表的节点没有前驱指针。
+// function sortedListToBST (head) {
+//   if (!head) return null;
+//   let slow = head;
+//   let fast = head;
+//   let preSlow; // 保存slow的前一个节点
+//   while(fast && fast.next) {
+//     preSlow = slow;
+//     slow =slow.next;
+//     fast = fast.next.next;
+//   }
+//   const root = new TreeNode(slow.val);
+//   if (preSlow != null) {
+//     preSlow.next = null; //preSlow有值，slow不是指向head，切断，左边用来构建左子树
+//     root.left = sortedListToBST(head);
+//   }
+//   root.right = sortedListToBST(slow.next);
+//   return root;
+// }
+
+// 将二叉查找树转换成数组然后左右指针在数组中查找
+
+function findTarget(root, k) {
+  let nums = [];
+  function inOrder(root, nums) {
+    if (root == null) return;
+    inOrder(root.left, nums);
+    nums.push(root.val);
+    inOrder(root.right, nums);
+  }
+  inOrder(root, nums);
+  let i =0, j = nums.length - 1;
+  while (i < j) {
+    let sum = nums[i] + nums[j];
+    if (sum == k) return true;
+    if (sum < k) i++;
+    else j--;
+  }
+  return false;
 }
