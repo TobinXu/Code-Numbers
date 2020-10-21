@@ -9233,18 +9233,18 @@ root 就是 q，p 在 q 的子树中
 
 // 迭代
 // 只要不符合都大于或者都小于即当前root就是满足条件的root
-function lowestCommonAncestor(root, p, q) {
-  while(root) {
-    if (root.val < p.val && root.val < q.val) {
-      root = root.right;
-    } else if (root.val > p.val && root.val >q.val) {
-      root = root.left;
-    } else {
-      break;
-    }
-  }
-  return root;
-}
+// function lowestCommonAncestor(root, p, q) {
+//   while(root) {
+//     if (root.val < p.val && root.val < q.val) {
+//       root = root.right;
+//     } else if (root.val > p.val && root.val >q.val) {
+//       root = root.left;
+//     } else {
+//       break;
+//     }
+//   }
+//   return root;
+// }
 
 
 /*
@@ -9379,30 +9379,229 @@ function lowestCommonAncestor(root, p, q) {
 如果 \rm count > maxCountcount>maxCount，那么说明当前的这个数字（\rm basebase）出现的次数大于当前众数出现的次数，因此，我们需要将 \rm maxCountmaxCount 更新为 \rm countcount，清空 \rm answeranswer 数组后将 \rm basebase 加入 \rm answeranswer 数组
 */
 
-function findMode(root) {
-  let base = 0, count = 0, maxCount = 0;
-  let ans = [];
-  function update(x) {
-    if (x === base) {
-      count++;
-    } else {
-      count = 1;
-      base = x;
-    }
-    if (count === maxCount) {
-      ans.push(base);
-    }
-    if (count > maxCount) {
-      maxCount = count;
-      ans = [base];
-    }
-  }
-  function inOrder(root) {
-    if (root === null) return;
-    inOrder(root.left);
-    update(root.val);
-    inOrder(root.right);
-  }
-  inOrder(root);
-  return ans;
-}
+// function findMode(root) {
+//   let base = 0, count = 0, maxCount = 0;
+//   let ans = [];
+//   function update(x) {
+//     if (x === base) {
+//       count++;
+//     } else {
+//       count = 1;
+//       base = x;
+//     }
+//     if (count === maxCount) {
+//       ans.push(base);
+//     }
+//     if (count > maxCount) {
+//       maxCount = count;
+//       ans = [base];
+//     }
+//   }
+//   function inOrder(root) {
+//     if (root === null) return;
+//     inOrder(root.left);
+//     update(root.val);
+//     inOrder(root.right);
+//   }
+//   inOrder(root);
+//   return ans;
+// }
+
+// function createPerson(name,age ,job) {
+//   var o = new Object();
+//   o.name = name;
+//   o.age = age;
+//   o.job = job;
+//   o.sayName = function() {
+//     console.log(this.name);
+//   };
+//   return o;
+// }
+// var person1 = createPerson('Nicholas', 29, "Software Engineer");
+// var person2 = createPerson("Greg", 27, "Doctor");
+
+// function Person(name,age ,job) {
+//   this.name = name;
+//   this.age = age;
+//   this.job = job;
+//   this.sayName = function() {
+//     console.log(this.name);
+//   };
+// }
+// var person1 = new Person('Nicholas', 29, "Software Engineer");
+// var person2 = new Person("Greg", 27, "Doctor");
+
+// function Person() {}
+// Person.prototype.name = "Nicholas";
+// Person.prototype.age = 29;
+// Person.prototype.job = "Software Engineer";
+// Person.prototype.sayName = function() {
+//   console.log(this.name);
+// };
+// var person1 = new Person();
+// person1.sayName();
+// var person2 = new Person();
+// person2.sayName();
+
+// function Person(name,age ,job) {
+//   this.name = name;
+//   this.age = age;
+//   this.job = job;
+//   this.friends = ["A","B"];
+// }
+// Person.prototype = {
+//   constructor: Person,
+//   syaName: function() {
+//     console.log(this.name);
+//   }
+// }
+
+// function SpecialArray() {
+//   var values = new Array();
+//   values.push.apply(vlaues, arguments);
+//   vlaues.toPipedString = function() {
+//     return this.join("|");
+//   };
+//   return values;
+// }
+// var colors = new SpecialArray("red", "blue", "green");
+// console.log(colors.toPipedString());
+
+// function Person(name, age, job) {
+//   var o = new Object();
+//   // 定义一些私有变量和函数
+//   o.sayName = function() {
+//     console.log(name);
+//   }
+//   return o;
+// }
+// var friend = Person("Nicholas", 20, "software Engineer");
+// friend.sayName();
+
+// function SuperType() {
+//   this.property = true;
+// }
+// SuperType.prototype.getSuperValue = function() {
+//   return this.property;
+// }
+// function SubType() {
+//   this.subproperty = false;
+// }
+// // 通过实例继承
+// SubType.prototype = new SuperType();
+// // 减价新方法
+// SubType.prototype.getSubValue = function() {
+//   return this.subproperty;
+// }
+// //重新父类方法
+// SubType.prototype.getSuperValue = function( ){
+//   return false;
+// }
+
+// var instance = new SubType();
+// console.log(instance.getSuperValue());
+
+// function SuperType(name) {
+//   this.name = name;
+// }
+// function SubType() {
+//   // 继承SuperType同时传参
+//   SuperType.call(this, "Nicholas");
+//   // 实例属性
+//   this.age = 29;
+// }
+// var instance = new SubType();
+// console.log(insatnce.name);
+// console.log(instance.age);
+
+// function SuperType(name) {
+//   this.name = name;
+//   this.colors = ["red", "green", "blue"];
+// }
+// SuperType.prototype.sayName = function() {
+//   console.log(this.name);
+// }
+// function SubType(name, age) {
+//   // 继承属性
+//   SuperType.call(this, name);
+//   this.age = age;
+// }
+// // 继承方法
+// SubType.prototype = new SuperType();
+// SubType.prototype.constructor = SubType;
+// SubType.prototype.sayAge = function () {
+//   console.log(this.age);
+// }
+
+// var instance1 = new SubType("Nichloas", 29);
+// instance1.colors.push("black");
+// console.log(instance1.colors);
+// instance1.sayName();
+// instance1.sayAge();
+
+// var instance1 = new SubType("jack", 29);
+// console.log(instance1.colors);
+// instance1.sayName();
+// instance1.sayAge();
+
+// var person = {
+//   name: "Nicholas",
+//   friends: ["shel", "court", "Van"]
+// }
+// var anthoerPerson = Object.create(person, {
+//   name: {
+//     value: "Greg"
+//   }
+// });
+// console.log(anthoerPerson.name);
+
+//Object.create(x)一个参数的时候等同于下面
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+
+// function createAnother(original) {
+//   var clone = ojbect(original);
+//   clone.sayHi = function() {
+//     console.log("hi");
+//   };
+//   return clone;
+// }
+// var person = {
+//   name: "Nicholas",
+//   friends: ["shel", "court", "Van"]
+// }
+// var anotherPerson = createAnother(person);
+// anotherPerson.sayHi();
+
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+// function inheritPrototype(subType, superType) {
+//   var prototype = object(superType.prototype);
+//   prototype.constructor = subType;
+//   subType.prototype = prototype;
+// }
+// function SuperType(name) {
+//   this.name = name;
+//   this.colors = ["red", "green", "blue"];
+// }
+// SuperType.prototype.sayName = function() {
+//   console.log(this.name);
+// }
+// function SubType(name, age) {
+//   // 继承属性
+//   SuperType.call(this, name);
+//   this.age = age;
+// }
+// // 继承方法
+// inheritPrototype(SubType, SuperType);
+// SubType.prototype.sayAge = function () {
+//   console.log(this.age);
+// }
+
+
