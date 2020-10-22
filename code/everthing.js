@@ -9605,3 +9605,514 @@ root 就是 q，p 在 q 的子树中
 // }
 
 
+// var p1 = new Promise((resolve,reject) => {
+//   console.log('没有resolve')
+//   // throw new Error('手动返回错误')
+//   reject('失败了')
+// })
+// p1.then(data => {
+//   console.log('data=',data);
+// },err => {
+//   console.log('err=',err)
+// }).catch(
+//   res => {
+//       console.log('catch data=',data)
+//   }
+// )
+
+// .triangle {
+//   position： absolute;
+//   width: 0;
+//   height: 0;
+//   border-width: 0 10px 10px 10px;
+//   border-style: solid;
+//   border-color: transparent transparent white transparent;
+// }
+
+// function shallowCopy(object) {
+//   // 只拷贝对象属性
+//   if (!object || typeof object !== "object") return;
+//   // 根据object类型创建一个数组或者对象
+//   let newObj = Array.isArray(object) ? [] : {};
+//   // 遍历object，并且判断是object的属性才拷贝
+//   for (let key in object) {
+//     if (object.hasOwnProperty(key)) {
+//       newObj[key] = object[key];
+//     }
+//   }
+//   return newObj;
+// }
+// // 只拷贝对象属性
+// // 根据参数类型创建数组或对象
+// // 遍历对象，并判断是对象的属性在拷贝//
+// // 遇到引用类型，新建一个引用类型并赋值
+// function deepCopy(object) {
+//   if (!object || typeof object !== "object") return;
+//   let newObj = Array.isArray(object) ? [] : {};
+//   for (let key in object) {
+//     if (object.hasOwnProperty(key)) {
+//       newObj = typeof object[key] === "objecct"
+//       ? deepCopy(object[key])
+//       : object[key];
+//     }
+//   }
+//   return newObj;
+// }
+
+// Number.EPSILON
+
+// for( let i = 0; i < 5; i++) {
+//   setTimeout(function() {
+//     console.log(i);
+//   }, i*1000)
+// }
+
+// for (var i =0; i < 5; i++) {
+//   (function(i) {
+//     setTimeout(function() {
+//       console.log(i);
+//     }, i * 1000)
+//   })(i);
+// }
+
+// function a(numberOne) {
+//   var count = numberOne;
+//   return function b(numberTwo) {
+//     if (numberTwo === undefined) {
+//       return count;
+//     } else {
+//       count += numberTwo;
+//       return b;
+//     }
+//   }
+// }
+// console.log(a(1)(12)())
+
+// const SERVER_URL = "/server";
+// let xhr = new XMLHttpRequest();
+// xhr.upen("GET", SERVER_URL, true);
+// xhr.onreadystatechange = function() {
+//   if (this.readyState !== 4) return;
+//   if (this.status === 200) {
+//     handle(this.response);
+//   } else {
+//     console.error(this.statusText);
+//   }
+// };
+// xhr.onerror = function() {
+//   console.error(this.statusText);
+// };
+// xhr.responseType = "json";
+// xhr.setRequestHeader("Accept", "application/json");
+// xhr.send(null);
+
+// function getJson(url) {
+//   let promise = new Promise(function(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET", url, true);
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !== 4) return;
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     };
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     }
+//     xhr.responseType = "json";
+//     xhr.setRequestHeader("Accept", "application/json");
+//     xhr.send(null);
+//   });
+//   return promise;
+// }
+
+// function shallowCopy(object) {
+//   if (!object || typeof object !== "object") return;
+//   let newObj = Array.isArray(object) ? [] : {};
+//   for (let key in object) {
+//     if (object.hasOwnProperty(key)) {
+//       newObj = object[key];
+//     }
+//   }
+//   return newObj;
+// }
+
+// function deepCopy(object) {
+//   if (!object || typeof object !== "object") return;
+//   let newObj = Array.isArray(object) ? [] : {};
+//   for (let key in object) {
+//     if (object.hasOwnProperty(key)) {
+//       newObj = typeof object[key] === "object"
+//       ? deepCopy(object)
+//       : object[key];
+//     }
+//   }
+//   return newObj;
+// }
+
+// function debounce(fn, delay) {
+//   let timer = null;
+//   return function() {
+//     if (timer) {
+//       clearTimeout(timer);
+//     }
+//     timer = setTimeout(fn, delay);
+//   }
+// }
+
+// function throttle(fn, delay) {
+//   let valid = true;
+//   return function() {
+//     if (!valid) return false;
+//     valid = fasle;
+//     setTimeout(() => {
+//       fn();
+//       valid = true;
+//     }, delay)
+//   }
+// }
+
+// const PENDING = "pending";
+// const RESOLVED = "resolved";
+// const REJECTED = "rejected";
+// function MyPromise(fn) {
+//   var self = this;
+//   this.state = PENDING;
+//   this.value = null;
+//   this.resolvedCallbacks = [];
+//   this.rejectedCallbacks = [];
+//   function resolve(value) {
+//     if (value instanceof MyPromise) {
+//       return value.then(resolve, reject);
+//     }
+//     setTimeout(() => {
+//       if (self.state === PENDING) {
+//           self.state = RESOLVED;
+//           self.value = value;
+//           self.resolvedCallbacks.forEach(callbacks => {
+//             callbacks(value);
+//           })
+//       }
+//     }, 0);
+//   }
+//   function reject(value) {
+//     setTimeous(() => {
+//       if (self.state === PENDING) {
+//         self.state = REJECTED;
+//         self.value = value;
+//         self.rejectedCallbacks.forEach(callbacks => {
+//           callback(value);
+//         })
+//       }
+//     }, 0)
+//   }
+//   try {
+//     fn(resolve, reject)
+//   } catch(e) {
+//     reject(e);
+//   }
+// }
+// MyPromise.prototype.then = function(onResolved, onRejected) {
+//   onREsolved = 
+//   typeof onResolved === "function"
+//   ? onResolved
+//   : function(value) {
+//     return value;
+//   };
+//   onRejected = 
+//   typeof onRejected === "function"
+//   ? onRejected
+//   : function(error) {
+//     throw error;
+//   };
+//   if (this.state === PENDING) {
+//     this.resolvedCallbacks.push(onResolved);
+//     this.rejectedCallbacks.push(onRejected);
+//   }
+//   if (this.state === RESOLVED) {
+//     onResolved(this.value);
+//   }
+//   if (this.state === REJECTED) {
+//     onRejected(this.value);
+//   }
+// }
+
+// Array.prototype.MyMap = function(fn, callbackThis) {
+//   let res = [];
+//   let CBThis = callbackThis || null;
+//   this.reduce((before, after, idx, arr) => {
+//     res.push(fn.call(CBThis, after, idx, arr));
+//   },null);
+//   return res;
+// }
+
+
+// Function.prototype.myCall = function(context) {
+//   if (typeof this !== "function") {
+//     console.error("type error");
+//   }
+//   let args = [...arguments].slice(1);
+//   result = null;
+//   context = context || null;
+//   context.fn = this;
+//   result = context.fn(...args);
+//   delete context.fn;
+//   return result;
+// }
+
+// Function.prototype.myApply = function(context) {
+//   if (typeof this !== "function") {
+//     throw new TypeError;
+//   }
+//   let result = null;
+//   context = context || window;
+//   context.fn = this;
+//   if (arguments[1]) {
+//     result = context.fn(...arguments[1]);
+//   } else {
+//     result = context.fn();
+//   }
+//   delete context.fn;
+//   return result;
+// }
+
+// Function.prototype.myBind(context) = function() {
+//   if (typeof this !== "function") {
+//       throw new TypeError;
+//   }
+//   var args = [...arguments].slice(1);
+//   fn = this;
+//   return function Fn() {
+//     return fn.apply(
+//       this instanceof Fn ? this : context,
+//       args.concat(...arguments)
+//     );
+//   }
+
+// }
+
+// 实现一个add方法，使计算结果能够满足如下预期：
+// add(1)(2)(3) = 6;
+// add(1, 2, 3)(4) = 10;
+// add(1)(2)(3)(4)(5) = 15;
+
+// function add() {
+//     // 第一次执行时，定义一个数组专门用来存储所有的参数
+//     var _args = Array.prototype.slice.call(arguments);
+
+//     // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+//     var _adder = function() {
+//         _args.push(...arguments);
+//         return _adder;
+//     };
+
+//     // 利用toString隐式转换的特性，当最后执行时隐式转换，并计算最终的值返回
+//     _adder.toString = function () {
+//         return _args.reduce(function (a, b) {
+//             return a + b;
+//         });
+//     }
+//     return _adder;
+// }
+
+// add(1)(2)(3)                // 6
+// add(1, 2, 3)(4)             // 10
+// add(1)(2)(3)(4)(5)          // 15
+// add(2, 6)(1)                // 9
+
+
+// function createPerson(name, age, job) {
+//   var o = new Object();
+//   o.name = name;
+//   o.age = age;
+//   o.job = job;
+//   o.sayName = function() {
+//     console.log(this.name);
+//   };
+//   return o;
+// }
+// var person1 = createPerson("Nicholas", 29, "SoftWare Engineer");
+// var person2 = createPerson("Jack", 20, "Doctor");
+
+
+
+// function Person(name, age, job) {
+//   this.name = name;
+//   this.age = age;
+//   this.job = job;
+//   this.sayName = function() {
+//     console.log(this.name);
+//   };
+// }
+
+// var person1 = new PerformanceResourceTiming("Nicholas", 29, "Doctor");
+
+
+
+// function Person() {
+// }
+// Person.prototype.name = "Nicholas";
+// Person.prototype.age = 29;
+// Person.prototype.job = "SoftWare Enginner";
+// Person.prototype.sayName = function() {
+//   console.log(this.name);
+// };
+// var person1 = new Person();
+// person1.sayName();
+
+// function Person(name, age, job) {
+//   this.name = name;
+//   this.age =age;
+//   this.job = job;
+//   this.friens = ['a', 'b', 'c'];
+// }
+// Person.prototype = {
+//   constructor: Person,
+//   sayName: function() {
+//     console.log(this.name);
+//   }
+// }
+// var person1 = new Person("Nicholas", 29, "software engineer");
+
+// function Person(name, age, job) {
+//   this.name = name;
+//   this.age = age;
+//   this.job = job;
+//   if (typeof this.sayName !== "function") {
+//     Person.prototype.sayName = function() {
+//       console.log(this.name);
+//       }
+//   }
+// }
+// var friend = new Person("Nicholas", 29, "SoftWare Enginner");
+
+// function Person(name, age, job) {
+//   var o = new Object();
+//   o.name = name;
+//   o.age = age;
+//   o.job = job;
+//   o.sayName = function() {
+//     console.log(name);
+//   };
+//   return o;
+// }
+// var person1 = Person("Nicholas", 29, "SoftWare Engineer");
+
+// function SuperType() {
+//   this.property = true;
+// }
+// SuperType.prototype.getSuperValue = function() {
+//   return this.property;
+// }
+// function SubType() {
+//   this.subproperty = false;
+// }
+// SubType.prototype = new SuperType();
+// SubType.prototype.getSubValue = function() {
+//   return this.subproperty;
+// }
+// var isntance = new SubType();
+// console.log(instance.getSuperValue());
+
+// function SuperType() {
+//   this.colors = ['red', 'green', 'blue'];
+// }
+// function SubType() {
+//   SuperType.call(this);
+// }
+// var instance1 = new SubType();
+// instance1.colors.push("black");
+// console.log(instance1.colors);
+
+// function SuperType(name) {
+//   this.name = name;
+// }
+// function SubType() {
+//   SuperType.call(this, "Nicholas");
+//   this.age = 29;
+// }
+// function SuperType(name) {
+//   this.name = name;
+//   this.colors = ['red', 'green', 'blue'];
+// }
+
+// SuperType.prototype.sayName = function() {
+//   console.log(this.name);
+// }
+// function SubType(name, age) {
+//   SuperType.call(this, name);
+//   this.age = age;
+// }
+// SubType.prototype = new SuperType();
+// SubType.prototype.constructor = SubType;
+// SubType.prototype.sayAge = function() {
+//   console.log(this.age);
+// }
+// var instance1 = new SubType("Nicholas", 29);
+
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+// var person = {
+//   name: "Nicholas",
+//   friends: ['a', 'b', 'c']
+// }
+// var person1 = object(person);
+// person1.name = "Greg";
+// person1.friends.push("Rob");
+// var person2 = object(person);
+// person2.friends.push("Bar");
+// console.log(person.friends);
+
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+// function CreateAnother(original) {
+//   var clone = object(original);
+//   clone.sayHi = function() {
+//     console.log('hi');
+//   };
+//   return clone;
+// }
+// var person = {
+//   name: "Nicholas",
+//   friends: ["a", "b", "c"]
+// }
+// var anotherPerson = createAnother(person);
+// anotherPerson.sayHi();
+
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+// function inheritPrototype(subType, superType) {
+//   var prototype = object(superType.prototype);
+//   prototype.constructor = subType;
+//   subType.prototype = prototype;
+// }
+
+// function SuperType(name) {
+//   this.name = name;
+//   this.colors = ['red', 'green', 'blue'];
+// }
+// SuperType.prototype.sayName = function() {
+//   console.log(this.name);
+// }
+
+// function SubType(name, age) {
+//   SuperType.call(this, name);
+//   this.age =age;
+// }
+// inheritPrototype(SubtYpe, SuperType);
+// SubType.prototype.sayAge = function() {
+//   console.log(this.age);
+// }
+
+console.log(Math.pow(1.2, 20));
