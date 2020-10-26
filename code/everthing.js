@@ -10115,4 +10115,5 @@ root 就是 q，p 在 q 的子树中
 //   console.log(this.age);
 // }
 
-console.log(Math.pow(1.2, 20));
+// console.log(Math.pow(1.2, 20));
+
