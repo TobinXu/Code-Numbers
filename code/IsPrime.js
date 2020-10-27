@@ -30,7 +30,8 @@ IsPrime(1000);
 function IsPrime(Num) {
     if (typeof Num !== "number" || !Number.isInteger(Num)) return false;
     if (Num < 2) return false;
-    if (Num === 2) return true;
+    if (Num === 2) {return true;}
+    else if (Num % 2 === 0) return false;
     let NumSqr =Math.sqrt(Num)
     for (let i = 3; i < NumSqr; i+2) {
         if (NumSqr % i === 0) {
