@@ -27,4 +27,15 @@ IsPrime(1000);
 // 2.负数、0、1都不是质数，另外2是唯一的偶质数
 // 3.如果一个数不能被5整除，那也不能被他的倍数整除如15、20等
 // 4.因为因数都是成对出现的，如100的因数：1/100,2/50,4/25,5/20等，发现其中每对中都有一个小于100的开方，所以只需要判断数字的开方以内的数字即可
-function 
+function IsPrime(Num) {
+    if (typeof Num !== "number" || !Number.isInteger(Num)) return false;
+    if (Num < 2) return false;
+    if (Num === 2) return true;
+    let NumSqr =Math.sqrt(Num)
+    for (let i = 3; i < NumSqr; i+2) {
+        if (NumSqr % i === 0) {
+            return false;
+        }
+    }
+    return true;
+}
