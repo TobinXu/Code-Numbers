@@ -10117,3 +10117,128 @@ root 就是 q，p 在 q 的子树中
 
 // console.log(Math.pow(1.2, 20));
 
+// function randomSort(a, b) {
+//   return Math.random() > 0.5 ? -1 : 1;
+// }
+
+// function randomSort(arr) {
+//   var res = [];
+//   while(arr.length > 0) {
+//     var randomIndex = Math.floor(Math.random() * arr.length);
+//     res.push(arr[randomIndex]);
+//     arr.splice(randomIndex, 1);
+//   }
+//   return res;
+// }
+
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+// function inheritPrototype(subType, SuperType) {
+//   var prototype = SuperType.prototype;
+//   prototype.constructor = subType;
+//   subType.prototype = prototype;
+// }
+// function SuperType(name) {
+//   this.name = name;
+//   this.colors = ["red", "blue", "green"];
+// }
+// SuperType.prototype.sayName = function() {
+//   console.log(this.name);
+// }
+// function SubType(name, age) {
+//   SuperType.call(this, name);
+//   this.age = age;
+// }
+// inheritPrototype(subType, SuperType);
+// subType.prototype.sayAge = function() {
+//   console.log(this.age);
+// }
+
+// function myInstanceof(duixiang, gouzao) {
+//   let proto = Object.getPrototypeOf(duixiang);
+//   let prototype = gouzao.prototype;
+//   while(true) {
+//     if(!proto) return false;
+//     if (proto === prototype) return true;
+//     proto = Object.getPrototypeOf(proto);
+//   }
+// }
+
+// function objectFactory() {
+//   let newObject = null,
+//     constructor = Array.prototype.shift.call(arguments),// 取得第一个参数即构造函数
+//     result = null;
+
+//   // 参数判断
+//   if (typeof constructor !== "function") {
+//     console.error("type error");
+//     return;
+//   }
+
+//   // 新建一个空对象，对象的原型为构造函数的 prototype 对象
+//   newObject = Object.create(constructor.prototype);
+
+//   // 将 this 指向新建对象，并执行函数
+//   result = constructor.apply(newObject, arguments);
+
+//   // 判断返回对象
+//   let flag =
+//     result && (typeof result === "object" || typeof result === "function");
+
+//   // 判断返回结果
+//   return flag ? result : newObject;
+// }
+
+// // 使用方法
+// // objectFactory(构造函数, 初始化参数);
+// function objectFactory() {
+//   let newObj = null,
+//   Constructor = Array.prototype.shift.call(arguments),
+//   result = null;
+//   // 参数判断
+//   if(typeof Constructor !== "function") return false;
+//   // 新建一个空对象，对象的原型指向构造函数的原型
+//   newObj = Object.create(Constructor.prototype);
+//   // 将this指向新建对象并执行构造函数代码
+//   result = Constructor.apply(newObj, arguments);
+//   // 判断返回对象
+//   let flag = result && (typeof result === "object" || typeof result === "function");
+//   return flag ? result : newObj;
+// }
+// // 使用方法
+// // objectFactory(构造函数， 初始化参数)
+
+// 1.新建一个空对象
+// 2.将空对象的prototype指向构造函数的原型
+// 3.将构造函数的this指向新对象并执行构造函数代码初始化新对象
+// 4.如果是引用类型直接返回，否则返回新对象
+// function objectFactory() {
+//   let newObj = null,
+//   Constructor = Array.prototype.shift.call(arguments),
+//   res = null;
+//   if (typeof Constructor !== "function") return false;
+//   newObj = Object.create(Constructor.prototype);
+//   res = Constructor.apply(newObj, arguments);
+//   return res && (typeof res === "object" || typeof res === "function") ? res : newObj;
+// }
+
+// function objectFactory() {
+//   let newObj = null,
+//   Constructor = Array.prototype.shift.call(arguments),
+//   res = null;
+//   if (typeof Constructor !== "function") return false;
+//   newObj = Object.create(Constructor.prototype);
+//   res = Constructor.apply(newObj, arguments);
+//   return res && (typeof res === "object" || typeof res === "function") ? res : newObj;
+// }
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return new F();
+// }
+
+
+
