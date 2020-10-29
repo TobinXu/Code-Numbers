@@ -10242,3 +10242,478 @@ root 就是 q，p 在 q 的子树中
 
 
 
+// function getJson(url) {
+//   let promise = new Promise(function (resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET", url, true);
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !== 4) return;
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     }
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     }
+//     xhr.responseType = "json";
+//     xhr.setRequestHeader("Accept", "application/json");
+//     xhr.send(null);
+//   })
+//   return promise;
+// }
+
+// function getJson(url) {
+//   let promise = new Promise(function(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET", url, true);
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !== 4) return false;
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText));
+//       }
+//     }
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     }
+//     xhr.response = "json";
+//     xhr.setRequestHeader("Accept", "application/json");
+//     xhr.send(null);
+//   })
+//   return promise;
+// }
+
+// define(function(require, exports, module) {
+//   var a = require("./a");
+//   a.doSomething();
+//   // xxx
+//   var b = require("./b");
+//   b/doSomething();
+// })
+
+// define(["./a", "./b"], function(a, b) {
+//   a.doSomething();
+//   b.doSomething();
+// })
+
+
+// function debounce(fn ,delay) {
+//   let timer = null;
+//   return function() {
+//     if (timer) {
+//       clearTimeout(timer)
+//     }
+//     timer = setTimeout(fn, delay);
+//   }
+// }
+
+// function throttle(fn, delay) {
+//   let valid = true;
+//   return function() {
+//     if (!valid) {
+//       return false;
+//     }
+//     valid = false;
+//     setTimeout(() => {
+//       fn();
+//       valid = true;
+//     }, delay)
+//   }
+// }
+
+
+// function shallowCopy(object) {
+//   if (!object ||typeof object !== "object") return;
+//   let newObj = Array.isArray(object) ? [] : {};
+//   for (let key in object) {
+//     if (object.hasOwnproperty(key)) {
+//       newObj[key] = object[key];
+//     }
+//   }
+//   return newObj;
+// }
+
+// function deepCopy(object) {
+//   if (!object ||typeof object !== "object") return;
+//   let newObj = Array.isArray(object) ? [] : {};
+//   for (let key in object) {
+//     if (object.hasOwnproperty(key)) {
+//       typeof newObj[key] === "object"
+//       ? deepCopy(newObj[key])
+//       : object[key]
+//     }
+//   }
+//   return newObj;
+// }
+
+// const PENDING = "pending";
+// const RESOLVED = "resolved";
+// const REJECTED = "rejected";
+
+// function MyPromsie(fn) {
+//   var self = this;
+//   this.state = PENDING;
+//   this.value = null;
+//   this.resolvedCallbacks = [];
+//   this.rejectedCallbacks = [];
+//   function resolve(value) {
+//     if (vlaue instanceof MyPromsie) {
+//       return value.then(resolve, reject);
+//     }
+//     setTimeout(() => {
+//       if (self.state === PENDING) {
+//         self.state = RESOLVED;
+//         self.value = value;
+//         self.resolvedCallbacks.forEach(callback => {
+//           callback(value);
+//         })
+//       }
+//     }, 0)
+//   }
+//   function reject(value) {
+//     setTimeout(() => {
+//       if (self.state === PENDING) {
+//         self.state = REJECTED;
+//         self.value = value;
+//         self.rejectedCallbacks.forEach(callback => {
+//           callback(value);
+//         })
+//       }
+//     }, 0)
+//   }
+//   try {
+//     fn(resolve, reject)
+//   } catch(e) {
+//     reject(e);
+//   }
+// }
+// MyPromsie.prototype.then = function(onResolved, onRejected) {
+//   onResolved = 
+//    typeof onResolved === "function"
+//    ? onResolved
+//    : function(value) {
+//      return value;
+//    }
+//    onRejected = 
+//    typeof onRejected === "function"
+//    ? onRejected
+//    : function(error) {
+//      throw error;
+//    }
+//   if (this.state === PENDING) {
+//     this.resolvedCallbacks.push(onResolved);
+//     this.rejectedCallbacks.push(onRejected);
+//   } 
+//   if (this.state === RESOLVED) {
+//     onResolved(this.value);
+//   }
+//   if (this.state === REJECTED) {
+//     onRejected(this.value);
+//   }
+// } 
+
+
+// for (var i = 0; i < 5; i++) {
+//   (function(i) {
+//     setTimeout(function() {
+//       console.log(i);
+//     }, i * 1000);
+//   })(i);
+// }
+
+
+// class Modal {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Modal.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Modal(name);
+//     }
+//     return instance;
+//   }
+// })()
+// let a = Modal.create('aaa')
+// let b = Modal.create('bbb');
+
+// class Modal {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+  
+// }
+// Modal.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Modal(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Modal.create('aaa');
+// let b = Modal.create('bbb');
+
+// console.log(a,b)
+
+// class Subject {
+//   constructor() {
+//     this.message = '暂未通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update())
+//   }
+//   attch(observer) {
+//     this.observers.push(observer);
+//   }
+// }
+// class Observer {
+//   constructor (name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.message.attch(this);
+//   }
+//   update() {
+//     console.log(`${this.name}收到通知：${this.message.getMessage()}`);
+//   }
+// }
+
+// let message = new Subject();
+// let a = new Observer("zhangsan", message);
+// let b = new Observer("lisi", message);
+// message.setMessage("明天上班");
+// message.setMessage("后天加班");
+
+
+// var reserverList = function(headA) {
+//   let new_head = null;
+//   while(headA) {
+//     let temp = headA;
+//     headA = headA.next;
+//     temp.next = new_head;
+//     new_head = temp;
+//   }
+//   return new_head;
+// }
+
+// function getIntersectionNode(headA, headB) {
+//   let l1 = headA;
+//   let l2 = headB;
+//   while(l1 !== l2) {
+//     l1 = l1 === null ? headB : l1.next;
+//     l2 = l2 === null ? headA : l2.next;
+//   }
+//   return l1;
+// }
+// function mergeTwoLists(l1, l2) {
+//   if (l1 === null) return l2;
+//   if (l2 === null) return l1;
+//   if (l1.val < l2.val) {
+//     l1.next = mergeTwoLists(l1.next, l2);
+//     return l1;
+//   } else {
+//     l2.next = mergeTwoLists(l2.next, l1);
+//     return l2;
+//   }
+// }
+
+// function mergeTwoLists(l1, l2) {
+//   const prehead = new ListNode(-1);
+//   let prev = prehead;
+//   while(l1 !== null && l2 !== null) {
+//     if (l1.val <= l2.val) {
+//       prev.next = l1;
+//       l1 = l1.next;
+//     } else {
+//       prev.next = l1;
+//       l2 = l2.next;
+//     }
+//     prev = prev.next;
+//   }
+//   prev.next = l1 === null ? l2 : l1;
+//   return prehead.next;
+// }
+
+// function hasCycle(head) {
+//   if (!head || !head.next) return false;
+//   let slow = head;
+//   let fast = head.next;
+//   while(slow !== fast) {
+//     if (!fast || !fast.next) return false;
+//     slow = slow.next;
+//     fast = fast.next;
+//   }
+//   return true;
+// }
+
+// function deleteDuplicates(head) {
+//   let cur = head;
+//   while(cur && cur.next) {
+//     if (cur.val === cur.next.val) {
+//       cur.next = cur.next.next;
+//     } else {
+//       cur = cur.next;
+//     }
+//   }
+//   return head;
+// }
+
+// function removeNthFromEnd(head, n) {
+//   let [fast, slow] = [head, head];
+//   while(--n) {
+//     fast = fast.next;
+//   }
+//   if (!fast.next) return head.next;
+//   fast = fast.next;
+//   while(fast && fast.next) {
+//     fast = fast.next;
+//     slow = slow.next;
+//   }
+//   slow.next = slow.next.next;
+//   return head;
+// }
+// function swapPairs(head) {
+//   if (!head || !head.next) {
+//     return head;
+//   }
+//   let newHead = head.next;
+//   head.next = swapPairs(newHead.next);
+//   newHead.next = head;
+//   return newHead;
+// }
+
+// function addTwoNumbers(l1, l2) {
+//   const stack1 = [];
+//   const stack2 = [];
+//   const stack = [];
+//   let [cur1, cu2, carry] = [l1, l2, 0];
+//   while(cur1) {
+//     stack1.push(cur1.val);
+//     cur1 = cur1.next;
+//   }
+//   while(cur2) {
+//     stack2.push(cur2.val);
+//     cur2 = cu2.next;
+//   }
+//   let [a, b] = [null, null];
+//   while( stack1.length || stack2.length) {
+//     a = Number(stack1.pop()) || 0;
+//     b = Number(stack2.pop()) || 0;
+//     stack.push((a + b + carry) % 10);
+//     if ((a + b + carry) > 10) {
+//       carry = 1;
+//     } else {
+//       carry = 0;
+//     }
+//   }
+//   if (carry === 1) {
+//     stack.push(carry);
+//   }
+//   const dummy = {};
+//   let current = dummy;
+//   while(stack.length) {
+//     current.next = {
+//       val : stack.pop(),
+//       next: null
+//     }
+//     current = current.next;
+//   }
+//   return dummy.next;
+// }
+
+// function isPalindrome(head) {
+//   let [low, fast] = [head, head];
+//   if (!head || !head.next) return true;
+//   let values = [];
+//   while(fast && fast.next) {
+//     values.push(low.val);
+//     fast = fast.next.next;
+//     low = low.next;
+//   }
+//   if (fast) {
+//     low = low.next;
+//   }
+//   while(low) {
+//     let curVal = values.pop();
+//     if (curVal !== low.val) {
+//       return false;
+//     }
+//     low = low.next;
+//   }
+//   return true;
+// }
+
+// function moveZeros(nums) {
+//   let index = 0;
+//   for (let num in nums) {
+//     if (nums[num] !== 0) {
+//       nums[index++] = nums[num];
+//     }
+//   }
+//   while(index < nums.length) {
+//     nums[index++] = 0;
+//   }
+//   return nums;
+// }
+
+// function matrixReshape(nums, r, c) {
+//   let m = nums.length, n = nums[0].length;
+//   if (m * n !== R * c) {
+//     return nums;
+//   }
+//   let res = [];
+//   let arr = [];
+//   for (let num of nums) {
+//     arr.push(...num);
+//   }
+//   for (let i = 0; i < r; i++) {
+//     res.push(arr.splice(0, c));
+//   }
+//   return res;
+// }
+
+// function quick_sort(arr, l ,r) {
+//   let i =l, j =r;
+//   if (l >= r) return;
+//   let key = arr[i];
+//   while(i < j) {
+//     while(i < j && arr[j] >= key) {
+//       j--;
+//     }
+//     if (i < j) {
+//       arr[i] = arr[j];
+//     }
+//     while(i < j && arr[i] <= key) {
+//       i++;
+//     }
+//     if (i < j) {
+//       arr[j] = arr[i];
+//     }
+//   }
+//   arr[i] = key;
+//   quick_sort(arr, l, i-1);
+//   quick_sort(arr, i+1, r);
+// }
+
