@@ -10717,3 +10717,135 @@ root 就是 q，p 在 q 的子树中
 //   quick_sort(arr, i+1, r);
 // }
 
+
+function createPerson(name, age, job) {
+  var o = new Object();
+  o.name = name;
+  o.age = age;
+  o. job = job;
+  o.sayName = function() {
+    console.log(this.name);
+  }
+  return o;
+}
+var person1 = createPerson("Greg", 27, "docotor");
+
+function Person(name, age, job) {
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayName = function() {
+    console.log(this.name);
+  }
+}
+var person2 = new Person("Nicholas", 29, "SoftWare Engineer");
+
+function Person() {}
+Person.prototype.name = "Nicholas";
+Person.prototype.age = 29;
+Person.prototype.job = "Software Engineer";
+Person.prototype.sayName = function() {
+  console.log(this.name);
+}
+var person1 = new Person();
+person1.sayName();
+
+
+function Person(name, age, job) {
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.friends = ["a", "b"];
+}
+Person.prototype.sayName = function() {
+  console.log(this.name);
+}
+
+function Person(name, age, job) {
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  if (typeof this.sayName != "function") {
+    Person.prototype.sayName = function() {
+      console.log(this.name);
+    }
+  }
+}
+
+function SuperType() {
+  this.property = true;
+}
+SuperType.prototype.getSuperValue = function() {
+  return this.property;
+}
+function SubType() {
+  this.subproperty = false;
+}
+SubType.prototype = new SuperType();
+SubType.prototype.getSubValue = function() {
+  return this.subproperty;
+}
+var instance = new SubType();
+console.log(instance.getSuperValue());
+
+
+function SuperType() {
+  this.colors = ["a", "b"];
+}
+function SubType() {
+  SuperType.call(this);
+}
+var instance = new SubType();
+instance.colors.push("black");
+
+
+function SuperType(name) {
+  this.name =name;
+  this.colors = ["a","b"];
+}
+SuperType.prototype.sayName = funciton() {
+  console.log(this.name);
+}
+function SubType(name, age) {
+  SuperType.call(this, name);
+  this.age = age;
+}
+SubType.prototype = new SuperType();
+SubType.prototype.constructor = SubType;
+SubType.prototype.sayAge = function() {
+  console.log(this.age);
+}
+
+function object(o) {
+  function F() {};
+  F.prototype = o;
+  return  new F();
+}
+
+var person = {
+  name: "Nick",
+  Firends: ["a", "b"]
+}
+var anotherPerson = object(person);
+
+function inheritPrototype(subType, superType) {
+  var prototype = object(superType.property);
+  prototype.constructor = subType;
+  subType.prototype = prototype;
+}
+
+function SuperType() {
+  this.property = true;
+}
+SuperType.prototype.getSuperValue = function() {
+  return this.property;
+}
+function SubType() {
+  this.subproperty = false;
+}
+inheritPrototype(SubType, SuperType);
+SubType.prototype.getSubValue = function() {
+  return this.subproperty;
+}
+var instance = new SubType();
+console.log(instance.getSuperValue());
