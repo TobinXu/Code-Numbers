@@ -10718,134 +10718,435 @@ root 就是 q，p 在 q 的子树中
 // }
 
 
-function createPerson(name, age, job) {
-  var o = new Object();
-  o.name = name;
-  o.age = age;
-  o. job = job;
-  o.sayName = function() {
-    console.log(this.name);
-  }
-  return o;
-}
-var person1 = createPerson("Greg", 27, "docotor");
+// function createPerson(name, age, job) {
+//   var o = new Object();
+//   o.name = name;
+//   o.age = age;
+//   o. job = job;
+//   o.sayName = function() {
+//     console.log(this.name);
+//   }
+//   return o;
+// }
+// var person1 = createPerson("Greg", 27, "docotor");
 
-function Person(name, age, job) {
-  this.name = name;
-  this.age = age;
-  this.job = job;
-  this.sayName = function() {
-    console.log(this.name);
-  }
-}
-var person2 = new Person("Nicholas", 29, "SoftWare Engineer");
+// function Person(name, age, job) {
+//   this.name = name;
+//   this.age = age;
+//   this.job = job;
+//   this.sayName = function() {
+//     console.log(this.name);
+//   }
+// }
+// var person2 = new Person("Nicholas", 29, "SoftWare Engineer");
 
-function Person() {}
-Person.prototype.name = "Nicholas";
-Person.prototype.age = 29;
-Person.prototype.job = "Software Engineer";
-Person.prototype.sayName = function() {
-  console.log(this.name);
-}
-var person1 = new Person();
-person1.sayName();
-
-
-function Person(name, age, job) {
-  this.name = name;
-  this.age = age;
-  this.job = job;
-  this.friends = ["a", "b"];
-}
-Person.prototype.sayName = function() {
-  console.log(this.name);
-}
-
-function Person(name, age, job) {
-  this.name = name;
-  this.age = age;
-  this.job = job;
-  if (typeof this.sayName != "function") {
-    Person.prototype.sayName = function() {
-      console.log(this.name);
-    }
-  }
-}
-
-function SuperType() {
-  this.property = true;
-}
-SuperType.prototype.getSuperValue = function() {
-  return this.property;
-}
-function SubType() {
-  this.subproperty = false;
-}
-SubType.prototype = new SuperType();
-SubType.prototype.getSubValue = function() {
-  return this.subproperty;
-}
-var instance = new SubType();
-console.log(instance.getSuperValue());
+// function Person() {}
+// Person.prototype.name = "Nicholas";
+// Person.prototype.age = 29;
+// Person.prototype.job = "Software Engineer";
+// Person.prototype.sayName = function() {
+//   console.log(this.name);
+// }
+// var person1 = new Person();
+// person1.sayName();
 
 
-function SuperType() {
-  this.colors = ["a", "b"];
-}
-function SubType() {
-  SuperType.call(this);
-}
-var instance = new SubType();
-instance.colors.push("black");
+// function Person(name, age, job) {
+//   this.name = name;
+//   this.age = age;
+//   this.job = job;
+//   this.friends = ["a", "b"];
+// }
+// Person.prototype.sayName = function() {
+//   console.log(this.name);
+// }
+
+// function Person(name, age, job) {
+//   this.name = name;
+//   this.age = age;
+//   this.job = job;
+//   if (typeof this.sayName != "function") {
+//     Person.prototype.sayName = function() {
+//       console.log(this.name);
+//     }
+//   }
+// }
+
+// function SuperType() {
+//   this.property = true;
+// }
+// SuperType.prototype.getSuperValue = function() {
+//   return this.property;
+// }
+// function SubType() {
+//   this.subproperty = false;
+// }
+// SubType.prototype = new SuperType();
+// SubType.prototype.getSubValue = function() {
+//   return this.subproperty;
+// }
+// var instance = new SubType();
+// console.log(instance.getSuperValue());
 
 
-function SuperType(name) {
-  this.name =name;
-  this.colors = ["a","b"];
-}
-SuperType.prototype.sayName = funciton() {
-  console.log(this.name);
-}
-function SubType(name, age) {
-  SuperType.call(this, name);
-  this.age = age;
-}
-SubType.prototype = new SuperType();
-SubType.prototype.constructor = SubType;
-SubType.prototype.sayAge = function() {
-  console.log(this.age);
-}
+// function SuperType() {
+//   this.colors = ["a", "b"];
+// }
+// function SubType() {
+//   SuperType.call(this);
+// }
+// var instance = new SubType();
+// instance.colors.push("black");
 
-function object(o) {
-  function F() {};
-  F.prototype = o;
-  return  new F();
-}
 
-var person = {
-  name: "Nick",
-  Firends: ["a", "b"]
-}
-var anotherPerson = object(person);
+// function SuperType(name) {
+//   this.name =name;
+//   this.colors = ["a","b"];
+// }
+// SuperType.prototype.sayName = funciton() {
+//   console.log(this.name);
+// }
+// function SubType(name, age) {
+//   SuperType.call(this, name);
+//   this.age = age;
+// }
+// SubType.prototype = new SuperType();
+// SubType.prototype.constructor = SubType;
+// SubType.prototype.sayAge = function() {
+//   console.log(this.age);
+// }
 
-function inheritPrototype(subType, superType) {
-  var prototype = object(superType.property);
-  prototype.constructor = subType;
-  subType.prototype = prototype;
-}
+// function object(o) {
+//   function F() {};
+//   F.prototype = o;
+//   return  new F();
+// }
 
-function SuperType() {
-  this.property = true;
-}
-SuperType.prototype.getSuperValue = function() {
-  return this.property;
-}
-function SubType() {
-  this.subproperty = false;
-}
-inheritPrototype(SubType, SuperType);
-SubType.prototype.getSubValue = function() {
-  return this.subproperty;
-}
-var instance = new SubType();
-console.log(instance.getSuperValue());
+// var person = {
+//   name: "Nick",
+//   Firends: ["a", "b"]
+// }
+// var anotherPerson = object(person);
+
+// function inheritPrototype(subType, superType) {
+//   var prototype = object(superType.property);
+//   prototype.constructor = subType;
+//   subType.prototype = prototype;
+// }
+
+// function SuperType() {
+//   this.property = true;
+// }
+// SuperType.prototype.getSuperValue = function() {
+//   return this.property;
+// }
+// function SubType() {
+//   this.subproperty = false;
+// }
+// inheritPrototype(SubType, SuperType);
+// SubType.prototype.getSubValue = function() {
+//   return this.subproperty;
+// }
+// var instance = new SubType();
+// console.log(instance.getSuperValue());
+
+// class Modal {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Modal.create =(function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Modal(name);
+//     }
+//     return instance;
+//   }
+// })();
+// let a = Modal.create('aaa')
+// let b = Modal.create('bbb')
+
+
+
+// class Modal {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+// Modal.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       isntance = new Modal(name);
+//     }
+//     return isntance;
+//   }
+// })();
+
+// let a = Modal.create('aaa');
+// let b = Modal.create('bbb');
+
+
+// class Subject {
+//   constructor() {
+//     this.message = '暂无通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update())
+//   }
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+// }
+// class Observer {
+//   constructor(name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.message.attch(this);
+//   }
+//   update() {
+//     console.log(`${this.name}:收到通知${this.message.getMessage()}`)
+//   }
+// }
+
+// let message = new Subject();
+// let a = new Observer("zhang", message);
+// let b = new Observer('wang', message);
+
+
+
+
+// class Subject {
+//   constructor() {
+//     this.message = '暂无通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update())
+//   }
+//   attach(observer) {
+//     this.observers.push(observer)
+//   }
+// }
+// class Observer {
+//   constructor(name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.message.attach(this);
+//   }
+//   update() {
+//     console.log(`${this.name}收到通知：${this.message.getMessage()}`)
+//   }
+// }
+
+// let subject = new Subject();
+// let a = new Observer('张三', subject);
+// let b = new Observer('李四', subject);
+// subject.setMessage('明天加班')
+
+
+// function getJson(url) {
+//   let promise = new Promise(function(resolve, reject) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("GET", url, true);
+//     xhr.onreadystatechange = function() {
+//       if (this.readyState !== 4) return;
+//       if (this.status === 200) {
+//         resolve(this.response);
+//       } else {
+//         reject(new Error(this.statusText))
+//       }
+//     }
+//     xhr.onerror = function() {
+//       reject(new Error(this.statusText));
+//     }
+//     xhr.responseType = "json";
+//     xhr.setRequestHeader("Accept", "applicaiton/json")
+//     xhr.send(null);
+//   })
+//   return promise;
+// }
+
+
+// function shallowCopy(object) {
+//   if (!object || typeof object !== 'function') return false;
+//   let newObj = Array.isArray(object) ? [] : [];
+//   for (let key in  object) {
+//     if (object.hasOwnproperty(object[key])) {
+//       newObj[key] = object[key]
+//     }
+//   }
+//   return newObj;
+// }
+
+// function deepCopy(object) {
+//   if (!object || typeof object !== 'function') return false;
+//   let newObj = Array.isArray(object) ? [] : [];
+//   for (let key in  object) {
+//     if (object.hasOwnproperty(object[key])) {
+//       typeof newObj[key] === "object"
+//       ? deepCopy(object[key])
+//       : object[key]
+//     }
+//   }
+//   return newObj;
+// }
+
+// function debounce(fn, delay) {
+//   let timer = null;
+//   return function() {
+//     if (timer) {
+//       clearTimeout(timer)
+//     }
+//     timer = setTimeout(fn, delay);
+
+//   }
+// }
+
+// function throttle(fn, delay) {
+//   let valid = true;
+//   return function() {
+//     if (!valid) {
+//       return false;
+//     }
+//     valid = false;
+//     setTimeout(() => {
+//       fn();
+//       valid = false;
+//     }, delay)
+//   }
+// }
+// 裁剪到1以后的
+// var str = [1,2,3];
+// console.log(str.slice(1));
+
+// Function.prototype.myCall = funciton(context) {
+//   if (typeof this !== 'function') {
+//     console.log("type error");
+//   }
+//   let args = [...arguments].slice(1);
+//   result = null;
+//   context = context || window;
+//   context.fn = this;
+//   result = context.fn(...args);
+//   delete context.fn;
+//   return result;
+// }
+
+// const PENDING = "pending";
+// const RESOLVED = "resolved";
+// const REJECTED = "rejected";
+// function MyPromise(fn) {
+//   var self = this;
+//   this.state = PENDING;
+//   this.value = null;
+//   this.resolvedCallbacks = [];
+//   this.rejectedCallbacks = [];
+//   function resolve(value) {
+//     if (typeof value === "MyPromise") {
+//       return value.then(resolve, reject)
+//     }
+//     setTimeout(() => {
+//       if (self.state === PENDING) {
+//         self.state = RESOLVED;
+//         self.value = value;
+//         self.resolvedCallbacks.forEach(callback => {
+//           callback(value)
+//         })
+//       }
+//     }, 0);
+//   }
+//   function reject(value) {
+//     setTimeout(() => {
+//       if (self.state === PENDING) {
+//         self.state = REJECTED;
+//         self.value = value;
+//         self.rejectedCallbacks.forEach(callback => {
+//           callback(value);
+//         })
+//       }
+//     }, 0);
+//   }
+//   try {
+//     fn(resolve, reject);
+//   } catch(e) {
+//     reject(e);
+//   }
+// }
+
+// MyPromise.then = function(onResolved, onRejected) {
+//   onResolved = 
+//   typeof onResolved === "function"
+//   ? onResolved
+//   : function(value) {
+//     return value;
+//   }
+//   onRejected =
+//   typeof onRejected === "function"
+//   ? onRejected
+//   : function(error) {
+//     throw error;
+//   }
+//   if (this.state === PENDING) {
+//     this.resolvedCallbacks.push(onResolved);
+//     this.rejectedCallbacks.push(onRejected);
+//   }
+//   if (this.state === RESOLVED) {
+//     onResolved(this.value);
+//   }
+//   if (this.state === REJECTED) {
+//     onRejected(this.value);
+//   }
+// }
+
+// 数组flat()方法的实现，展开在递归下去，知道最底层，然后逐一向上连接
+// function flatten() {
+//   return [].concate(Array.map(item => [].concat(item, ...flatten(item.subitems))))
+// }
+
+// function quick_sort(arr, l ,r) {
+//   let i = l, j =r;
+//   let key = arr[i];
+//   if (l > r) return;
+//   while(i < j) {
+//     while(i < j && arr[j] > key) {
+//       j--;
+//     }
+//     if (i < j) {
+//       arr[i] = arr[j];
+//     }
+//     while(i < j && arr[i] <= key) {
+//       arr[j] = arr[i];
+//     }
+//   }
+//   arr[i] = key;
+//   quick_sort(arr, l, i-1);
+//   quick_sort(arr, i+1, r);
+// }
+
+
+
