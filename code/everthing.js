@@ -11148,5 +11148,216 @@ root 就是 q，p 在 q 的子树中
 //   quick_sort(arr, i+1, r);
 // }
 
+/*20201030滴滴耻辱史
+/* 
+/**
+* 实现一个 useRetryable 方法
+* @param {Function} fn 任意一个 JavaScript 函数
+* @param {number} n 可重试的次数
+* @return {Function} 带有重试功能的新函数
+*/
+
+/**
+* 当调用 retryableFn 时，它的调用方式要与原始函数（即fn）保持一致。同时还具备重试功能：
+* 1、如果 n 次内执行失败，进行重试；
+* 2、一旦执行成功，就不再执行多余的次数了；
+* 3、如果 n 次全部失败，抛出最后一次的异常。
+*/
+// function useRetryable(fn, n) {
+  
+//   return function(n) {
+//    let i =n;
+//   while(i) {
+//   try {
+  	
+   
+//   } catch(e) {
+//   	i--
+//     if (i === 0) {
+//     throw Error
+//     }
+//   }
+  
+//  }
+//   }
+ 
+// }
+// const retryableFn = useRetryable(fn, 3)
+
+
+// fn = (a,b) => a+b
+/**
+* 当调用 retryableFn 时，它的调用方式要与原始函数（即fn）保持一致。同时还具备重试功能：
+* 1、如果 n 次内执行失败，进行重试；
+* 2、一旦执行成功，就不再执行多余的次数了；
+* 3、如果 n 次全部失败，抛出最后一次的异常。
+*/
+// 3 = retryableFn(1, 2)
+
+//  function (1,2) {
+// 	let n = 1;
+// return  function(n) {
+//   	x+y
+//   }
+  
+// function add1(m, n) {
+//   let i = m, j = n;
+//   return function() {
+//      i+j;
+//   }
+// }
+
+/*
+
+class Emitter {
+  constructor() {
+  	this.callbacks = {}
+  }
+  
+  on(name, callback) {	
+    let callbacks = this.callbacks[name]
+    if (!callbacks) {
+      callbacks = []
+    }
+    callbacks.push(callback)
+  	this.callbacks[name] = callbacks
+    return () => {
+      let callbacks = this.callbacks[name]
+      const index = callbacks.indexOf(callback)
+      callbacks.splice(index, 1)
+    }
+  }
+  
+  fire(name, data) {
+  	const callbacks = this.callbacks[name]
+    if (callbacks) {
+      for (let callback in callbacks) {
+        callback(data)
+      }
+    }
+  }
+  
+}
+
+const emitter = new Emitter()
+const dispose = emitter.on('click', (data) => console.log(data)) // {a: 1}
+emitter.fire('click', { a: 1})
+dispose()
+  
+class Subject() {
+constructor() {
+	this.message = '暂无通知'
+  this.observers = []
+}
+  
+  setMessage(message) {
+  	this.message = message;
+    this.notifyAllObservers();
+  }
+  
+  getMessage() {
+  	return this.message;
+  }
+  
+  notifyAllObserver() {
+  	this.observers.forEach(observer => observer.update())
+  }
+  
+  attach(observer) {
+  	this.observers.push(observer)
+  }
+  
+}
+
+class Observer {
+	constructor(name, message) {
+  	this.name = name;
+    this.message.attach(this)
+    
+  }
+  update() {
+  	console.log(`${this.name}收到通知${this.message.getMessage()}`)
+  }
+}
+
+let subject = new Subject()
+
+
+function SuperType() {
+
+}
+
+SuperType.prototype  = {
+	friends: ['a', 'b']
+}
+
+function SubType() {}
+SubType.prototype = new SuperType()
+
+const sub = SubType()
+sub.prototype.friends.push('c')
+
+
+function SuperType(name) {
+	this.name = name;
+}
+
+function SubType() {
+	SubperType.call(this, name);
+}
+
+
+*/
+
+// node --v8-options | grap harmony
+// node --v8-options | findstr harmony
+
+// Input.map(item => item + 1)
+
+// imput.map(function(item) {
+//   return item + 1;
+// })
+
+// npm install --save-dev @babel/core
+
+// npm install --save-dev @babel/preset-env
+// npm install --save-dev @babel/preset-react
+
+// {
+//   "preset" : [
+//     "@babel/env",
+//     "@babel/react"
+//   ],
+//   "plugins" : []
+// }
+
+// npm isntall --save-dev @babel/cli
+// npx babel example.js
+// npx babel example.js --out-file compiled.js
+// npx babel example.js -o compiled.js
+// npx babel src --out-dir lib
+// npx babel src -d lib
+// npx babel src -d lib -s
+
+// npm install --save-dev @babel/node
+// npx babel-node
+// > (x => x* 2)(1)
+
+// es6.js里面
+// console.log((x => x* 2)(1))
+// npx babel-node es6.js
+
+// npm isntall --save-dev @babel/register
+// // index.js
+// require('@babel/register')
+// require('./es6.js')
+// node index.js
+
+// npm install --save-dev core.js regenerator-runtime
+// import 'core.js'
+// import 'regenerator-runtime/runtime'
+// // 或者
+// require('core-js')
+// require('regenerator-runtime/runtime')
 
 
