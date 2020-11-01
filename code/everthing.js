@@ -11493,3 +11493,40 @@ function SubType() {
 // }
 // let {id, status, data: number} = jsonDate
 // console.log(id, status, number)
+
+class Subject {
+  constructor() {
+    this.message = '暂无通知';
+    this.observers = [];
+  }
+  getMessage() {
+    return this.message;
+  }
+  setMessage(message) {
+    this.message = message;
+    this.notifyAllObservers();
+  }
+  notifyAllObservers() {
+    this.observers.forEach(observer => observer.update())
+  }
+  attach(observer) {
+    this.observers.push(observer);
+  }
+}
+
+class Observer {
+  constructor(name, message) {
+    this.name = name;
+    this.message = message;
+    this.message.attach(this);
+  }
+  update() {
+    console.log(`${this.name}收到通知：${this.message.getMessage()}`)
+  }
+}
+
+let message = new Subject();
+let person1 = new Observer("徐强国", message);
+let person2 = new Observer("康鑫印", message);
+message.setMessage("明天不上课");
+message.setMessage("恭喜中奖100w");
