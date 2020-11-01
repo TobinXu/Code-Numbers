@@ -11169,7 +11169,7 @@ root 就是 q，p 在 q 的子树中
 //    let i =n;
 //   while(i) {
 //   try {
-  	
+  	    
    
 //   } catch(e) {
 //   	i--
@@ -11361,3 +11361,135 @@ function SubType() {
 // require('regenerator-runtime/runtime')
 
 
+// {
+//   let a =1;
+//   var b = 3;
+// }
+// console.log(b)
+
+// var a = [];
+// for (var i =0; i < 10; i++) {
+//   a[i] = function() {
+//     console.log(i);
+//   }
+// }
+// a[9]();
+
+// 函数是第一公民的意思：函数能作为参数、函数可以给变量赋值、函数可以作为返回值
+
+// var a = [];
+// for (var i = 0; i < 10; i++) {
+//   a[i] = function() {
+//     console.log(i);
+//   }
+// }
+
+// a[5]();
+
+// for (let i = 0; i < 3; i++) {
+//   let i = 'abc';
+//   console.log(i);
+// }
+
+// var a = [];
+// for (let i = 0; i < 10; i++) {
+//   a[i] = function() {
+//     console.log(i);
+//   }
+// }
+
+// a[6]()
+
+// 不存在变量提升 暂时性死区
+
+// var tmp = 'abc'
+// if (true) {
+//   tmp = 'bnm'
+//   let tmp
+// }
+
+// function bar(x = y, y = 2) {
+//   return [x, y]
+// }
+// console.log(bar())
+
+// function func() {
+//   let a= 10
+//   var a= 1
+// }
+
+// function func(arg) {
+//  { let arg}
+// }
+
+// (function() {
+//   var tmp = ''
+// }())
+
+// {
+//   let tmp = ''
+// }
+
+// function f() { console.log('I am outside!'); }
+
+// (function () {
+//   if (false) {
+//     // 重复声明一次函数f
+//     function f() { console.log('I am inside!'); }
+//   }
+
+//   f();
+// }());
+
+// const foo = {}
+// foo.prop = 123
+// foo = {}
+
+// const foo = Object.freeze({})
+
+// foo.prop =123
+
+// var constantize = (obj) => {
+//   Object.freeze(obj);
+//   Object.keys(obj).forEach((key, i) => {
+//     if (typeof obj[key] === 'object') {
+//       constantize(obj[key]);
+//     }
+//   })
+// }
+
+// console.log(globalThis)
+
+
+// let {bar, foo} = {foo: 'bbb', bar: 'aaa'}
+
+// const { log } = console;
+// log('hello')
+
+// let x = 1;
+// let y = 2;
+// [x, y] = [y, x];
+
+// console.log(y)
+
+// function example() {
+//   return [1,2,3]
+// }
+// let [a,b,c] = example()
+// console.log(a)
+
+// function example() {
+//   return {
+//     foo: 1,
+//     bar: 2
+//   }
+// }
+// let {foo, bar} = example()
+// console.log(foo)
+// let jsonDate = {
+//   id: 42,
+//   status: "ok",
+//   data: [123, 321]
+// }
+// let {id, status, data: number} = jsonDate
+// console.log(id, status, number)
