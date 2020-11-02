@@ -11271,7 +11271,8 @@ constructor() {
 
 class Observer {
 	constructor(name, message) {
-  	this.name = name;
+    this.name = name;
+    this.message = message;
     this.message.attach(this)
     
   }
@@ -11569,3 +11570,175 @@ function SubType() {
 // message.setMessage('我的神啊');
 
 
+// function  findDuplicate(nums) {
+//   let n = nums.length;
+//   for (let i = 0; i < n; i++) {
+//     if (nums[i])
+//   }
+// }
+
+// `${this.name}收到通知：${this.message.getMessage()}` 模板字符串
+// JSON.stringify() 非utf8标准
+// for of 遍历器
+// let {log} = console
+// log(String.fromCodePoint(0x20BB7))
+
+// let s = '吉a';
+// for (let ch of s) {
+//   console.log(ch.codePointAt(0).toString(16));
+// }
+
+// let s = 'Hello,World!';
+// console.log(s.startsWith('Hello'));
+// console.log(s.endsWith('!'));
+// console.log(s.includes('o'));
+// console.log(s.repeat(4));
+
+// function add() {
+//   let args = [].slice.call(arguments);
+//   let fn = function(){
+//    let fn_args = [].slice.call(arguments)
+//    return add.apply(null,args.concat(fn_args))
+//  }
+// fn.toString = function(){
+//   return args.reduce((a,b)=>a+b)
+// }
+// return fn
+// }
+
+// function add(x, y, f) {
+//   return f(x) + f(y);
+// }
+// let fn = function(x) {
+//   return x;
+// }
+// var x= add(1, -5, fn);
+// console.log(x)
+
+
+// function formalGreeting() {
+//   console.log("How are you");
+// }
+// function casualGreeting() {
+//   console.log("whats up");
+// }
+// function greeting(type, formal, casual) {
+//   if (type === "formal") {
+//     formal()
+//   } else {
+//     casual();
+//   }
+// }
+// greeting("formal", formalGreeting, casualGreeting);
+// 参数 赋值 返回值，高阶函数就是把函数当做参数或者返回值的函数
+// const arr = [1,2,3];
+// const arr1 = arr.map(item => item * 2)
+// console.log(arr1);
+
+// const persons = [
+//   { name: 'Peter', age: 16 },
+//   { name: 'Mark', age: 18 },
+//   { name: 'John', age: 27 },
+//   { name: 'Jane', age: 14 },
+//   { name: 'Tony', age: 24},
+// ];
+// arr = persons.filter(person => person.age > 18)
+// console.log(arr)
+// const arr = [5, 7, 1, 8, 4];
+// let sum = arr.reduce(function(acc, currentVal) {
+//   return acc + currentVal;
+// }, 10)
+// console.log(sum)
+
+// const strArray = ['JavaScript', 'Python', 'PHP', 'Java', 'C'];
+// function myMap(arr, fn) {
+//   let newArray = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     newArray.push(fn(arr[i]))
+//   }
+//   return newArray;
+// }
+// let arr = myMap(strArray, function(item) {
+//   return item.length;
+// })
+// console.log(arr)
+
+
+// let isType = type => obj => {
+//   return Object.prototype.toString.call(obj) === '[object'+type + ']';
+// }
+// console.log(isType('Array')([1,2,3]))
+// Array.from(new Set(arr.flat(infinity))).sort((a, b) => {return a - b})
+
+// function add(a) {
+//   function sum(b) { // 使用闭包
+//     a = a + b; // 累加
+//     return sum;
+//   }
+//   sum.toString = function() { // 重写toString()方法
+//       return a;
+//   }
+//   return sum; // 返回一个函数
+// }
+// console.log(add(1)(2))
+
+// var findRepeatNumber = function(nums) {
+//   let set = new Set();
+//     for (let num of nums) {
+//       if (set.has(num)) {
+//         return num;
+//       }
+//       set.add(num);
+//     }
+//     return false;
+// };
+
+// 正常情况下标等于数值，从头扫描，当为i时，判断nums[i]是否为记为m，判断是否等于i，如果等于继续判断下一个，不等于的话，判断m和第m个数字是否相等，相等即为重复数（该数字在下标为i和m的位置都出现了），如果不相等就把第i个数和第m个数交换，让m回到自己正确的位置。
+// var findRepeatNumber = function(nums) {
+//   for (let i = 0; i < nums.length; i++) {
+//     while(nums[i] !== i) {
+//       if (nums[i] === nums[nums[i]]) {
+//         return nums[i];
+//       }
+//       let temp = nums[i];
+//       nums[i] = nums[temp];
+//       nums[temp] = temp;
+//     }
+//   }
+//   return false;
+// };
+
+class Subject {
+  constructor () {
+    this.message = '暂无通知';
+    this.observers = [];
+  }
+  getMessage() {
+    return this.message;
+  }
+  setMessage(message) {
+    this.message = message;
+    this.notifyAllObservers();
+  }
+  notifyAllObservers() {
+    this.observers.forEach(observer => observer.update());
+  }
+  attach(observer) {
+    this.observers.push(observer);
+  }
+}
+
+class Observer {
+  constructor(name, message) {
+    this.name = name;
+    this.message = message;
+    this.message.attach(this)
+  }
+  update() {
+    console.log(`${this.name}收到通知：${this.message.getMessage()}`)
+  }
+}
+let message = new Subject();
+let person1 = new Observer("徐强国", message);
+let person2 = new Observer("康鑫印", message);
+message.setMessage("明天要上班")
