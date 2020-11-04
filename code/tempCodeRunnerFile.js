@@ -1,1 +1,3 @@
-    message.attach(this);
+if (originArr.length < len) {
+      len = originArr;
+    }

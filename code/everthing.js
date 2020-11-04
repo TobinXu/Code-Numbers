@@ -11708,37 +11708,457 @@ function SubType() {
 //   return false;
 // };
 
-class Subject {
-  constructor () {
-    this.message = '暂无通知';
-    this.observers = [];
-  }
-  getMessage() {
-    return this.message;
-  }
-  setMessage(message) {
-    this.message = message;
-    this.notifyAllObservers();
-  }
-  notifyAllObservers() {
-    this.observers.forEach(observer => observer.update());
-  }
-  attach(observer) {
-    this.observers.push(observer);
-  }
-}
+// class Subject {
+//   constructor () {
+//     this.message = '暂无通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update());
+//   }
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+// }
 
-class Observer {
-  constructor(name, message) {
-    this.name = name;
-    this.message = message;
-    this.message.attach(this)
+// class Observer {
+//   constructor(name, message) {
+//     this.name = name;
+//     this.message = message;
+//     this.message.attach(this)
+//   }
+//   update() {
+//     console.log(`${this.name}收到通知：${this.message.getMessage()}`)
+//   }
+// }
+// let message = new Subject();
+// let person1 = new Observer("徐强国", message);
+// let person2 = new Observer("康鑫印", message);
+// message.setMessage("明天要上班")
+
+
+// class Modal {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName()
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+
+// Modal.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Modal(name);
+//     }
+//     return instance;
+//   }
+// })();
+
+// let a = Modal.create('aaa');
+// let b = Modal.create('bbb');
+// console.log(a, b);
+
+// class Modal {
+//   constructor(name) {
+//     this.name = name;
+//     this.getName();
+//   }
+//   getName() {
+//     return this.name;
+//   }
+// }
+
+// Modal.create = (function() {
+//   let instance = null;
+//   return function(name) {
+//     if (!instance) {
+//       instance = new Modal(name);
+//     }
+//     return instance;
+//   }
+// })()
+// let a = Modal.create("aaa");
+// let b = Modal.create('bbb');
+// console.log(a,b)
+
+// O(N)O(1)
+// var findRepeatNumber = function(nums) {
+//   for (let i = 0; i < nums.length; i++) {
+//     while (nums[i] !== i) {
+//       if (nums[i] === nums[nums[i]]) {
+//         return nums[i];
+//       }
+//       let temp = nums[i];
+//       nums[i] = nums[temp];
+//       nums[temp] = temp;
+//     }
+//   }
+//   return false;
+// }
+
+// var findRepeatNumber = function(nums) {
+//   for (let i = 0; i < nums.length; i++) {
+//     while (nums[i] !== i) {
+//       if (nums[i] === nums[nums[i]]) {
+//         return nums[i];
+//       }
+//       let temp = nums[i];
+//       nums[i] = nums[temp];
+//       nums[temp] = temp;
+//     }
+//   }
+//   return false;
+// // }
+// <script>
+//   // socket.html;
+//   const socket = new WebSocket("ws:localhost:3000");
+//   socket.onopen = function() {
+//     socket.send('woaini');
+//   }
+//   socket.onmessage = function(e) {
+//     console.log(e.data);
+//   }
+// </script>
+// <script>
+//   // server.js
+//   const express = require('express');
+//   const app = express();
+//   const WebSocket = require('ws')
+//   const wss = new WebSocket.Server({port:3000});
+//   wss.on('connection', function(ws) {
+//     ws.on('message', function(data) {
+//       console.log(data);
+//       ws.send('我不爱你');
+//     })
+//   })
+// </script>
+
+// function debounce(fn, delay) {
+//   let timer = null;
+//   return function() {
+//     if (timer) {
+//       clearTimeout(timer)
+//     }
+//     timer = setTimeout(fn, delay)
+//   }
+// }
+
+// function throttle(fn, delay) {
+//   let valid = true;
+//   return function() {
+//     if (!valid) {
+//       return false;
+//     }
+//     valid = false;
+//     setTimeout(() => {
+//       fn();
+//       valid = true;
+//     }, delay)
+//   }
+// }
+
+
+
+// function quick_sort(nums, l, r) {
+//   let [i, j] = [l, r];
+//   let key = nums[i];
+//   if (l > r) return;
+//   while(i < j) {
+//     while(i < j && nums[j] > key) {
+//       j--;
+//     }
+//     if (i < j) {
+//       nums[i] = nums[j];
+//     }
+//     while(i < j && nums[i] <= key) {
+//       i++;
+//     }
+//     if (i < j) {
+//       nums[j] = nums[i];
+//     }
+//   }
+//   nums[i] = key;
+//   quick_sort(nums, l, i-1);
+//   quick_sort(nums, i+1, r);
+// }
+// var arr=[6,3,8,7,9,1,3,5,3,8,2,9];
+// console.log(arr);
+// quick_sort(arr,0,arr.length-1);
+// console.log(arr);
+
+// 20201003第一题
+// const originArr = ['a', 'b', 'c', 'd']
+// function chunk(originArr, len) {
+//   let newArr = [];
+//   while(originArr.length) {
+//     let tempArr = [];
+//     if (originArr.length < len) {
+//       len = originArr.length;
+//     }
+//     for (let i = 0; i < len; i++) {
+//       let k = originArr.shift();
+//       tempArr.push(k);
+//     }
+//     newArr.push(tempArr);
+//   }
+//   console.log(newArr);
+  
+// }
+// chunk(originArr, 3);
+
+// @description
+// * 根据给出的例子，实现 Person
+// * @example
+// * Person("Li");
+// * 输出： Hi! This is Li!
+// * Person("Dan").sleep(10).eat("dinner");
+// * 输出：
+// * Hi! This is Dan!
+// * 等待10秒..
+// * Wake up after 10
+// * Eat dinner~
+// * Person("Jerry").eat("dinner").eat("supper");
+// * 输出：
+// * Hi This is Jerry!
+// * Eat dinner~
+// * Eat supper~
+// * Person("Smith").sleepFirst(5).eat("supper");
+// * 输出：
+// * 等待5秒
+// * Wake up after 5
+// * Hi This is Smith!
+// * Eat supper
+// */
+
+// function Person(name) {
+//  this.name = name;
+//  console.log(`Hi! This is ${this.name}`);
+
+//  this.sayHi = function() {
+//   console.log(`Hi! This is ${this.name}`);
+// }
+
+// this.eat = function(what) {
+//   console.log('Eat' + what);
+//  }
+
+//  this.sleep = function(time) {
+//   console.log(`等待${time}秒..`)
+//   setTimeout(() => {
+//     console.log(`Wake up after ${time}`);
+//   }, time);
+//  }
+
+//  this.sleepFirst = function(time) {
+//   console.log(`等待${time}秒..`)
+//   setTimeout(() => {
+//     console.log(`Wake up after ${time}`);
+//   }, time);
+//  }
+
+// }
+
+// function Person(name) {
+  
+//   return new Promise((resolve, reject) => {
+//     this.name = name;
+//     resolve(name);
+//   }).then(() => {
+//     console.log(`Hi! This is ${this.name}`);
+//     return new Promise((resolve, reject) => {
+//       this.time = time;
+//       resolve(time);
+//     }).then(() => {
+//       this.sleep();
+//     })
+//   })
+// }
+// Person("Li")
+
+// const takeValue = (originObj, key) => {
+//   let nums = Object.keys(originObj);
+//   console.log(nums);
+// };
+// let object = {'a': [{'b': {'c': 3}}]};
+// takeValue(object, 1);
+
+
+//  const versionManager = {
+//   version: "v0.0.0",
+//   VN: [0,0],
+//   patch() {
+//     let oldVersion = this.version;
+//     this.VN[0] = oldVersion;
+//     let nums = this.version.split('.');
+//     nums[2]++;
+//     this.version = nums.join('.');
+//     this.VN.push(this.version);
+//     this.VN[1] = this.version;
+//     return this.version;
+//   },
+//   minor() {
+//     let oldVersion = this.version;
+//     this.VN[0] = oldVersion;
+//     let nums = this.version.split('.');
+//     nums[1]++;
+//     nums[2] = [0];
+//     this.version = nums.join('.');
+//     this.VN[1] = this.version;
+//     return this.version;
+//   },
+//   major() {
+//     let oldVersion = this.version;
+//     this.VN[0] = oldVersion;
+//     let nums = this.version.split('.');
+//     nums[0]++;
+//     nums[1] = [0];
+//     nums[2] = [0];
+//     this.version = nums.join('.');
+//     this.VN[1] = this.version;
+//     return this.version;
+//   },
+//   rollback() {
+//     this.version = this.VN[0];
+//     return this.version;
+//   }
+// };
+// console.log(versionManager.version)
+
+// var vue = new Vue({
+//   data: {
+//     a: 1
+//   }
+// })
+// console.log(vue.a)
+
+// <div id = "example">{message}</div>
+// var vm = new VTTCue({
+//   el: '#example',
+//   data: {
+//     message: 1
+//   }
+// })
+// vm.message = 'new Message';
+// vm.$el.textContent === 'new Message' //false
+// Vue.nextTick(function() {
+//   vm.$el.textContent === 'new Message'; //true  
+// })
+
+// Function.prototype.Mycall = function(context) {
+//   if (typeof this !== 'function') return;
+//   let res = null;
+//   let args = [...arguments].slice(1);
+//   context = context || window;
+//   context.fn = this;
+//   res = context.fn(...args);
+//   delete context.fn;
+//   return res;
+// }
+
+// function SuperType(name) {
+//   this.name = name;
+//   this.colors = ["red", "black", "green"];
+// }
+// function SubType(name, age) {
+//   SuperType.call(this, name);
+//   this.age = age;
+// }
+// let instance = new SubType("zs", 30);
+// instance.colors.push("yellow");
+// console.log(instance.colors);
+
+// function levelOrder(root) {
+//   if (!roor) return;
+//   let queue = [root];
+//   let res = [];
+//   while(queue.length) {
+//     let temp = [];
+//     let levelSize = queue.length;
+//     for (let i = 0; i < levelSize; i++) {
+//       let node = queue.shift();
+//       temp.push(node.val);
+//       if (node.left) queue.push(node.left);
+//       if (node.right) queue.push(node.right);
+//     }
+//     res = res.push(temp);
+//   }
+//   return res;
+// }
+
+// function quick_sort(arr, l, r) {
+//   let i = l, j = r;
+//   let key = arr[i];
+//   if (l > r) return;
+//   while(i < j) {
+//     while(i < j && arr[j] > key) {
+//       j--;
+//     }
+//     if (i < j) {
+//       arr[i] = arr[j];
+//     }
+//     while(i < j && arr[i] <= key) {
+//       i++;
+//     }
+//     if (i < j) {
+//       arr[j] = arr[i];
+//     }
+//   }
+//   arr[i] = key;
+//   quick_sort(arr, l, i-1);
+//   quick_sort(arr, i+1, r);
+// }
+// var vm = new VTTCue({
+//   el: '#app',
+//   data: {
+
+//   },
+//   computed: {
+
+//   },
+//   methods() {
+
+//   },
+//   created: function() {}
+// })
+// function b() {};
+// let a = 'aaa';
+// let c = 111;
+// let k = new RegExp();
+// console.log(Object.prototype.toString.call(k));
+// console.log(typeof k);
+
+
+//line=readline()
+//print(line)
+// console.log('Hello World!');
+function sortNum(arr) {
+  if (arr[0] <= arr[1]) {
+      for (let i = 2; i < arr.length; i++) {
+          if (arr[i] <= arr[i+1]) {
+              continue;
+          } else {
+              return false;
+          }
+      }
+      return true;
+  } else if(arr[0] >= arr[1]) {
+      for (let i = 2; i < arr.length; i++) {
+          if (arr[i] >= arr[i+1]) {
+              continue;
+          } else {
+              return false;
+          }
+      }
   }
-  update() {
-    console.log(`${this.name}收到通知：${this.message.getMessage()}`)
-  }
+  
 }
-let message = new Subject();
-let person1 = new Observer("徐强国", message);
-let person2 = new Observer("康鑫印", message);
-message.setMessage("明天要上班")
