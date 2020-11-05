@@ -12141,24 +12141,199 @@ function SubType() {
 //line=readline()
 //print(line)
 // console.log('Hello World!');
-function sortNum(arr) {
-  if (arr[0] <= arr[1]) {
-      for (let i = 2; i < arr.length; i++) {
-          if (arr[i] <= arr[i+1]) {
-              continue;
-          } else {
-              return false;
-          }
-      }
-      return true;
-  } else if(arr[0] >= arr[1]) {
-      for (let i = 2; i < arr.length; i++) {
-          if (arr[i] >= arr[i+1]) {
-              continue;
-          } else {
-              return false;
-          }
-      }
-  }
+// function sortNum(arr) {
+//   if (arr[0] <= arr[1]) {
+//       for (let i = 2; i < arr.length; i++) {
+//           if (arr[i] <= arr[i+1]) {
+//               continue;
+//           } else {
+//               return false;
+//           }
+//       }
+//       return true;
+//   } else if(arr[0] >= arr[1]) {
+//       for (let i = 2; i < arr.length; i++) {
+//           if (arr[i] >= arr[i+1]) {
+//               continue;
+//           } else {
+//               return false;
+//           }
+//       }
+//   }
   
-}
+// }
+// console.log(null instanceof Object)
+// let div = '<div></div>'
+// console.log(div.repeat(3))
+// class Star {
+//   pulibc name:string
+//   constructor(name:String) {
+//     this.name = name;
+//   }
+
+// }
+// class Animal {
+//   constructor(name) {
+//     this.name = name;
+//   }
+//   sayHi() {
+//     console.log("发出不同声音");
+//   }
+// }
+
+// class Cat extends Animal {
+//   constructor(name) {
+//     super(name);
+//   }
+//   sayHi() {
+//     console.log(this.name+'miaomiao~');
+//   }
+// }
+
+// class Dog extends Animal {
+//   constructor(name) {
+//     super(name);
+//   }
+//   sayHi() {
+//     console.log(this.name+'wangwang~');
+//   }
+// }
+// let cat1 = new Cat('大猫');
+// cat1.sayHi();
+// let dog1 = new Dog('小狗');
+// dog1.sayHi()
+
+// if (a = 0) console.log("true"); // 这两条语句是等价的
+// if (a == 0) console.log("true");
+
+// function factorial(n) {
+//   return !(n > 1) ? 1 : n * factorial(n-1);
+// }
+// console.log(factorial(4))
+
+
+// var foo = '123';
+// 	console.log(foo);
+// function print() {
+//   // var foo = undefined;
+//   console.log(foo);
+
+// 	 foo = '456';
+		
+// 	this.foo = '789';
+		
+//   console.log(foo);
+//   console.log(this.foo)
+		
+// }
+	
+// print()
+// var foo = '123';
+// function print() {
+//   this.foo = '456';
+//   console.log(foo);
+// }
+// print()
+
+
+
+// var foo = '123';
+ 
+// function print() {
+		
+// this.foo = '789';
+	
+// console.log(foo);
+	
+// }
+	
+// print()
+
+// var a = 5;
+// function test() {
+//   a = 0;
+//   console.log(a);
+//   console.log(this.a);
+//   var a;
+//   console.log(a);
+
+// }
+// test()
+// console.log(typeof Math)
+// console.log(''===false)
+// let user;
+// console.log(user ?? "Anonymous");
+
+// let i = 0;
+
+// do {
+//   console.log(i);
+//   i++;
+// } while(i < 3);
+// switch(x) {
+//   case 'value1':
+//     console.log('ni')
+//     break;
+//   case 'value2':
+//     console.log('hao')
+//     break;
+//   case 'value3':
+//     console.log('ma')
+//     break;
+//   default:
+//     console.log("?")
+// }
+// let a = 2;
+// switch(a) {
+//   case 2:
+//     console.log("gan");
+//     break;
+//   case 3:
+//     console.log("3");
+//     break;
+// }
+// switch(arg) {
+//   case 1:
+//   case 2:
+//   case 3:
+//     console.log("hao");
+//     break;
+//   case 4:
+//     console.log("tommorow")
+//     break;
+//   default:
+//     console.log("ddd");
+    
+// }
+// var userName = "John";
+// console.log(userName)
+// function showName() {
+//   console.log(userName)
+//   var userName = "Bob";
+//   let message = "Hello";
+//   console.log(message+" "+userName);
+// }
+// showName()
+// "show..." ——用于显示
+// "get..."——计算某些内容
+// "create..."——创建某些内容
+// "check..."——检查某些内容并返回boolean值
+
+// let  k= function sayHi() {
+//   console.log("Hi");
+// }
+// console.log(k)
+// ask(1, sayYes, sayNo);
+
+// function ask(question, yes, no) {
+//   if (question == 1) yes();
+//     else no();
+// }
+// function sayYes() {
+//   console.log("是的");
+// }
+// function sayNo() {
+//   console.log("不行");
+// }
+
+// ask(0, function() {console.log("wodetian")}, function() {console.log("haoba")});

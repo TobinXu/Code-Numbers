@@ -1,3 +1,1 @@
-if (originArr.length < len) {
-      len = originArr;
-    }
+  var foo = undefined;
