@@ -12630,17 +12630,73 @@ function SubType() {
 //   }
 // }
 // var fn = function(a,b,c) {return a+b+c}; console.log(curry(fn)(1)(2)(3))
-function sleep(ms) {
-  return new Promise(function(resolve,reject) {
-    setTimeout(() => {
-      resolve()
-    }, ms)
-  })
-}
-async function printNum(n) {
-  for (let i = 0; i < n; i++) {
-    await sleep(2000);
-    console.log(i);
+// function sleep(ms) {
+//   return new Promise(function(resolve,reject) {
+//     setTimeout(() => {
+//       resolve()
+//     }, ms)
+//   })
+// }
+// async function printNum(n) {
+//   for (let i = 0; i < n; i++) {
+//     await sleep(2000);
+//     console.log(i);
+//   }
+// }
+// printNum(10)
+
+// function count(start, end) {
+//   console.log(start++);
+//   let timer = setInterval(()=> {
+//     if (start <= end) {
+//       console.log(start++);
+//     } else {
+//       clearInterval(timer);
+//     }
+//   })
+//   return {
+//     cancel: function() {
+//       clearInterval(timer);
+//     }
+//   }
+// }
+
+// function compose(f,g) {
+//   return function(x) {
+//     return f(g(x))
+//   }
+// }
+// var reserver = function(arr) {
+//   return arr.reverse();
+// }
+// var getFirst = function(arr) {
+//   return arr.shift();
+// }
+// var composeFunc = compose(getFirst, reserver);
+// console.log(composeFunc(arr))
+let arr = [1,2,3,4,5];
+function compose() {
+  let args = Array.prototype.slice.call(arguments);
+  return function(x) {
+    if (args.length >= 2) {
+      return args.reverse().reduce((pre, cur) => {
+        return pre = cur(pre);
+      },x)
+    } else {
+      return args[1] && args[1](x);
+    }
   }
+
 }
-printNum(10)
+var reverse = function(arr) {
+  return arr.reverse();
+}
+var getFirst = function(arr) {
+  return arr[0];
+}
+var trace = function(x) {
+  console.log("收到",x);
+}
+var composeFunc = compose(trace,getFirst,reverse);
+composeFunc(arr)
+console.log(arr)
