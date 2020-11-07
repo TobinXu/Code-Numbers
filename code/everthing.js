@@ -12337,3 +12337,310 @@ function SubType() {
 // }
 
 // ask(0, function() {console.log("wodetian")}, function() {console.log("haoba")});
+// var color = "red";
+// var o = {
+//   color: "blue"
+// };
+// sayColor();
+// function sayColor() {
+//   console.log(this.color);
+// }
+
+
+// var anotherSayColor = sayColor.bind(o);
+// anotherSayColor();
+// anotherSayColor();
+
+// var foo = 1;
+// var fooReference = {
+//   base: EnvironmentRecord,
+//   name: 'foo',
+//   strict: false
+// }
+// var bar = {
+//   name: 'k',
+//   foo: 1
+// }
+// var fooReference = {
+//   base: bar,
+//   name: 'foo',
+//   strict: false
+// }
+
+
+// function foo() {
+//   console.log(this)
+// }
+
+// foo(); 
+
+// let arr = [1,2,3,4];
+// const reducer = (acc, cur) => {
+//   acc + cur;
+// }
+// console.log(arr.reduce(reducer))
+// temp = function () {
+//   return 'dddd' + 5;
+//   }
+
+// console.log(temp.toString())
+// var add = function(m) {
+//   var temp = function(n) {
+//     return add(m+n);
+//   }
+//   temp.toString = function() {
+//     return m;
+//   }
+//   return temp;
+// }
+// add(3)(4)(5);
+
+
+
+// var add = function(m) {
+//   var temp = function(n) {
+//     return add(m+n);
+//   }
+//   temp.toString = function() {
+//     return m;
+//   }
+//   return temp;
+// }
+// console.log(add(4)(5)(6))
+
+// var f = function g() {
+//   return 3;
+// }
+// console.log(typeof g())
+
+// function sleep(ms) {
+//   return new Promise(function(resolve,reject) {
+//     setTimeout(() => {
+//       resolve()    
+//     }, ms)
+  
+//   })
+// }
+
+// async function printNum(n) {
+//   for( let i = 0; i < n; i++) {
+//     await sleep(1000)
+//     console.log(i);
+//   }
+// }
+// printNum(10);
+
+
+// function sleep1(ms) {
+//   return new Promise((resolve) => {
+//       setTimeout(resolve, ms);
+//   })
+// }
+// sleep1(1000).then(() => {
+//   console.log(2000);
+// })
+
+// function sleep2(ms) {
+//   return new Promise((resolve) => {
+//       setTimeout(resolve, ms)
+//   })
+// }
+// async function init() {
+//   await sleep2(1000);
+// }
+// init().then(() => {
+//   console.log(3000);
+// })
+// function sleep(ms) {
+//   return new Promise((resolve) => {
+//     setTimeout(resolve,ms)
+//   })
+// }
+// async function printNum(n) {
+//   for (let i = 0; i < n; i++) {
+//     await sleep(2000);
+//     console.log(i);
+//   }  
+// }
+// printNum(10)
+
+// var val = 'smtg';
+// console.log(false + (val === 'smtg') ? 'Something' : 'Nothing');
+// let a = new String('x');
+// console.log(x);
+// console.log(Array.prototype)
+// var a = [0];
+// console.log(a == true);
+// if (a) {
+//   console.log("fuck");
+// }
+
+// function compose(f, g) {
+//   return function(x) {
+//     return f(g(x));
+//   }
+// }
+
+// let arr = [1,2,3],
+// reverse = function(x) {
+//   return x.reverse();
+// }
+// getFirst = function(x) {
+//   return x[0];
+// }
+// composeFunc = compose(getFirst, reverse);
+
+// console.log(composeFunc(arr))
+
+// var compose = function() {
+//   args = Array.prototype.slice.call(arguments);
+//   return function(x) {
+//     if (args.length >= 2) {
+//       return args.reverse().reduce((p, c) => {
+//         return p = c(p);
+//       }, x);
+//     } else {
+//       return args[1] && args[1](x);
+//     }
+//   }
+// }
+
+// var arr = [1,2,3];
+// var reverse = function(x) {
+//   return x.reverse();
+// }
+// var getFirst = function(x) {
+//   return x[0];
+// }
+// var trace = function(x) {
+//   console.log('执行结果',x);
+//   return x;
+// }
+// var composeFunc = compose(trace, getFirst, trace, reverse);
+// composeFunc(arr);
+
+// var arr = [1,2,3,4];
+// var sum = arr.reduce(function(pre, cur, index, arr) {
+//   console.log(pre, cur, index);
+//   return pre + cur;
+// })
+// console.log(arr, sum)
+
+// var arr = [];
+// var sum = arr.reduce(function(pre, cur, index, arr) {
+//   console.log(pre, cur);
+//   return pre + cur;
+// },0)
+// console.log(sum)
+// var arr = [1,2,3,4];
+// var sum = arr.reduce(function(pre, cur, index, arr) {
+//   console.log(pre, cur, index);
+//   return pre + cur;
+// },0)
+// console.log(sum)
+// var sum = arr.reduce((x,y) => {
+//   return x * y;
+// })
+// console.log(sum)
+// let names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+// let nameNum = names.reduce((pre, cur) => {
+//   if (cur in pre) {
+//     pre[cur]++;
+//   } else {
+//     pre[cur] = 1;
+//   }
+//   return pre;
+// }, {})
+// console.log(nameNum)
+
+// var compose = function() {
+//   let args = Array.prototype.slice.call(...arguments);
+//   return function(x) {
+//     if (args.length >= 2) {
+//         return args.reverse().reduce((pre, cur) => {
+//         return pre = cur(pre)
+//       }, x)
+//     } else {
+//       return args[1] && args[1](x);
+//     }
+//   }
+// }
+// function fn1(arg) {
+//   return arg +1; // 14
+//   }
+//   function fn2(arg) {
+//   return arg +2; // 13
+//   }
+//   function fn3(arg) {
+//   return arg +3; // 11
+//   }
+//   const arr = [fn1, fn2, fn3];
+  
+// console.log(compose(arr)(8));
+// function removeWithoutCopy(arr, item) {
+//   while(arr.indexOf(item) !== -1) {
+//       arr.splice(arr.indexOf(item), 1);  
+//   }
+//   return arr;
+// }
+// var arr = [1, 2, 2, 3, 4, 2, 2]
+// console.log(removeWithoutCopy(arr, 2))
+
+// function duplicates(arr) {
+//   let num = new Set();
+//   let arr1 = [];
+//   for (let i of arr) {
+//       if (num.has(i)&& arr1.indexOf(i)=== -1) {
+//           arr1.push(i);
+//       } else {
+//           num.add(i)
+//       }
+//   }
+//   return arr1
+  
+// }
+// function functions(flag) {
+//   if (flag) {
+//     function getValue() { return 'a'; }
+//   } else {
+//     function getValue() { return 'b'; }
+//   }
+
+//   return getValue();
+// }
+// console.log(parseInt("0x12",10))
+// function curryIt(fn) {
+//   return function a(x1) {
+//       return function b(x2) {
+//           return function c(x3) {
+//               return x1+x2+x3;
+//           }
+//       }
+//   }
+// }
+// var fn = function (a, b, c) {return a + b + c}; console.log(curryIt(fn)(1)(2)(3));
+
+// function curry(fn) {
+//   return function(x1) {
+//     return function(x2) {
+//       return function(x3) {
+//         return x1+x2+x3;
+//       }
+//     }
+//   }
+// }
+// var fn = function(a,b,c) {return a+b+c}; console.log(curry(fn)(1)(2)(3))
+function sleep(ms) {
+  return new Promise(function(resolve,reject) {
+    setTimeout(() => {
+      resolve()
+    }, ms)
+  })
+}
+async function printNum(n) {
+  for (let i = 0; i < n; i++) {
+    await sleep(2000);
+    console.log(i);
+  }
+}
+printNum(10)

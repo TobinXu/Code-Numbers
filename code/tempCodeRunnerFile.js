@@ -1,1 +1,1 @@
-  var foo = undefined;
+0
