@@ -12943,13 +12943,13 @@ Eat supper
 // obj.normal.call(obj1)() // obj1
 // obj.arrow.call(obj1)() // window
 
-console.log(fish1,fish2,fish3)
-var fish1 = function() {
-  console.log("welcome fish-1");
-}
-function fish2() {
-  console.log('fish2');
-}
-var fish3 = "welcome fish3";
-var fish1,fish2,fish3;
-console.log(fish1,fish2,fish3);
+// console.log(fish1,fish2,fish3)
+// var fish1 = function() {
+//   console.log("welcome fish-1");
+// }
+// function fish2() {
+//   console.log('fish2');
+// }
+// var fish3 = "welcome fish3";
+// var fish1,fish2,fish3;
+// console.log(fish1,fish2,fish3);
