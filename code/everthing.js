@@ -12771,3 +12771,185 @@ function SubType() {
 // }
 // let arr = [10,20,30]
 // console.log(reducer(arr))
+
+// function Person(name) {
+//   var o = new Object();
+//   o.name = name;
+//   o.sayHi = function() {
+//     console.log('Hi! This is '+this.name);
+//   }
+//   o.sleep = function(ms) {
+//     console.log("等待"+ms+"秒...");
+//     setTimeout(() => {
+//       console.log("Wake up after "+ms)
+//     })
+//   }
+//   o.eat = function(food) {
+//     console.log("Eat "+food);
+//   } 
+// }
+// Person("Dan").sleep(10)
+
+// let index = 0;
+// let stack = [];
+
+// function next() {
+//     let fn = stack[index];
+//     index++;
+//     if (typeof fn === 'function') {
+//         fn();
+//     }
+// }
+
+// function Man(name) {
+//     stack.push(function () {
+//         console.log("Hi! This is " + name);
+//         next();
+//     })
+// }
+// var Person = function (name) {
+//     return new Man(name)
+// }
+// Man.prototype.sleep = function (time) {
+//     stack.push(function () {
+//         setTimeout(function () {
+//             console.log("Wake up after " + time)
+//             next()
+//         }, time * 1000)
+//     })
+//     return this;
+// }
+// Man.prototype.eat = function (food) {
+//     stack.push(function () {
+//         console.log('Eat ' + food)
+//         next();
+//     })
+//     return this;
+// }
+// Man.prototype.sleepFirst = function (time) {
+//     stack.unshift(function () {
+//         setTimeout(function () {
+//             console.log('wake up after ' + time)
+//             next()
+//         }, time * 1000)
+//     })
+//     return this;
+// }
+// Person('Li')
+/* 输出:
+Hi! This is Hank!
+*/
+// Person('Dan').sleep(3).eat('dinner')
+/* 输出:
+Hi! This is Hank!
+// 等待10秒..
+Wake up after 10
+Eat dinner~
+*/
+// Person('Jerry').eat('dinner~').eat('supper~')
+/* 输出:
+Hi This is Hank!
+Eat dinner~
+Eat supper~
+*/
+// Person('Smith').sleepFirst(2).eat('supper')
+/* 等待5秒，输出
+Wake up after 5
+Hi This is Hank!
+Eat supper
+*/
+// next()
+
+// class PersonGenerator {
+//   taskQueue = [];
+
+//   nextTask = () => {
+//     if (this.taskQueue.length > 0) {
+//       const task = this.taskQueue.shift();
+//       if (typeof task === "function") {
+//         task();
+//         this.nextTask();
+//       }
+//       if (typeof task === "number") {
+//         console.log(`等待 ${task} 秒... \n`);
+//         setTimeout(() => {console.log(`Wake up after ${task} 秒... \n`);this.nextTask()}, task * 1000);
+//       }
+//     }
+//   };
+
+//   runTaskQueue = () => {
+//     setTimeout(() => this.nextTask());
+//   };
+
+//   constructor(name) {
+//     this.taskQueue.push(() => this.sayHi(name));
+//     this.runTaskQueue();
+//   }
+
+//   sayHi(name) {
+//     console.log(`Hi! This is ${name}! \n`);
+//     return this;
+//   }
+
+//   sleep(seconds) {
+//     this.taskQueue.push(seconds);
+//     return this;
+//   }
+
+//   sleepFirst(seconds) {
+//     this.taskQueue.splice(-1, 0, seconds);
+//     return this;
+//   }
+
+//   eat(food) {
+//     this.taskQueue.push(() => console.log(`Eat ${food}~ \n`));
+//     return this;
+//   }
+// }
+
+// const Person = name => new PersonGenerator(name);
+
+// Person("Keith")
+//   .sleepFirst(1)
+//   .sleep(3)
+//   .eat("apple");
+
+// let x = 5;
+// function fn(x) {
+//   return function(y) {
+//     console.log(y+(++x));
+//   }
+// }
+// let f = fn(6);
+// f(7);
+// console.log(x);
+// var name = 'window';
+// var obj = {
+//   name: 'obj',
+//   normal() {
+//     return () => {
+//       console.log(this.name);
+//     }
+//   },
+//   arrow: () => {
+//     return function() {
+//       // console.log(this)
+//       // console.log(obj)
+//       console.log(this.name);
+//     }
+//   }
+// }
+// var obj1 = {name:'obj1'}
+// obj.normal.call(obj1)() // obj1
+// obj.arrow.call(obj1)() // window
+
+console.log(fish1,fish2,fish3)
+var fish1 = function() {
+  console.log("welcome fish-1");
+}
+function fish2() {
+  console.log('fish2');
+}
+var fish3 = "welcome fish3";
+var fish1,fish2,fish3;
+console.log(fish1,fish2,fish3);
