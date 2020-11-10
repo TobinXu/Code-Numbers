@@ -12953,3 +12953,48 @@ Eat supper
 // var fish3 = "welcome fish3";
 // var fish1,fish2,fish3;
 // console.log(fish1,fish2,fish3);
+
+
+// function p2() {
+//   return new Promise(function(resolve, reject) {
+//     console.log('p2 rejected');
+//     reject(456);
+//   });
+// }
+// p2().then(function resolve() {
+//   console.log("hao")
+// },function reject() {
+//   console.log('buhao')
+// }).catch(e => console.log(e)) 
+
+// function a() {
+//   var b = 5;
+//   return function c() {
+//     console.log(b);
+//   }
+// }
+// a()()
+// function TreeNode(val) {
+//   this.val = val;
+//   this.left = this.right = null;
+// }
+
+// function levelOrder(root) {
+//   if (!root) return [];
+//   let queue = [root];
+//   let res = [];
+//   while(queue.length) {
+//     let levelSize = queue.length;
+//     let temp = [];
+//     for (let i = 0; i < levelSize; i++) {
+//       let node = queue.shift();
+//       temp.push(node.val);
+//       if (node.left) queue.push(node.left);
+//       if (node.right) queue.push(node.right);
+//     }
+//     res.push(temp);
+//   }
+//   return res;
+// }
+
+console.log(this)
