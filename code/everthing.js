@@ -12997,4 +12997,274 @@ Eat supper
 //   return res;
 // }
 
-console.log(this)
+// console.log(this)]
+
+// function preorderTraversal(root) {
+//   let res = [];
+//   let stack = [root];
+//   while(stack.length) {
+//     let node = stack.pop();
+//     if (node) {
+//       res.push(node.val);
+//       stack.push(node.right);
+//       stack.push(node.left);
+//     }
+//   }
+//   return res;
+// }
+
+// function preorderTraversal(root) {
+//   let res = [];
+//   function preOrder(node) {
+//     if (node) {
+//       res.push(node.val);
+//       preOrder(node.left);
+//       preOrder(node.right);
+//     }
+//   }
+//   preOrder(root);
+//   return res;
+// }
+
+// 从小到大打印出N个质数
+// function IsPrime(N) {
+//   if (N <=1) return false;
+//   let arr = [2];
+//   while(N) {
+//     for (let i = 3; i < k; i++) {
+
+//     }
+//     N--;
+//   }
+  
+// }
+
+// function IsPrime(N){
+//     var arr=[2,3];
+//     for(var i=4;i<N;i++) {
+//         var flag=true;
+//         for (var j=2;j<=Math.sqrt(i);j++){
+//             if(i%j==0){
+//                 flag=false;
+//                 break;
+//             }
+//         }
+//         if(flag){
+//             arr.push(i);
+//         }
+//     }
+//     console.log(arr);
+//     console.log(arr.length);
+// }
+// IsPrime(1000);
+
+// 晒法
+// function IsPrime(N) {
+//   let isPrim = new Array(N).fill(true);
+//   let n = Math.sqrt(N);
+//   for (let i = 2; i < n; i++) {
+//     if ((isPrim[i])) {
+//       for (let j = i * i; j < N; j += i) {
+//         isPrim[j] = false;
+//       }
+//     }
+//   }
+//   let count = 0;
+//   for (let i = 2; i < N; i++) {
+//     if (isPrim[i]) count++
+//   }
+//   return count;
+// }
+// console.log(IsPrime(1000));
+
+// function binarySearch(nums, target) {
+//   let left = 0;
+//   let right = nums.length-1;
+//   while(left <= right) {
+//     let mid = left + (right - left) / 2;
+//     if (nums[mid] == target) {
+//       return mid;
+//     } else if (nums[mid] > target) {
+//       right = mid - 1;
+//     } else if (nums[mid] < target) {
+//       left = mid + 1;
+//     }
+//   }
+//   return -1;
+// }
+// let arr = [1,2,3,4,5,6,6];
+// console.log(binarySearch(arr, 2))
+
+// 因为退出条件为left = right +1，所以当target大于所有数组元素的时候，left会检查到超过数组长度
+// function left_bound(nums, target) {
+//   let left = 0;
+//   let right = nums.length-1;
+//   while(left <= right) { // 退出条件为left = right +1
+//     let mid = left + (right -left) / 2;
+//     if (nums[mid] == target) {
+//       right = mid - 1;
+//     } else if(nums[mid] < target) {
+//       left = mid + 1;
+//     } else if (nums[mid] > target) {
+//       right = mid - 1;
+//     }
+//   }
+//   // 检查出界情况
+//   if (left > nums.length || nums[left] != target)
+//     return -1;
+//   return left;
+// }
+ // 当 target 比所有元素都小时，right 会被减到 -1
+// function right_bound(nums, target) {
+//   let left = 0;
+//   let right = nums.length - 1;
+//   while(left <= right) {
+//     let mid = left + (right - left) / 2;
+//     if (nums[mid] == target) {
+//       left = mid + 1;
+//     } else if (nums[mid] < target) {
+//       left = mid + 1;
+//     } else if (nums[mid] > target) {
+//       right = mid - 1;
+//     }
+//   }
+//   // 检查出界情况
+//   if (right < 0 || nums[right] != target) {return -1;}
+    
+//   return right;
+// }
+// let arr = [2,3,5,7];
+// console.log(left_bound(arr, 1));
+
+
+// var searchRange = function(nums, target) {
+//   let left = 0;
+//   let right = nums.length -1;
+//   let mid, leftIndex, rightIndex;
+//   // 寻找左边界
+//   while(left <= right) {
+//       mid = left + (right - left) / 2;
+//       if (nums[mid] == target) {
+//           right = mid - 1;
+//       } else if (nums[mid] < target) {
+//           left = mid + 1;
+//       } else if (nums[mid] > target) {
+//           right = mid - 1;
+//       }
+//   }
+//   if (left > nums.length || nums[left] != target) {
+//       leftIndex = -1
+//   } else {
+//       leftIndex = left;
+//   }
+//   // 寻找右边界
+//   left = 0;
+//   right = nums.length -1;
+//   while (left <= right) {
+//       mid = left + (right - left) / 2;
+//       if (nums[mid] == target) {
+//           left = mid + 1;
+//       } else if (nums[mid] < target) {
+//           left = mid + 1;
+//       } else if (nums[mid] > target) {
+//           right = mid - 1;
+//       }
+//   }
+//   if (right < 0 || nums[right] != target) {
+//       rightIndex = -1;
+//   } else {
+//       rightIndex = right;
+//   }
+
+//   return [leftIndex, rightIndex];
+
+// };
+
+// function match(s, t) {
+//   let left = 0, right = 0, minLen = Number.MAX_SAFE_INTEGER;
+//   let start = 0;
+//   let tMap = new Map();
+//   let tempMap = new Map();
+//   let match = 0; // 记录tempMap中已经有多少字符符合要求 
+//   for (let key of t) {
+//     if (tMap.has(key)) {
+//       tMap.set(key, tMap.get(key)+1)
+//     } else {
+//       tMap.set(key, 1) 
+//     }
+//   }
+
+//   while(right < s.length) {
+//     let c1 = s[right];
+//     if (!tempMap.has(c1)) {
+//       tempMap.set(c1, 1);
+//       // 字符c1出现的次数符合要求match++
+//       if (tMap.get(c1) == tempMap.get(c1)) {
+//         match++;
+//       }
+//     } else {
+//       tempMap.set(c1, tempMap.get(c1)+1);
+//       if (tMap.get(c1) == tempMap.get(c1)) {
+//         match++;
+//       }
+//     }
+//     right++;
+
+//     // 当tempMap中的字符串已符合tMap的要求了
+//     while (match == tMap.size) {
+//       if (right - left < minLen) {
+//         // 更新最小子串的位置和长度
+//         start = left;
+//         minLen = right - left;
+//       }
+//       let c2 = s[left];
+//       if (!tMap.has(c2)) {
+//         tempMap.delete(c2);
+//         if (tempMap.get(c2) < tMap.get(c2)) {
+//           match--;
+//         }
+//       }
+//       left++;
+//     }
+//   }
+//   return minLen == Number.MAX_SAFE_INTEGER ? "" : s.substr(start, minLen);
+
+// }
+
+// let s = "ADOBECODEBANC", t = "ABC";
+// console.log(match(s,t))
+
+
+
+
+// let t = 'ssagsDfdsg';
+// console.log([...t])
+
+// let a = {};
+// console.log(a['key']);
+// console.log(Object.keys(a));
+
+// function minWindow(s, t) {
+//   let l=0,r=0;
+//   let start = 0;
+//   let windows ={}, needs = {},minLen = Infinity;
+//   let match = 0;
+//   [...t].forEach(c => {needs[c] ? needs[c]++ : needs[c] = 1});
+//   let keyLen = Object.keys(needs).length;
+//   while(r < s.length) {
+//     let c1 = s[r++];
+//     windows[c1] ? windows[c1]++ : windows[c1] = 1;
+//     if (windows[c1] === needs[c1]) match++;
+//     while(match === keyLen) {
+//       if (r - l < minLen) {
+//         start = l;
+//         minLen = r - l;
+//       }
+//       let c2 = s[l++];
+//       if (windows[c2]-- === needs[c2]) match--;
+//     }
+//   }
+//   return start === 0 ? "" : s.substr(start, minLen);
+// }
+
+
