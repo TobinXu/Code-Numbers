@@ -13268,3 +13268,36 @@ Eat supper
 // }
 
 
+// let windows = {};
+// let needs = {};
+// windows['a'] ? windows['a']++ : windows['a'] = 1
+// needs['a'] ? needs['a']++ : needs['a'] = 1
+// if (windows['a']-- === needs['a']) {
+//   console.log('相等意味着先判断是否相等，再--')
+// }
+// console.log(windows)
+
+function hasCycle(head) {
+    let fast = head, slow = head;
+    while(fast != null && fast.next != null) {
+      fast = fast.next.next;
+      slow = slow.next;
+      if (fast == slow) return true;
+    }
+    return false;
+}
+
+function detectCycle(head) {
+  let fast = head, slow = head;
+  while(fast != null && fast.next != null) {
+    fast = fast.next.next;
+    slow = slow.next;
+    if (fast == slow) break;
+  }
+  slow = head;
+  while(slow != fast) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+  return slow;
+}
