@@ -13277,27 +13277,381 @@ Eat supper
 // }
 // console.log(windows)
 
-function hasCycle(head) {
-    let fast = head, slow = head;
-    while(fast != null && fast.next != null) {
-      fast = fast.next.next;
-      slow = slow.next;
-      if (fast == slow) return true;
-    }
-    return false;
-}
+// function hasCycle(head) {
+//     let fast = head, slow = head;
+//     while(fast != null && fast.next != null) {
+//       fast = fast.next.next;
+//       slow = slow.next;
+//       if (fast == slow) return true;
+//     }
+//     return false;
+// }
 
-function detectCycle(head) {
-  let fast = head, slow = head;
-  while(fast != null && fast.next != null) {
-    fast = fast.next.next;
-    slow = slow.next;
-    if (fast == slow) break;
-  }
-  slow = head;
-  while(slow != fast) {
-    slow = slow.next;
-    fast = fast.next;
-  }
-  return slow;
-}
+// function detectCycle(head) {
+//   let fast = head, slow = head;
+//   while(fast != null && fast.next != null) {
+//     fast = fast.next.next;
+//     slow = slow.next;
+//     if (fast == slow) break;
+//   }
+//   slow = head;
+//   while(slow != fast) {
+//     slow = slow.next;
+//     fast = fast.next;
+//   }
+//   return slow;
+// }
+
+// function isIn(s1, s2) {
+//   let s11 = s1 + s1;
+//   return s11.indexOf(s2) != -1 ? true : false;
+// }
+
+// function stringCycle(s1) {
+//   let temp1 = s1.slice(-k).split('').reverse().join('');
+//   let temp2 = s1.slice(0, s1.length - k).split('').reverse().join('');
+//   let temp = temp1+temp2;
+//   return temp.split('').reverse().join('');
+// }
+
+// function isSame(ss, tt) {
+//   let counter = new Array(26).fill(0);
+//   for (let i = 0; i < ss.length; i++) {
+//     counter[ss.charCodeAt(i)-97]++
+//     counter[tt.charCodeAt(i)-97]--
+//   }
+//   for (let count of counter) {
+//     if (count != 0) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+// function longestPalindrome(s) {
+//   let temp = new Set();
+//   let count = 0;
+//   s.split('').forEach(c => {
+//     if (temp.has(c)) {
+//       temp.delete(c);
+//       count += 2;
+//     } else {
+//       temp.add(c);
+//     }
+//   })
+//   console.log(s)
+//   return count + temp.size > 0 ? 1 : 0;
+// }
+// longestPalindrome("abccccdd")
+
+// function isIsomorphicHelper(s, t) {
+//   let n = s.length;
+//   let map = new Map();
+//   for (let i = 0; i < n; i++) {
+//     c1 = s.charAt(i);
+//     c2 = t.charAt(i);
+//     if (map.has(c1)) {
+//       if (map.get(c1) != c2) {
+//         return false;
+//       }
+//     } else {
+//       map.set(c1, c2);
+//     }
+//   }
+//   return true;
+// }
+// function isIsomorphic(s, t) {
+//   return isIsomorphicHelper(s, t) && isIsomorphicHelper(t, s);
+// }
+
+// function isPalindrome(num) {
+//   if (num < 0 || (num % 10 ==0 && num != 0)) return false;
+//   let revertedNum = 0;
+//   while(num > revertedNum) {
+//     revertedNum = revertedNum * 10 + num % 10;
+//     num = Math.floor(num / 10);
+//   }
+//   return revertedNum == num || Math.floor(revertedNum / 10) == num;
+// }
+
+// function countBinarySubstrings(s) {
+//   let ptr = 0;
+//   let n = s.length;
+//   let counts = [];
+//   let ans = 0;
+//   while(ptr < n) {
+//     let count = 0;
+//     let c = s.charAt(ptr)
+//     while(ptr < n && c == s.charAt(ptr)) {
+//       ++count;
+//       ++ptr;
+//     }
+//     counts.push(count);
+//   }
+//   for (let i = 1; i < counts.length; i++) {
+//     ans += Math.min(counts[i], counts[i-1]);
+//   }
+//   return ans;
+// }
+// console.log(countBinarySubstrings("00110011"))
+// let i =0;
+// while( i < 10) {
+//   const a = i;
+//   console.log(a)
+//   i++
+// }
+// const a = 1;
+// // a = 2
+// class MyQueue {
+//   constructor() {
+//     this.popArr = [];
+//     this.pushArr = [];
+//   }
+//   push(value) {
+//     this.pushArr.push(value);
+//   }
+//   pop() {
+//     if (!this.popArr.length) {
+//       while(this.pushArr.length) {
+//         this.popArr.push(this.pushArr.pop())
+//       }
+//     }
+//     return this.popArr.pop();
+//   }
+//   peek() {
+//     if (!this.popArr.length) {
+//       while(this.pushArr.length) {
+//         this.popArr.push(this.pushArr.pop())
+//       }
+//     }
+//     return this.popArr[this.popArr.length - 1]
+//   }
+//   empty() {
+//     return !this.pushArr.length && !this.popArr.length;
+//   }
+// }
+// function MyStack() {
+//   this.queue = [];
+// }
+// MyStack.prototype.push = function(x) {
+//   this.queue.push(x);
+// }
+// MyStack.prototype.pop = function() {
+//   let temp = [];
+//   for (let i = 0; i < this.queue.length - 1; i++) {
+//     temp.push(this.queue[i])
+//   }
+//   let res = this.queue[this.queue.length - 1];
+//   this.queue = temp;
+//   return res;
+// }
+// MyStack.prototype.top = function() {
+//   if (!this.queue.length) return null;
+//   return this.queue[this.queue.length - 1];
+// }
+// MyStack.prototype.empty = function() {
+//   return !this.queue.length;
+// }
+
+// function isValid(s) {
+//   let stack = [];
+//   for (let item of s) {
+//     if (
+//       item == '{' ||
+//       item == '[' ||
+//       item == '('
+//     ) {
+//       stack.push(item);
+//     } else {
+//       if (!stack.length) return false;
+//       let top = stack[stack.length - 1]
+//       if (
+//         top == '{' && item == '}' ||
+//         top == '[' && item == ']' ||
+//         top == '(' && item == ')'
+//         ) {
+//           stack.pop();
+//         } else {
+//           return false;
+//         }
+//     }
+//   }
+//   return !stack.length;
+// }
+
+// function dailyTemperatures(T) {
+//   let stack = [];
+//   let res = new Array(T.length).fill(0);
+//   for (let i = 0; i < T.length; i++) {
+//     console.log(stack)
+//     while(stack.length && T[i] > T[stack[stack.length - 1]]) {
+//       let topIdx = stack.pop(); //数组即将要入栈的元素大于栈顶元素，则栈顶弹出
+//       res[topIdx] = i - topIdx;
+//     }
+//     stack.push(i);
+//   }
+//   return res;
+// }
+
+
+// function dailyTemperatures(T) {
+//   let res = new Array(T.length).fill(0);
+//   let stack = [];
+//   for (let i = 0; i < T.length; i++) {
+//     while(stack.length && T[i] > T[stack[stack.length-1]]) {
+//       let idx = stack.pop();
+//       res[idx] = i - idx;
+//     }
+//     stack.push(i);
+//   }
+//   return res;
+// }
+// let T =  [73, 74, 75, 71, 69, 72, 76, 73];
+// console.log(dailyTemperatures(T));
+
+// function getIntersectionNode(headA, headB) {
+//   let l1 = headA;
+//   let l2 = headB;
+//   while (l1 !== l2) {
+//     l1 === null ? headB : l1.next;
+//     l2 === null ? headB : l2.next;
+//   }
+//   return l1;
+// }
+
+// function reverseList(head) {
+//   let new_head = null;
+//   while (head != null) {
+//     let temp = head;
+//     head = head.next;
+//     temp.next = new_head;
+//     new_head = temp;
+//   }
+//   return new_head;
+// }
+
+// function mergeTwoLists(l1, l2) {
+//   if (!l1) return l2;
+//   if (!l2) return l1;
+//   if (l1.val < l2.val) {
+//     l1.next = mergeTwoLists(l1.next, l2);
+//     return l1;
+//   } else {
+//     l2.next = mergeTwoLists(l2.next, l1);
+//     return l2;
+//   }
+// }
+// function mergeTwoLists(l1, l2) {
+//   let newHead = new ListNode();
+//   let pre = newHead;
+//   while(l1 != null & l2 != null) {
+//     if (l1.val <= l2.val) {
+//       pre.next = l1;
+//       l1 = l1.next;
+//     } else {
+//       pre.next = l2;
+//       l2 = l2.next;
+//     }
+//     pre = pre.next;
+//   }
+//   pre.next = l1 == null ? l2 : l1;
+//   return newHead.next;
+// }
+
+// function deleteDuplicates(head) {
+//   let cur = head;
+//   while(cur && cur.next) {
+//     if (cur.val === cur.next.val) {
+//       cur.next = cur.next.next;
+//     } else {
+//       cur = cur.next;
+//     }
+//   }
+//   return head;
+// }
+
+// function removeNthFromEnd(head, n) {
+//   let [fast, slow] = [head, head];
+//   while(--n) {
+//     fast = fast.next;
+//   }
+//   if (!fast.next) return head.next;
+//   fast = fast.next;
+//   while(fast && fast.next) {
+//     fast = fast.next;
+//     slow = slow.next;
+//   }
+//   slow.next = slow.next.next;
+//   return head;
+// }
+
+// function swapPairs(head) {
+//   if (head == null || head.next == null) return head;
+//   let newHead = head.next;
+//   head.next = swapPairs(newHead.next);
+//   newHead.next = head;
+//   return newHead;
+// }
+
+// function addTwoNumbers(l1, l2) {
+//   let stack1 = [];
+//   let stack2 = [];
+//   let stack = [];
+//   let [cur1, cur2, carry] = [l1, l2, 0];
+//   while(cur1) {
+//     stack1.push(cur1.val);
+//     cur1 = cur1.next;
+//   }
+//   while(cur2) {
+//     stack2.push(cur2.next);
+//     cur2 = cur2.next;
+//   }
+//   let [a, b] = [0, 0];
+//   while(stack1.length > 0 || stack2.length > 0) {
+//     a = Number(stack1.pop()) || 0;
+//     b = Number(stack2.pop()) || 0;
+//     stack.push((a+b+carry) % 10);
+//     if (a+b+carry >= 10) {
+//       carry = 1;
+//     } else {
+//       carry = 0;
+//     }
+//   }
+//   if (carry == 1) {
+//     stack.push(carry);
+//   }
+//   const dummy = {};
+//   let current = dummy;
+//   while(stack.length > 0) {
+//     current.next = {
+//       val: stack.pop(),
+//       next: null
+//     };
+//     current = current.next;
+//   }
+//   return dummy.next;
+// }
+
+// function isPalindrome(head) {
+//   let low = head;
+//   let fast = head;
+//   if (!head || !head.next) return true;
+//   let values = [];
+//   while(fast && fast.next) {
+//     values.push(slow.val);
+//     fast = fast.next.next;
+//     slow =slow.next;
+//   }
+//   // fast还存在就是fast.next为null，此时为计数个结点，让slow多往前走一步跳过最中间的结点再比较
+//   if (fast) {
+//     slow =slow.next;
+//   }
+//   while(slow) {
+//     let curVal = values.pop();
+//     if (curVal != slow.val) {
+//       return false;
+//     }
+//     slow = slow.next;
+//   }
+//   return true;
+// }
