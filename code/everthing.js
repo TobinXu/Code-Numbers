@@ -13655,3 +13655,287 @@ Eat supper
 //   }
 //   return true;
 // }
+
+// let a = 10n;
+// console.log(typeof a)
+
+// let map = new Map();
+// map.set('a', 10)
+// map.set('b', 20)
+// for (let item of map) {
+
+//   console.log(item)
+// }
+// console.log(map.entries())
+// console.log(-0 === +0)
+
+// var add = function (m) {
+ 
+//   var temp = function (n) {
+//       return add(m + n);
+//   }
+
+//   temp.toString = function () {
+//       return m;
+//   }
+
+//   return temp;
+// };
+
+
+// console.log(add(3)(4)(5)); // 12
+// add(3)(6)(9)(25); // 43
+// target = {}
+// let p = new Proxy(target, {})
+// p.k = 5;
+// console.log(target.k)
+
+// let p1 = new Promise((resolve, reject) => {
+//   console.log('没有resolved')
+//   reject('失败了')
+// })
+// p1.then((data) => {
+//   console.log('成功',data)
+// }, (err) => {
+//   console.log(err)
+// }).catch(e => {
+//   console.log('抓住了',e)
+// })
+
+// function timeout(ms) {
+//   return new Promise(function(resolve) {
+//     setTimeout(() => {
+//       resolve();
+//     }, ms)
+//   })
+// }
+
+// async function printNum(n) {
+//   for (let i = 0; i < n; i++) {
+//     await timeout(1000);
+//     console.log(i);
+//   }
+// }
+// printNum(10)
+
+// function twoSum(nums, target) {
+//   let map = new Map();
+//   for (let i = 0; i < nums.length; i++) {
+//     let temp = target - nums[i];
+//     if (map.has(temp)) {
+//       return [map.get(temp), i];
+//     } else {
+//       map.set(nums[i], i)
+//     }
+//   }
+//   return fasle;
+// }
+
+// function LHS(nums) {
+//   let map = new Map();
+//   let t = 0;
+//   for (let i = 0; i < nums.length; i++) {
+//     if (map.has(nums[i])) {
+//       map.set(nums[i], map.get(nums[i]) + 1);
+//     } else {
+//       map.set(nums[i], 1);
+//     }
+//   }
+  
+//   for (let key of map.keys()) {
+//     if (map.has(key+1)) {
+//       let sum = map.get(key) + map.get(key+1);
+//       t = Math.max(t, sum);
+//     }
+//   }
+//   return t;
+// }
+
+// function longestConsecutive(nums) {
+//   let set = new Set();
+//   let longest = 0;
+//   for (let num of nums) {
+//     set.add(num);
+//   }
+//   for (let num of set) {
+//     if (set.delete(num)) {
+//       let currentLongest = 1;
+//       let current = num;
+//       while(set.delete(current - 1)) current--;
+//       currentLongest += num - current;
+//       current = num;
+//       while(set.delete(current + 1)) current++;
+//       currentLongest += current - num;
+//       longest = Math.max(currentLongest, longest);
+//     }
+//   }
+//   return longest;
+// }
+
+// function* getByteDanceTicket(oc) {
+//   yield 'Wlcome to bytedance world!';
+//   yield 'This is your offer call ' + oc;
+//   yield 'Do wanne accept it?';
+//   return 'Yes, I do';
+// //   }
+// var moveZeros = function(nums) {
+//   let index = 0;
+//   for (let num in nums) {
+//     if (nums[num] != 0) {
+//       nums[index++] = nums[num];
+//     }
+//   }
+//   while(index < nums.length) {
+//     nums[index++] = 0;
+//   }
+//   return nums;
+// }
+
+// function matrixReshape(nums,r,c) {
+//   let m = nums.length, n = nums[0].length;
+//   if (m * n != r * c) {
+//     return nums;
+//   }
+//   let res = [];
+//   let arr = [];
+//   for (let num of nums) {
+//     arr.push(...num);
+//   }
+//   for (let i = 0; i < r; i++) {
+//     res.push(arr.splice(0, c));
+//   }
+//   return res;
+// }
+
+// function matrixReshape(nums,r,c) {
+//   let [timer, max] = [0, 0];
+//   for (let num of nums) {
+//     if (num != 0) {
+//       timer++;
+//       max = Math.max(max, timer);
+//     } else {
+//       timer = 0;
+//     }
+//   }
+//   return max;
+// }
+
+// function searchMatrix(nums, target) {
+//   if (nums == null || nums.length == 0 || nums[0].length == 0) return false;
+//   let m = nums.length;
+//   let n = nums[0].length;
+//   let row = 0, col = n-1;
+//   while(row < m && col >= 0) {
+//     if (nums[row][col] == target) return true;
+//     else if(nums[row][col] < target) row++;
+//     else col--;
+//   }
+//   return false;
+// }
+
+// function countInMatrix(matrix, midVal) {
+//   let n = matrix.length;
+//   let row = 0, col = n - 1;
+//   let count = 0;
+//   while(row < n && col >= 0) {
+//     if (midVal >= matrix[row][col]) {
+//       count += col + 1;
+//       row++
+//     } else {
+//       col--;
+//     }
+//   }
+//   return count;
+// }
+
+// function kthSmallest(matrix, k) {
+//   let n = matrix.length;
+//   let low = matrix[0][0], heigh = matrix[n-1][n-1]
+//   while(low <= heigh) {
+//     let midVal = low + (heigh - low) / 2;
+//     let count = countInMatrix(matrix, midVal);
+//     if (count < k) {
+//       low = midVal + 1; 
+//     } else {
+//       heigh = midVal - 1;
+//     }
+//   }
+//   return low;
+// }
+
+
+
+/*
+
+class Emitter {
+  constructor() {
+  	this.callbacks = {}
+  }
+  
+  on(name, callback) {	
+    let callbacks = this.callbacks[name]
+    if (!callbacks) {
+      callbacks = []
+    }
+    callbacks.push(callback)
+  	this.callbacks[name] = callbacks
+    return () => {
+      let callbacks = this.callbacks[name]
+      const index = callbacks.indexOf(callback)
+      callbacks.splice(index, 1)
+    }
+  }
+  
+  fire(name, data) {
+  	const callbacks = this.callbacks[name]
+    if (callbacks) {
+      for (let callback in callbacks) {
+        callback(data)
+      }
+    }
+  }
+  
+}
+
+const emitter = new Emitter()
+const dispose = emitter.on('click', (data) => console.log(data)) // {a: 1}
+emitter.fire('click', { a: 1})
+dispose();*/
+
+function recursiveMax(nums) {
+  let res = [];
+  let flag = false;
+  for (let num of nums) {
+    if (num instanceof Array) {
+      flag = true;
+      res.push(recursiveMax(num))
+    }
+  }
+  if (flag) {
+    return Math.max.apply(undefined, res) + 1;
+  } else {
+    return 1;
+  }
+}
+
+var res = recursiveMax([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10]);
+console.log(res) // 4
+console.log([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10].join(""))
+
+function getArrayDeepin(arr) {
+  let str = JSON.stringify(arr);
+  let max = 0, cur = 0;
+  for (let key of str) {
+    if (key == '[') {
+      cur++;
+    }
+    if (key == ']') {
+      cur--;
+    }
+    if (max < cur) {
+      max = cur;
+    }
+  }
+  return max;
+}
+console.log(getArrayDeepin([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10]))
