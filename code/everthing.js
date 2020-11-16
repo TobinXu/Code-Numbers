@@ -13902,40 +13902,110 @@ const dispose = emitter.on('click', (data) => console.log(data)) // {a: 1}
 emitter.fire('click', { a: 1})
 dispose();*/
 
-function recursiveMax(nums) {
-  let res = [];
-  let flag = false;
-  for (let num of nums) {
-    if (num instanceof Array) {
-      flag = true;
-      res.push(recursiveMax(num))
-    }
-  }
-  if (flag) {
-    return Math.max.apply(undefined, res) + 1;
-  } else {
-    return 1;
-  }
-}
+// function recursiveMax(nums) {
+//   let res = [];
+//   let flag = false;
+//   for (let num of nums) {
+//     if (num instanceof Array) {
+//       flag = true;
+//       res.push(recursiveMax(num))
+//     }
+//   }
+//   if (flag) {
+//     return Math.max.apply(undefined, res) + 1;
+//   } else {
+//     return 1;
+//   }
+// }
 
-var res = recursiveMax([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10]);
-console.log(res) // 4
-console.log([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10].join(""))
+// var res = recursiveMax([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10]);
+// console.log(res) // 4
+// console.log([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10].join(""))
 
-function getArrayDeepin(arr) {
-  let str = JSON.stringify(arr);
-  let max = 0, cur = 0;
-  for (let key of str) {
-    if (key == '[') {
-      cur++;
-    }
-    if (key == ']') {
-      cur--;
-    }
-    if (max < cur) {
-      max = cur;
-    }
-  }
-  return max;
-}
-console.log(getArrayDeepin([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10]))
+// function getArrayDeepin(arr) {
+//   let str = JSON.stringify(arr);
+//   let max = 0, cur = 0;
+//   for (let key of str) {
+//     if (key == '[') {
+//       cur++;
+//     }
+//     if (key == ']') {
+//       cur--;
+//     }
+//     if (max < cur) {
+//       max = cur;
+//     }
+//   }
+//   return max;
+// }
+// console.log(getArrayDeepin([1,[[2,3,5,[],6,7,8],4,5,6,7],8,9,10]))
+
+// function myCall(context) {
+//   let res = null;
+//   let args = [...arguments].slice(1);
+//   context = context || window;
+//   if (this !== "function") {
+//     console.error("type error");
+//   }
+//   context.fn = this;
+//   res = context.fn(...args);
+//   delete context.fn;
+//   return res;
+// }
+
+// function object(o) {
+//   function F() {}
+//   F.prototype = o;
+//   return new F();
+// }
+
+// var add = function(m) {
+//   var temp = function(n) {
+//     return add(m+n)
+//   }
+//   temp.toString = function() {
+//     return m;
+//   }
+//   return temp;
+// }
+
+// var add = function(m) {
+//   var temp = function(n) {
+//     return add(m+n);
+//   }
+//   temp.toString = function() {
+//     return m;
+//   }
+//   return temp;
+// }
+
+
+
+// function add(m) {
+//   return function(n) {
+//     return function(k) {
+//       return m+n+k
+//     }
+//   }
+// }
+// console.log(add(1)(2)(3))
+
+// let k = {o:1}
+// console.log(k.toString())
+// var invocation = new XMLHttpRequest();
+// var url = 'http://bar.other/resources/pulibc-data/';
+// function callOtherDomain() {
+//   if (invocation) {
+//     invocation.open('GET', url, true);
+//     invocation.onreadystatechange = function() {
+//       if (this.readyState != 4) return;
+//       if (this.status == 200) {
+//         resolve()
+//       } else {
+//         reject();
+//       }
+//     }
+//     invocation.send();
+//   }
+// }
+

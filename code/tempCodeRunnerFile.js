@@ -1,1 +1,9 @@
-let T =  [73, 74, 75, 71, 69, 72, 76, 73];
+var add = function(m) {
+//   var temp = function(n) {
+//     return add(m+n);
+//   }
+//   temp.toString = function() {
+//     return m;
+//   }
+//   return temp;
+// }
