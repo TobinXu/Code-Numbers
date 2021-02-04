@@ -1,9 +1,4 @@
-var add = function(m) {
-//   var temp = function(n) {
-//     return add(m+n);
-//   }
-//   temp.toString = function() {
-//     return m;
-//   }
-//   return temp;
+
+// for(var i = 0; i < 10; i++) {
+//   setTimeout(() => {console.log(i),1000});
 // }

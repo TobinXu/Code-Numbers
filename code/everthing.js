@@ -14009,3 +14009,282 @@ dispose();*/
 //   }
 // }
 
+// function randomSort(arr) {
+//   let resut = [];
+//   while (arr.length>0) {
+//     let index = Math.floor(Math.random()*arr.length);
+//     result.push(arr[index]);
+//     arr.splice(index,1);
+//   }
+//   return result;
+// }
+
+// function sortNum(a,b) {
+//   return a-b;
+// }
+
+// let num = [2,6,1,2,3,9,7,4];
+// console.log(num.sort((a,b) => {return b-a;}))
+
+// var arr = [
+//   {name:'zopp',age:0},
+//   {name:'gpp',age:18},
+//   {name:'yjj',age:8}
+// ];
+
+// function compare(property) {
+//   return function(a, b) {
+//     let value1 = a[property];
+//     let value2 = b[property];
+//     return value1-value2;
+//   }
+// }
+// console.log(arr.sort(compare('age')))
+
+// function k(a) {
+//   return function(b) {
+//     return a+b;
+//   }
+// }
+
+
+// function add() {
+//   // 第一次执行时，定义一个数组专门用来存储所有的参数
+//   var _args = Array.prototype.slice.call(arguments);
+
+//   // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+//   var _adder = function() {
+//       _args.push(...arguments);
+//       return _adder;
+//   };
+
+//   // 利用toString隐式转换的特性，当最后执行时隐式转换，并计算最终的值返回
+//   _adder.toString = function () {
+//       return _args.reduce(function (a, b) {
+//           return a + b;
+//       });
+//   }
+//   return _adder;
+// }
+
+// add(1)(2)(3)                // 6
+// add(1, 2, 3)(4)             // 10
+// add(1)(2)(3)(4)(5)          // 15
+// add(2, 6)(1)                // 9
+
+// while(number = readline()) {
+//   console.log(parseInt(number));
+// }
+
+// 功能:输入一个正整数，按照从小到大的顺序输出它的所有质因子（重复的也要列举）（如180的质因子为2 2 3 3 5 ）
+
+// 最后一个数后面也要有空格
+
+// function getZhi(number) {
+//   let num = parseInt(number);
+//   let res = '';
+//   for (let i = 2; i*i <= num; i++) {
+//     while (num % i === 0) {
+//       res += i + ' ';
+//       num /= i;
+//     }
+//   }
+//   if (num > 1) {
+//     res += num + ' ';
+//   }
+//   console.log(res);
+// }
+// getZhi(180)
+
+// let amount = readline();
+// let arr = [];
+// let map = {};
+// while(amount) {
+//   arr = readline().split(" ");
+//   map[arr[0]] = (map[arr[0]] || 0) + Number(arr[1]);
+//   amount--;
+// }
+// for(let key in map) {
+//   console.log(key + " " + map[key]);
+// }
+
+
+// // let value = readline();
+// function getValue(value) {
+//   let arr = value.split(' ');
+//   console.log(arr);
+//   let res = [];
+//   for (let i = 0; i < arr.length; i++) {
+//       if (res.indexOf(arr[i])==-1) {
+//           res.push(arr[i]);
+//       }   
+//   }
+  
+//   let k = res.length;
+//   while(k) {
+//       if (res[k]==0) {
+//           res.splice(k,1);
+//           k--;
+//       } else {
+//           break;
+//       }
+//   }
+//   console.log(res);
+// }
+
+// getValue(2752771)
+
+
+// let k = 123434;
+// console.log(k.split(''))
+
+// let cha = 'aabbc';
+// let arr=[];
+// for (let i = 0; i < cha.length; i++) {
+//     if(arr.indexOf(cha[i])== -1 && cha.charCodeAt(i)<=127&&cha.charCodeAt(i)>=0) {
+//         arr.push(cha[i]);
+//     } 
+// }
+// console.log(arr.length);
+// console.log(cha[2])
+
+// console.log([...new Set([1,8,2,4,1,0,5,3,3,5,5])].sort((a,b) => a-b))
+
+// 寄生组合式继承
+// function Person(name) {
+//   this.name = name;
+// }
+// Person.prototype.sayName = function() {
+//   console.log('My name is '+ this.name);
+// }
+// function Student(name,grade) {
+//   Person.call(this,name);
+//   this.grade = grade;
+// }
+// Student.prototype = Object.create(Person.prototype);
+// Student.prototype.constructor = Student;
+// Student.prototype.SayGrade = function() {
+//   console.log("My grade is " + this.grade);
+// }
+
+// function object(o) {
+//   function A() {};
+//   A.prototype = o;
+//   return new A();
+// }
+
+// // 原型链继承
+// function Person(name) {
+//   this.name = name;
+// }
+// Person.prototype.sayName = function() {
+//   console.log("我的名字"+this.name);
+// }
+// function Student(grade) {
+//   this.grade = grade;
+// }
+// Studetn.prototype = new Person();
+// let s = new Student();
+// s.sayName();
+
+// for(var i = 0; i < 10; i++) { // 主线程循环执行完i的值为5
+//   setTimeout(() => {console.log(i),1000}); //1秒以后向任务队列里面添加任务
+// } // 等主线程执行完以后去任务队里面取的时候i是5，所以打印的是5
+
+// for(var i = 0; i < 10; i++) {
+//   (function k(j) {
+//     setTimeout(() => {console.log(j),1000});
+//   })(i)
+// }
+
+
+// /*构造函数里面要初始化信息和缓存订阅者、获取信息、设置信息、发布通知、添加订阅者*/
+// class Subject {
+//   constructor() {
+//     this.message = '暂无通知';
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => observer.update());
+//   }
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+// }
+
+// //绑定更新
+// class Observer {
+//   constructor(name, subject) {
+//     this.name = name;
+//     this.subject = subject;
+//     this.subject.attach(this);
+//   }
+//   update() {
+//     console.log(`${this.name}收到通知：${this.subject.getMessage()}`);
+//   }
+// }
+
+// let subject = new Subject();
+// let a = new Observer('张三', subject);
+// let b = new Observer('李四', subject);
+// let c = new Observer('王五', subject);
+
+// subject.setMessage("明天开学");
+// subject.setMessage("今天提前放假");
+// subject.setMessage("在家记得踢足球");
+
+
+// class Subjject {
+//   constructor() {
+//     this.message = "暂无通知";
+//     this.observers = [];
+//   }
+//   getMessage() {
+//     return this.message;
+//   }
+//   setMessage(message) {
+//     this.message = message;
+//     this.notifyAllObservers();
+//   }
+//   notifyAllObservers() {
+//     this.observers.forEach(observer => {observer.update()})
+//   }
+//   attach(observer) {
+//     this.observers.push(observer);
+//   }
+
+// }
+
+// class Observer {
+//   constructor(name, subject) {
+//     this.name = name;
+//     this.subject = subject;
+//     this.subject.attach(this);
+//   }
+//   update() {
+//     console.log(this.name+' 收到通知',this.subject.getMessage());
+//   }
+// }
+
+// let broad = new Subjject();
+// let a = new Observer('徐强国',broad);
+// broad.setMessage("明天吃大餐");
+
+// function reverseList(head) {
+//   let new_head = null;
+//   while(head) {
+//     let temp = head;
+//     head = head.next;
+//     temp.next = new_head;
+//     new_head = temp;
+//   }
+//   return new_head;
+// }
+
